@@ -1,77 +1,101 @@
 import { Link } from 'react-router-dom';
+import mcleanImg from './assets/2.2.jpg';
 
 function MemberThree() {
+  const accent = '#4facfe'; // Bright Blue
+  
+  const cardStyle = {
+    background: '#ffffff',
+    color: '#333333',
+    padding: '40px',
+    borderRadius: '12px',
+    boxShadow: '0 15px 35px rgba(0,0,0,0.2)',
+    marginBottom: '30px'
+  };
+
+  const h2Style = {
+    color: accent,
+    fontSize: '2.2rem',
+    fontWeight: '700',
+    marginTop: '0',
+    marginBottom: '20px',
+    fontFamily: 'system-ui, sans-serif'
+  };
+
+  const listStyle = {
+    listStyleType: 'none',
+    padding: 0,
+    margin: 0,
+    fontSize: '1.1rem',
+    lineHeight: '2'
+  };
+
+  const listItemStyle = {
+    borderBottom: '1px solid #eee',
+    padding: '10px 0'
+  };
+
   return (
     <div style={{
       minHeight: '100vh',
-      background: 'linear-gradient(135deg, #000033 0%, #000000 100%)',
+      background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)', // Soft dark navy
       color: '#ffffff',
-      padding: '50px 20px',
-      fontFamily: 'system-ui, -apple-system, sans-serif'
+      padding: '60px 20px',
+      fontFamily: '"Inter", "Helvetica Neue", sans-serif'
     }}>
-      <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
-        <Link to="/" style={{ color: '#4facfe', textDecoration: 'none', display: 'inline-block', marginBottom: '30px', fontSize: '1.1rem' }}>
-          ← Back to Portfolio
-        </Link>
+      <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+        <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+          <Link to="/" style={{ color: 'rgba(255,255,255,0.7)', textDecoration: 'none', fontSize: '1rem', border: '1px solid rgba(255,255,255,0.3)', padding: '8px 20px', borderRadius: '20px' }}>
+            Back to Team
+          </Link>
+        </div>
         
-        <div style={{ borderBottom: '2px solid rgba(255,255,255,0.1)', paddingBottom: '20px', marginBottom: '40px' }}>
-          <h1 style={{ fontSize: '3rem', margin: '0 0 10px 0' }}>John Mclean A. Adornado</h1>
-          <p style={{ color: '#a0aec0', fontSize: '1.2rem', margin: 0 }}>Born March 22, 2005 • Infanta, Quezon</p>
+        {/* Clean Header */}
+        <div style={{ textAlign: 'center', marginBottom: '50px' }}>
+          <img 
+            src={mcleanImg} 
+            alt="McLean" 
+            style={{ width: '160px', height: '160px', borderRadius: '50%', objectFit: 'cover', border: `6px solid ${accent}`, boxShadow: '0 10px 20px rgba(0,0,0,0.3)', marginBottom: '20px' }}
+          />
+          <h1 style={{ fontSize: '3.5rem', margin: '0 0 10px 0', fontWeight: '800', letterSpacing: '-1px' }}>John Mclean Adornado</h1>
+          <p style={{ color: accent, fontSize: '1.3rem', margin: '0', fontWeight: '500', textTransform: 'uppercase', letterSpacing: '2px' }}>Tech Enthusiast & Learner</p>
+          <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1rem', margin: '10px 0 0 0' }}>Born: March 22, 2005 • Infanta, Quezon</p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px' }}>
-          {/* Main Content */}
-          <div style={{ lineHeight: '1.8', fontSize: '1.1rem', color: '#e2e8f0' }}>
-            <h2 style={{ color: '#4facfe', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '10px' }}>About Me</h2>
-            <p>I am a simple person who always tries my best in everything I do. I can say that I am hardworking and willing to learn new things. I am not perfect, but I keep trying to improve myself little by little.</p>
+        {/* Content - White Cards */}
+        <div style={cardStyle}>
+          <h2 style={h2Style}>My Story</h2>
+          <div style={{ lineHeight: '1.9', fontSize: '1.15rem', color: '#555' }}>
+            <p>I am a simple person who always tries my best in everything I do. I am hardworking and willing to learn new things. I am not perfect, but I keep trying to improve myself little by little.</p>
             <p>I like learning about technology, especially computers, because it is interesting and helpful for my future. Sometimes I experience challenges in school and in life, but I do not give up easily. I stay positive and continue working hard because I know it will help me grow.</p>
-            <p>I also enjoy learning new skills and trying different activities. My goal is to finish my studies and have a stable job someday. I want to help my family and make them proud. I believe that with hard work and determination, I can achieve my dreams.</p>
-            
-            <h2 style={{ color: '#4facfe', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '10px', marginTop: '40px' }}>Aspiration</h2>
-            <p>My goal is to finish my studies and have a good and stable job in the future. I want to improve my skills in technology and become successful someday.</p>
+            <p>I enjoy learning new skills and trying different activities. My goal is to finish my studies, secure a stable job, help my family, and make them proud. I believe that with hard work and determination, I can achieve my dreams.</p>
+          </div>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '30px' }}>
+          <div style={cardStyle}>
+            <h2 style={h2Style}>Skills</h2>
+            <ul style={listStyle}>
+              <li style={listItemStyle}>Basic computer skills</li>
+              <li style={listItemStyle}>Basic coding (C++, HTML, CSS)</li>
+              <li style={listItemStyle}>Basic troubleshooting</li>
+              <li style={listItemStyle}>Hardworking & Responsible</li>
+              <li style={listItemStyle}>Time management</li>
+            </ul>
           </div>
 
-          {/* Sidebar Info */}
-          <div style={{ background: 'rgba(255,255,255,0.03)', padding: '30px', borderRadius: '15px', border: '1px solid rgba(255,255,255,0.05)' }}>
-            <h3 style={{ color: '#4facfe', marginTop: 0 }}>Skills</h3>
-            <ul style={{ paddingLeft: '20px', color: '#cbd5e0', marginBottom: '30px' }}>
-              <li>Basic computer skills</li>
-              <li>Basic coding (C++, HTML, CSS)</li>
-              <li>Willing to learn new things</li>
-              <li>Hardworking and responsible</li>
-              <li>Basic knowledge in troubleshooting computers</li>
-              <li>Time management</li>
-              <li>Can handle challenges</li>
-            </ul>
-
-            <h3 style={{ color: '#4facfe' }}>Experiences</h3>
-            <ul style={{ paddingLeft: '20px', color: '#cbd5e0', marginBottom: '30px' }}>
-              <li>Basic programming and coding activities</li>
-              <li>Doing school projects related to technology</li>
-              <li>Basic computer troubleshooting</li>
-              <li>Making simple programs and activities in coding</li>
-              <li>Learning how to build or set up a computer (basic)</li>
-            </ul>
-
-            <h3 style={{ color: '#4facfe' }}>Achievements</h3>
-            <ul style={{ paddingLeft: '20px', color: '#cbd5e0', marginBottom: '30px' }}>
-              <li>Completed school projects on time</li>
-              <li>Improved skills in using computers</li>
-              <li>Finished tasks and assignments with effort</li>
-              <li>Learned basic troubleshooting in computers</li>
-              <li>Continued studying and improving skills</li>
-            </ul>
-
-            <h3 style={{ color: '#4facfe' }}>Interests</h3>
-            <ul style={{ paddingLeft: '20px', color: '#cbd5e0' }}>
-              <li>Learning about computers and technology</li>
-              <li>Exploring new skills in coding</li>
-              <li>Spending time with friends and family</li>
-              <li>Trying new things and learning new ideas</li>
-              <li>Sports basketball and cycling</li>
+          <div style={cardStyle}>
+            <h2 style={h2Style}>Interests</h2>
+            <ul style={listStyle}>
+              <li style={listItemStyle}>Exploring new coding skills</li>
+              <li style={listItemStyle}>Family & Friends time</li>
+              <li style={listItemStyle}>Learning new ideas</li>
+              <li style={listItemStyle}>Basketball</li>
+              <li style={listItemStyle}>Cycling</li>
             </ul>
           </div>
         </div>
+
       </div>
     </div>
   );

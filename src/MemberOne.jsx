@@ -1,77 +1,93 @@
 import { Link } from 'react-router-dom';
+import jeiImg from './assets/1x1.jpg';
 
 function MemberOne() {
+  const accent = '#00ffff'; // Teal/Cyan
+  
+  const sectionStyle = {
+    backgroundColor: 'rgba(0, 20, 40, 0.8)',
+    border: `2px solid ${accent}`,
+    padding: '30px',
+    marginBottom: '30px',
+    position: 'relative',
+    fontFamily: 'sans-serif'
+  };
+
+  const labelStyle = {
+    fontFamily: 'monospace',
+    color: accent,
+    textTransform: 'uppercase',
+    letterSpacing: '2px',
+    fontWeight: 'bold',
+    fontSize: '0.9rem',
+    display: 'block',
+    marginBottom: '5px'
+  };
+
   return (
     <div style={{
       minHeight: '100vh',
-      background: 'linear-gradient(135deg, #000033 0%, #000000 100%)',
+      backgroundColor: '#000510',
+      // Blueprint grid background
+      backgroundImage: 'linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px)',
+      backgroundSize: '20px 20px',
       color: '#ffffff',
       padding: '50px 20px',
-      fontFamily: 'system-ui, -apple-system, sans-serif'
     }}>
       <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
-        <Link to="/" style={{ color: '#4facfe', textDecoration: 'none', display: 'inline-block', marginBottom: '30px', fontSize: '1.1rem' }}>
-          ← Back to Portfolio
+        <Link to="/" style={{ color: accent, textDecoration: 'none', fontFamily: 'monospace', fontSize: '1.1rem', display: 'block', marginBottom: '40px' }}>
+          &lt; RETURN_TO_BASE /&gt;
         </Link>
         
-        <div style={{ borderBottom: '2px solid rgba(255,255,255,0.1)', paddingBottom: '20px', marginBottom: '40px' }}>
-          <h1 style={{ fontSize: '3rem', margin: '0 0 10px 0' }}>Jei Ervin R. Icalabis</h1>
-          <p style={{ color: '#a0aec0', fontSize: '1.2rem', margin: 0 }}>Born June 8, 2005 • Santa Maria, Bulacan</p>
+        {/* Header Section */}
+        <div style={{ display: 'flex', gap: '40px', alignItems: 'center', marginBottom: '50px', flexWrap: 'wrap', borderBottom: `4px double ${accent}`, paddingBottom: '30px' }}>
+          <div style={{
+            width: '200px', height: '200px', border: `4px solid ${accent}`, padding: '10px', background: '#000'
+          }}>
+            <img src={jeiImg} alt="Jei" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          </div>
+          <div>
+            <span style={labelStyle}>IDENTIFICATION</span>
+            <h1 style={{ fontSize: '3.5rem', margin: '0 0 10px 0', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '2px' }}>J. ICALABIS</h1>
+            <p style={{ color: '#a0aec0', fontSize: '1.2rem', margin: 0, fontFamily: 'monospace' }}>HARDWARE & TECH SPECIALIST</p>
+            <p style={{ color: '#666', fontSize: '1rem', margin: '5px 0 0 0', fontFamily: 'monospace' }}>DOB: 06.08.2005 | ORIGIN: BULACAN</p>
+          </div>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px' }}>
-          {/* Main Content */}
-          <div style={{ lineHeight: '1.8', fontSize: '1.1rem', color: '#e2e8f0' }}>
-            <h2 style={{ color: '#4facfe', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '10px' }}>About Me</h2>
-            <p>I grew up with my grandparents until I reached high school, and they played an important role in shaping who I am today. I also have a sister who is five years older than me, and she has been one of the people I look up to.</p>
-            <p>I describe myself as a hardworking, somewhat friendly, and a jolly person. I enjoy spending time with others, but I also value moments where I can focus on improving myself. I believe that being positive and determined helps me overcome challenges in life.</p>
-            <p>During my school years, I developed an interest in technology and hands-on activities, especially those related to electronics. I enjoy learning how things work and applying that knowledge to projects. Although I have faced difficulties along the way, I continue to push myself to do better and achieve my goals.</p>
-            <p>As I continue my journey, I aim to grow both personally and academically. I hope to build a successful career in the future and make my family proud. I believe that with dedication, perseverance, and the right mindset, I can achieve my dreams.</p>
-            
-            <h2 style={{ color: '#4facfe', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '10px', marginTop: '40px' }}>Aspiration</h2>
-            <p>I want to be a technology specialist, helping to develop computer systems and preserve digital information. I want to keep learning, obtain hands-on experience, and establish a profession where I can have a positive influence while exploring new technologies and tackling real-world challenges.</p>
+        {/* Content Grid */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px' }}>
+          <div style={sectionStyle}>
+            <span style={labelStyle}>// BIOGRAPHY_DATA</span>
+            <div style={{ lineHeight: '1.8', color: '#e2e8f0', fontSize: '1.05rem' }}>
+              <p>I grew up with my grandparents until I reached high school, shaping who I am today. I have a sister five years older who I look up to.</p>
+              <p>I describe myself as hardworking, somewhat friendly, and a jolly person. I enjoy spending time with others but value moments to focus on self-improvement. I believe positivity and determination help overcome challenges.</p>
+              <p>I developed an interest in technology and hands-on activities, especially electronics. I enjoy learning how things work and applying knowledge to projects. Facing difficulties, I continue to push myself to achieve my goals.</p>
+              <p>I aim to grow personally and academically, building a successful career in the future to make my family proud.</p>
+            </div>
           </div>
 
-          {/* Sidebar Info */}
-          <div style={{ background: 'rgba(255,255,255,0.03)', padding: '30px', borderRadius: '15px', border: '1px solid rgba(255,255,255,0.05)' }}>
-            <h3 style={{ color: '#4facfe', marginTop: 0 }}>Skills</h3>
-            <ul style={{ paddingLeft: '20px', color: '#cbd5e0', marginBottom: '30px' }}>
-              <li>Communication skills</li>
-              <li>Basic coding (C++, HTML, CSS, PYTHON)</li>
-              <li>Computer literate</li>
-              <li>Patient and understanding in different situations</li>
-              <li>Always up for challenges</li>
-              <li>Basic logic circuit knowledge</li>
-            </ul>
-
-            <h3 style={{ color: '#4facfe' }}>Experiences</h3>
-            <ul style={{ paddingLeft: '20px', color: '#cbd5e0', marginBottom: '30px' }}>
-              <li>Game development, Programming</li>
-              <li>Math and spelling competitions</li>
-              <li>Basic logic circuits</li>
-              <li>Treasurer role in high school</li>
-              <li>Sell foods in school in senior high school</li>
-              <li>Building a pc</li>
-              <li>Joining competitive games</li>
-            </ul>
-
-            <h3 style={{ color: '#4facfe' }}>Achievements</h3>
-            <ul style={{ paddingLeft: '20px', color: '#cbd5e0', marginBottom: '30px' }}>
-              <li>Successfully completed school projects related to programming and technology.</li>
-              <li>Creating algorithms, flowcharts, and basic programs in Python and C++ (learning as I go).</li>
-              <li>Developing fundamental understanding in computer networking and troubleshooting.</li>
-              <li>Sharing online safety awareness with peers through presentations.</li>
-              <li>Learning new programming languages</li>
-              <li>ML Championships</li>
-            </ul>
-
-            <h3 style={{ color: '#4facfe' }}>Interests</h3>
-            <ul style={{ paddingLeft: '20px', color: '#cbd5e0' }}>
-              <li>Hardware configurations, like PCs, TVs</li>
-              <li>Games that require both strategy and understanding</li>
-              <li>Baking & Drawing</li>
-              <li>New learnings about technology</li>
-            </ul>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
+            <div style={sectionStyle}>
+              <span style={labelStyle}>// CORE_SKILLS</span>
+              <ul style={{ paddingLeft: '20px', color: '#cbd5e0', columns: 2, fontFamily: 'monospace' }}>
+                <li>Communication</li>
+                <li>C++, HTML, CSS</li>
+                <li>PYTHON</li>
+                <li>Computer Literate</li>
+                <li>Basic Logic Circuits</li>
+                <li>Troubleshooting</li>
+              </ul>
+            </div>
+            
+            <div style={sectionStyle}>
+              <span style={labelStyle}>// INTEREST_LOG</span>
+              <ul style={{ paddingLeft: '20px', color: '#cbd5e0', fontFamily: 'monospace' }}>
+                <li>Hardware: PCs, TVs</li>
+                <li>Strategy Games</li>
+                <li>Baking & Drawing</li>
+                <li>Emerging Technologies</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>

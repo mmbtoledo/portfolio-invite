@@ -3,10 +3,25 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import michaelImg from './assets/2x2.jpg';
 
+// Importing Achievement Images
+import cert2nd from './Membertwo/CEA CERT 2nd.jpg';
+import certChamp from './Membertwo/CEA CERT Champ.jpg';
+import champPubmat from './Membertwo/Champion CEA MLBB.jpg';
+import excAward from './Membertwo/Excellence Award.jpg';
+import excAward2 from './Membertwo/Excellence Award 2.jpg';
+import intercampus from './Membertwo/Intercampus.jpg';
+import intertown1 from './Membertwo/Intertown Cavite 1st runner up.jpg';
+import intertown2 from './Membertwo/Intertown Cavite 1st runner.jpg';
+import introCyber from './Membertwo/Introduction to Cyber.jpg';
+import kkb from './Membertwo/KKB.jpg';
+import mvp from './Membertwo/MVP.jpg';
+import squadGoals from './Membertwo/Squad Goals.jpg';
+
 function MemberTwo() {
   const [activeTab, setActiveTab] = useState('home');
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isDarkMode, setIsDarkMode] = useState(true);
+  const [selectedAchievement, setSelectedAchievement] = useState(null); // State for popup modal
 
   // --- The System Architect / Emerald & Gold Theme ---
   const darkTheme = {
@@ -34,9 +49,25 @@ function MemberTwo() {
   const tabs = [
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'About Me' },
-    { id: 'journey', label: 'Expeditions' },
+    { id: 'achievements', label: 'Achievements' }, // Updated from Expeditions
     { id: 'projects', label: 'Schematics' },
     { id: 'connect', label: 'Contact' }
+  ];
+
+  // Achievement Data List
+  const achievementsList = [
+    { id: 1, img: certChamp, title: 'CEA Champion', desc: 'Awarded Championship Certificate in Computer Engineering.' },
+    { id: 2, img: cert2nd, title: 'CEA 2nd Place', desc: 'Awarded 2nd Place Certificate for exemplary skills.' },
+    { id: 3, img: excAward, title: 'Excellence Award', desc: 'Recognized for outstanding academic and extracurricular excellence.' },
+    { id: 4, img: excAward2, title: 'Excellence Award II', desc: 'Continued recognition for dedication and performance.' },
+    { id: 5, img: mvp, title: 'MVP Award', desc: 'Most Valuable Player award for exceptional sportsmanship and skill.' },
+    { id: 6, img: champPubmat, title: 'Champion CEA MLBB', desc: 'Official publication material for the champions of CEA MLBB.' },
+    { id: 7, img: intercampus, title: 'Intercampus Participant', desc: 'Represented the campus in high-stakes intercampus events.' },
+    { id: 8, img: intertown1, title: 'Intertown 1st Runner Up', desc: 'Secured 1st Runner Up position in the competitive Intertown event.' },
+    { id: 9, img: intertown2, title: 'Intertown Commendation', desc: 'Additional recognition for the Intertown competition.' },
+    { id: 10, img: introCyber, title: 'Cybersecurity Certification', desc: 'Successfully completed the Introduction to Cybersecurity course.' },
+    { id: 11, img: kkb, title: 'KKB Participation', desc: 'Active participation and contribution to KKB initiatives.' },
+    { id: 12, img: squadGoals, title: 'Squad Goals', desc: 'Commendation for outstanding teamwork and team achievement.' }
   ];
 
   const contentVariants = {
@@ -145,7 +176,7 @@ function MemberTwo() {
               </h1>
               
               <p style={{ fontSize: '1.2rem', lineHeight: '2', color: theme.muted, maxWidth: '700px', margin: '0 auto', borderTop: `1px solid ${theme.border}`, paddingTop: '30px' }}>
-                A 2nd-year Computer Engineering student at TIP-Manila. I build systems, write code, and design circuits—constantly exploring the dynamic intersection where software meets hardware
+                A 2nd-year Computer Engineering student at TIP-Manila. I build systems, write code, and design circuits—constantly exploring the dynamic intersection where software meets hardware.
               </p>
             </motion.div>
           )}
@@ -169,7 +200,52 @@ function MemberTwo() {
              </motion.div>
           )}
 
-          {/* UNIQUE CONTACT SECTION */}
+          {/* NEW ACHIEVEMENTS SECTION (Replaced Expeditions) */}
+          {activeTab === 'achievements' && (
+             <motion.div key="achievements" variants={contentVariants} initial="hidden" animate="visible" exit="exit" style={{ maxWidth: '1000px', width: '100%' }}>
+               <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+                 <h1 style={{ fontFamily: '"Playfair Display", serif', color: theme.text, fontSize: '3.5rem', margin: 0, letterSpacing: '2px' }}>Achievements</h1>
+                 <p style={{ color: theme.muted, fontStyle: 'italic', fontSize: '1.1rem', marginTop: '10px' }}>
+                   In my 20 years of living, these are some of the achievements I am proud of.
+                 </p>
+               </div>
+
+               {/* Grid Layout for Achievement Cards */}
+               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '30px', paddingBottom: '40px' }}>
+                 {achievementsList.map((item) => (
+                   <motion.div 
+                     key={item.id}
+                     whileHover={{ y: -8, boxShadow: theme.shadow, borderColor: theme.accent }}
+                     onClick={() => setSelectedAchievement(item)}
+                     style={{ 
+                       backgroundColor: theme.panel, 
+                       padding: '15px', 
+                       border: `1px solid ${theme.border}`, 
+                       borderRadius: '4px', 
+                       cursor: 'pointer',
+                       transition: 'border-color 0.3s ease'
+                     }}
+                   >
+                     <img 
+                       src={item.img} 
+                       alt={item.title} 
+                       style={{ 
+                         width: '100%', 
+                         height: '200px', 
+                         objectFit: 'cover', 
+                         border: `1px solid ${theme.border}`, 
+                         marginBottom: '15px',
+                         filter: isDarkMode ? 'brightness(0.9)' : 'none'
+                       }} 
+                     />
+                     <h3 style={{ color: theme.text, fontSize: '1.1rem', margin: '0 0 5px 0', fontFamily: '"Playfair Display", serif' }}>{item.title}</h3>
+                     <p style={{ color: theme.muted, fontSize: '0.8rem', margin: 0, textTransform: 'uppercase', letterSpacing: '1px' }}>Click to view ↗</p>
+                   </motion.div>
+                 ))}
+               </div>
+             </motion.div>
+          )}
+
           {activeTab === 'connect' && (
             <motion.div key="connect" variants={contentVariants} initial="hidden" animate="visible" exit="exit" style={{ maxWidth: '900px', width: '100%' }}>
               <div style={{ textAlign: 'center', marginBottom: '40px' }}>
@@ -177,13 +253,10 @@ function MemberTwo() {
                 <h1 style={{ fontFamily: '"Playfair Display", serif', color: theme.text, fontSize: '3rem', margin: 0, letterSpacing: '2px' }}>Formal Correspondence</h1>
               </div>
 
-              {/* Thematic Ledger Container */}
               <div style={{ backgroundColor: theme.panel, border: `2px solid ${theme.border}`, padding: '4px', boxShadow: theme.shadow }}>
                 <div style={{ border: `1px dashed ${theme.accent}`, padding: '50px', position: 'relative' }}>
                   
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '50px' }}>
-                    
-                    {/* Left Column: Personal Quarters */}
                     <div style={{ flex: '1 1 300px' }}>
                       <h3 style={{ color: theme.accent, fontFamily: '"Playfair Display", serif', fontSize: '1.5rem', borderBottom: `1px solid ${theme.border}`, paddingBottom: '10px', margin: '0 0 20px 0' }}>
                         The Architect's Quarters
@@ -201,7 +274,6 @@ function MemberTwo() {
                       </div>
                     </div>
 
-                    {/* Right Column: Academic Guild */}
                     <div style={{ flex: '1 1 300px' }}>
                       <h3 style={{ color: theme.accent, fontFamily: '"Playfair Display", serif', fontSize: '1.5rem', borderBottom: `1px solid ${theme.border}`, paddingBottom: '10px', margin: '0 0 20px 0' }}>
                         Academic Guild
@@ -219,26 +291,21 @@ function MemberTwo() {
                         <a href="mailto:jennifer.enriquez@tip.edu.ph" style={{ color: theme.muted, fontSize: '0.8rem', textDecoration: 'none', fontStyle: 'italic' }}>jennifer.enriquez@tip.edu.ph</a>
                       </div>
                     </div>
-
                   </div>
 
-                  {/* Bottom Row: Telegraphic Links */}
                   <div style={{ marginTop: '50px', borderTop: `1px solid ${theme.border}`, paddingTop: '40px', textAlign: 'center' }}>
                     <p style={{ color: theme.muted, fontStyle: 'italic', margin: '0 0 20px 0' }}>For swift dispatch, utilize the following telegraphic channels:</p>
                     
                     <div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
                       <a href="https://github.com/mmbtoledo" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '50px', height: '50px', borderRadius: '50%', border: `1px solid ${theme.accent}`, color: theme.accent, textDecoration: 'none', transition: 'all 0.3s' }} onMouseOver={(e) => {e.currentTarget.style.backgroundColor = theme.accent; e.currentTarget.style.color = theme.bg}} onMouseOut={(e) => {e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = theme.accent}}>
-                        {/* GitHub Icon SVG */}
                         <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
                       </a>
                       
                       <a href="#" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '50px', height: '50px', borderRadius: '50%', border: `1px solid ${theme.border}`, color: theme.muted, textDecoration: 'none', transition: 'all 0.3s', cursor: 'not-allowed' }} title="Line Currently Inactive">
-                        {/* LinkedIn Icon SVG */}
                         <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
                       </a>
 
                       <a href="https://www.facebook.com/benedict.toledo.90" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '50px', height: '50px', borderRadius: '50%', border: `1px solid ${theme.accent}`, color: theme.accent, textDecoration: 'none', transition: 'all 0.3s' }} onMouseOver={(e) => {e.currentTarget.style.backgroundColor = theme.accent; e.currentTarget.style.color = theme.bg}} onMouseOut={(e) => {e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = theme.accent}}>
-                        {/* Facebook Icon SVG */}
                         <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
                       </a>
                     </div>
@@ -250,7 +317,7 @@ function MemberTwo() {
           )}
 
           {/* Placeholders for the remaining tabs */}
-          {(activeTab !== 'home' && activeTab !== 'about' && activeTab !== 'connect') && (
+          {(activeTab !== 'home' && activeTab !== 'about' && activeTab !== 'connect' && activeTab !== 'achievements') && (
             <motion.div key="placeholder" variants={contentVariants} initial="hidden" animate="visible" exit="exit" style={{ maxWidth: '900px', width: '100%', textAlign: 'center', marginTop: '100px' }}>
               <div style={{ fontSize: '3rem', color: theme.accent, marginBottom: '20px' }}>✧</div>
               <h1 style={{ fontFamily: '"Playfair Display", serif', color: theme.text, fontSize: '3rem', margin: '0 0 20px 0' }}>
@@ -258,7 +325,7 @@ function MemberTwo() {
               </h1>
               <div style={{ borderTop: `1px solid ${theme.border}`, borderBottom: `1px solid ${theme.border}`, padding: '40px 0' }}>
                 <p style={{ color: theme.muted, fontSize: '1.2rem', fontStyle: 'italic', margin: 0 }}>
-                  [The blueprints for this chapter are currently being drafted. Michael's detailed records will appear here soon.]
+                  [The blueprints for this chapter are currently being drafted. Detailed records will appear here soon.]
                 </p>
               </div>
             </motion.div>
@@ -266,6 +333,81 @@ function MemberTwo() {
 
         </AnimatePresence>
       </div>
+
+      {/* MODAL / LIGHTBOX FOR ACHIEVEMENTS */}
+      <AnimatePresence>
+        {selectedAchievement && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedAchievement(null)}
+            style={{
+              position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+              backgroundColor: 'rgba(0,0,0,0.85)', zIndex: 999,
+              display: 'flex', justifyContent: 'center', alignItems: 'center',
+              padding: '40px'
+            }}
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              onClick={(e) => e.stopPropagation()} // Prevents closing when clicking inside the box
+              style={{
+                backgroundColor: theme.bg,
+                padding: '30px',
+                border: `2px solid ${theme.accent}`,
+                borderRadius: '8px',
+                maxWidth: '800px',
+                width: '100%',
+                maxHeight: '90vh',
+                overflowY: 'auto',
+                position: 'relative',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                boxShadow: '0 25px 50px rgba(0,0,0,0.5)'
+              }}
+            >
+              {/* Close Button */}
+              <button
+                onClick={() => setSelectedAchievement(null)}
+                style={{ 
+                  position: 'absolute', top: '15px', right: '15px', 
+                  background: 'transparent', border: 'none', color: theme.accent, 
+                  fontSize: '1.8rem', cursor: 'pointer', transition: 'transform 0.2s' 
+                }}
+                onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.2)'}
+                onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
+              >
+                ✕
+              </button>
+
+              {/* Modal Content */}
+              <img 
+                src={selectedAchievement.img} 
+                alt={selectedAchievement.title} 
+                style={{ 
+                  maxWidth: '100%', 
+                  maxHeight: '60vh', 
+                  objectFit: 'contain', 
+                  border: `1px solid ${theme.border}`, 
+                  marginBottom: '20px',
+                  backgroundColor: theme.panel,
+                  padding: '5px'
+                }} 
+              />
+              <h2 style={{ color: theme.text, fontFamily: '"Playfair Display", serif', margin: '0 0 10px 0', fontSize: '2rem' }}>
+                {selectedAchievement.title}
+              </h2>
+              <p style={{ color: theme.muted, textAlign: 'center', margin: 0, fontSize: '1.1rem', lineHeight: '1.6', fontStyle: 'italic' }}>
+                {selectedAchievement.desc}
+              </p>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <style>
         {`

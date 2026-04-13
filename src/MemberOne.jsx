@@ -2,16 +2,15 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
-// Profile Images (From assets folder)
+// Profile Image
 import jeiImg from './assets/1x1.jpg';
-import jeiImg2 from './assets/2x2.jpg';
-import jeiImg3 from './assets/2.2.jpg';
 
-// Project & Achievement Images (From MemberOne folder, no spaces)
+// Project & Achievement Images (From MemberOne folder)
 import flowchartImg from './MemberOne/flowchart.png';
 import troubleshootImg from './MemberOne/troubleshoot.png';
 import mlCertChamp from './MemberOne/coess.jpg';
 import mlCert2nd from './MemberOne/2nd.jpg';
+import logicImg from './MemberOne/logic.jpg'; // <-- Added your new logic image!
 
 function MemberOne() {
   const [activeTab, setActiveTab] = useState('home');
@@ -21,23 +20,23 @@ function MemberOne() {
 
   // --- Unique "Vintage Engineer Blueprint" Theme ---
   const darkTheme = {
-    bg: '#0B132B',          // Deep Blueprint Navy
-    panel: '#152243',       // Slightly lighter blueprint paper
-    accent: '#E6C229',      // Antique Brass / Gold
-    text: '#EAEAEA',        // Chalk White ink
-    muted: '#8A9EBD',       // Faded blueprint ink
-    border: '#283E71',      // Grid lines
-    shadow: '4px 4px 0px rgba(0, 0, 0, 0.5)' // Hard retro shadow
+    bg: '#0B132B',          
+    panel: '#152243',       
+    accent: '#E6C229',      
+    text: '#EAEAEA',        
+    muted: '#8A9EBD',       
+    border: '#283E71',      
+    shadow: '4px 4px 0px rgba(0, 0, 0, 0.5)' 
   };
 
   const lightTheme = {
-    bg: '#F5F2EB',          // Vintage Draft Paper
-    panel: '#EBE5D9',       // Lighter paper layer
-    accent: '#1D3557',      // Dark Navy ink
-    text: '#2B2D42',        // Typewriter black
-    muted: '#7A8494',       // Faded text
-    border: '#D0C8B6',      // Pencil lines
-    shadow: '4px 4px 0px rgba(29, 53, 87, 0.15)' // Hard retro shadow
+    bg: '#F5F2EB',          
+    panel: '#EBE5D9',       
+    accent: '#1D3557',      
+    text: '#2B2D42',        
+    muted: '#7A8494',       
+    border: '#D0C8B6',      
+    shadow: '4px 4px 0px rgba(29, 53, 87, 0.15)' 
   };
 
   const theme = isDarkMode ? darkTheme : lightTheme;
@@ -46,36 +45,54 @@ function MemberOne() {
     { id: 'home', label: 'Technical Profile' },
     { id: 'about', label: 'Biographical Data' },
     { id: 'journey', label: 'Experience Logs' },
+    { id: 'achievements', label: 'Achievements' },
     { id: 'projects', label: 'Schematics & Records' }, 
     { id: 'connect', label: 'Communications' }
   ];
 
-  // Specific Data derived from your Portfolio Document
+  // Achievements Data (Hardware removed, Logic added)
   const achievementsData = [
     { id: 1, img: mlCertChamp, title: 'MLBB Champion', desc: 'Participated and achieved Championship recognition in competitive gaming tournaments.' },
     { id: 2, img: mlCert2nd, title: 'MLBB 2nd Place', desc: 'Secured 2nd Place title in Mobile Legends Championships.' },
-    { id: 3, img: jeiImg2, title: 'Hardware Config', desc: 'Visual documentation of hands-on technical activities.' },
-    { id: 4, img: jeiImg3, title: 'Logic Assembly', desc: 'Practical application of basic logic circuit knowledge.' }
+    { id: 3, img: logicImg, title: 'Logic Assembly', desc: 'Practical application and assembly of basic logic circuits.' }
   ];
 
+  // Projects Data
   const projectsData = [
     {
       id: 1,
-      title: 'Algorithms & Flowcharts',
-      desc: 'Created algorithms, flowcharts, and basic programs in Python and C++.',
-      img: flowchartImg
+      title: 'Crypto Pulse',
+      desc: 'A React-based cryptocurrency tracking dashboard utilizing APIs for real-time market data visualization.',
+      img: null,
+      codeLink: 'https://github.com/mjeicalabis-alt/crypto-pulse.git'
     },
     {
       id: 2,
-      title: 'Networking & Troubleshooting',
-      desc: 'Developed fundamental understanding in computer networking and hardware troubleshooting.',
-      img: troubleshootImg
+      title: 'Project Gatekeeper',
+      desc: 'Security and authentication gateway application for managing user access.',
+      img: null,
+      codeLink: 'https://github.com/mjeicalabis-alt/project-gatekeeper.git'
     },
     {
       id: 3,
-      title: 'Safety Awareness Presentations',
-      desc: 'Shared online safety awareness with peers through organized presentations.',
-      img: null
+      title: 'Enrollment UI Design',
+      desc: 'Frontend user interface design and layout for a university enrollment portal system.',
+      img: null,
+      codeLink: 'https://github.com/mjeicalabis-alt/enrollment-ui-design-jei.git'
+    },
+    {
+      id: 4,
+      title: 'Algorithms & Flowcharts',
+      desc: 'Created algorithms, flowcharts, and basic programs in Python and C++.',
+      img: flowchartImg,
+      codeLink: null
+    },
+    {
+      id: 5,
+      title: 'Networking & Troubleshooting',
+      desc: 'Developed fundamental understanding in computer networking and hardware troubleshooting.',
+      img: troubleshootImg,
+      codeLink: null
     }
   ];
 
@@ -93,7 +110,6 @@ function MemberOne() {
         display: 'flex', minHeight: '100vh', 
         fontFamily: '"Georgia", serif', 
         overflow: 'hidden', 
-        // Engineering Blueprint Grid Pattern
         backgroundImage: isDarkMode 
           ? `linear-gradient(${theme.border} 1px, transparent 1px), linear-gradient(90deg, ${theme.border} 1px, transparent 1px)` 
           : `linear-gradient(${theme.border} 1px, transparent 1px), linear-gradient(90deg, ${theme.border} 1px, transparent 1px)`,
@@ -116,7 +132,7 @@ function MemberOne() {
         </Link>
       </div>
 
-      {/* Sidebar: Styled like a technical manual index */}
+      {/* Sidebar */}
       <AnimatePresence>
         {isSidebarOpen && (
           <motion.div 
@@ -129,7 +145,7 @@ function MemberOne() {
           >
             <div style={{ marginBottom: '40px', paddingBottom: '20px', borderBottom: `2px solid ${theme.border}` }}>
               <p style={{ margin: '0 0 5px 0', fontSize: '0.8rem', letterSpacing: '2px', color: theme.accent, fontFamily: '"Courier New", monospace', textTransform: 'uppercase' }}>
-                Document Ref: CE-2026
+                Document Ref: CPE-2026
               </p>
               <h2 style={{ margin: '0', fontFamily: '"Playfair Display", serif', fontSize: '2.2rem', color: theme.text, lineHeight: '1.2' }}>
                 JEI ERVIN<br/>ICALABIS
@@ -156,7 +172,6 @@ function MemberOne() {
               ))}
             </div>
             
-            {/* Sidebar bottom stamp */}
             <div style={{ marginTop: 'auto', paddingTop: '20px', borderTop: `1px dashed ${theme.border}`, textAlign: 'center' }}>
                 <p style={{ color: theme.muted, fontFamily: '"Courier New", monospace', fontSize: '0.75rem', margin: 0 }}>CONFIDENTIAL DOSSIER</p>
             </div>
@@ -174,7 +189,6 @@ function MemberOne() {
               
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '50px', alignItems: 'center' }}>
                 
-                {/* Vintage Polaroid / Spec Sheet Image Container */}
                 <div style={{ flex: '0 0 auto', border: `12px solid #FFF`, backgroundColor: '#FFF', padding: '0px', boxShadow: theme.shadow, transform: 'rotate(-2deg)' }}>
                   <img src={jeiImg} alt="Jei Ervin Icalabis" style={{ width: '280px', height: '280px', objectFit: 'cover', filter: isDarkMode ? 'sepia(0.3) contrast(1.2)' : 'sepia(0.1) contrast(1.1)' }} />
                   <div style={{ padding: '15px 10px', backgroundColor: '#FFF', textAlign: 'center', borderTop: '2px solid #EEE' }}>
@@ -188,7 +202,6 @@ function MemberOne() {
                   </h1>
                   
                   <div style={{ backgroundColor: theme.panel, border: `2px solid ${theme.border}`, padding: '30px', boxShadow: theme.shadow, position: 'relative' }}>
-                     {/* Draftsman tape details */}
                      <div style={{ position: 'absolute', top: '-10px', left: '40%', width: '80px', height: '20px', backgroundColor: isDarkMode ? '#FFF' : '#EAEAEA', opacity: 0.2, transform: 'rotate(-2deg)' }} />
 
                     <p style={{ fontSize: '1.15rem', lineHeight: '1.8', color: theme.text, margin: 0 }}>
@@ -253,18 +266,16 @@ function MemberOne() {
              </motion.div>
           )}
 
-          {/* TAB: PROJECTS & ACHIEVEMENTS */}
-          {activeTab === 'projects' && (
-             <motion.div key="projects" variants={contentVariants} initial="hidden" animate="visible" exit="exit" style={{ maxWidth: '1000px', margin: '0 auto' }}>
-               <h1 style={{ fontFamily: '"Playfair Display", serif', color: theme.text, fontSize: '3rem', margin: '0 0 10px 0' }}>Schematics & Records</h1>
-               <p style={{ color: theme.muted, fontFamily: '"Courier New", monospace', marginBottom: '40px', fontSize: '0.9rem' }}>&gt; DISPLAYING ARCHIVED TECHNICAL FILES...</p>
+          {/* TAB: ACHIEVEMENTS */}
+          {activeTab === 'achievements' && (
+             <motion.div key="achievements" variants={contentVariants} initial="hidden" animate="visible" exit="exit" style={{ maxWidth: '1000px', margin: '0 auto' }}>
+               <h1 style={{ fontFamily: '"Playfair Display", serif', color: theme.text, fontSize: '3rem', margin: '0 0 10px 0' }}>Achievements & Honors</h1>
+               <p style={{ color: theme.muted, fontFamily: '"Courier New", monospace', marginBottom: '40px', fontSize: '0.9rem' }}>&gt; DISPLAYING RECOGNITION LOGS...</p>
 
                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(400px, 1fr))', gap: '40px' }}>
-                 
-                 {/* Combine Projects and Achievements into one technical view */}
-                 {[...projectsData, ...achievementsData].map((item, idx) => (
+                 {achievementsData.map((item, idx) => (
                    <motion.div 
-                     key={idx}
+                     key={`ach-${idx}`}
                      whileHover={{ y: -5 }}
                      style={{ 
                        backgroundColor: theme.panel, 
@@ -276,7 +287,7 @@ function MemberOne() {
                    >
                      <div style={{ borderBottom: `2px solid ${theme.border}`, paddingBottom: '10px', marginBottom: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
                         <h3 style={{ margin: 0, fontFamily: '"Playfair Display", serif', fontSize: '1.6rem', color: theme.accent }}>{item.title}</h3>
-                        <span style={{ fontFamily: '"Courier New", monospace', fontSize: '0.8rem', color: theme.muted }}>REF-{String(idx + 1).padStart(3, '0')}</span>
+                        <span style={{ fontFamily: '"Courier New", monospace', fontSize: '0.8rem', color: theme.muted }}>ACH-{String(idx + 1).padStart(3, '0')}</span>
                      </div>
                      
                      {item.img ? (
@@ -298,6 +309,83 @@ function MemberOne() {
                      )}
 
                      <p style={{ margin: '0', color: theme.text, lineHeight: '1.6', fontSize: '1.05rem', flexGrow: 1 }}>{item.desc}</p>
+                   </motion.div>
+                 ))}
+               </div>
+             </motion.div>
+          )}
+
+          {/* TAB: PROJECTS */}
+          {activeTab === 'projects' && (
+             <motion.div key="projects" variants={contentVariants} initial="hidden" animate="visible" exit="exit" style={{ maxWidth: '1000px', margin: '0 auto' }}>
+               <h1 style={{ fontFamily: '"Playfair Display", serif', color: theme.text, fontSize: '3rem', margin: '0 0 10px 0' }}>Schematics & Records</h1>
+               <p style={{ color: theme.muted, fontFamily: '"Courier New", monospace', marginBottom: '40px', fontSize: '0.9rem' }}>&gt; DISPLAYING ARCHIVED TECHNICAL FILES...</p>
+
+               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(400px, 1fr))', gap: '40px' }}>
+                 {projectsData.map((item, idx) => (
+                   <motion.div 
+                     key={`proj-${idx}`}
+                     whileHover={{ y: -5 }}
+                     style={{ 
+                       backgroundColor: theme.panel, 
+                       border: `2px solid ${theme.text}`, 
+                       padding: '20px',
+                       boxShadow: theme.shadow,
+                       display: 'flex', flexDirection: 'column'
+                     }}
+                   >
+                     <div style={{ borderBottom: `2px solid ${theme.border}`, paddingBottom: '10px', marginBottom: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+                        <h3 style={{ margin: '0', fontFamily: '"Playfair Display", serif', fontSize: '1.6rem', color: theme.accent, lineHeight: '1.2' }}>{item.title}</h3>
+                        <span style={{ fontFamily: '"Courier New", monospace', fontSize: '0.8rem', color: theme.muted }}>PRJ-{String(idx + 1).padStart(3, '0')}</span>
+                     </div>
+                     
+                     {item.img ? (
+                        <div 
+                          onClick={() => setSelectedImage(item.img)}
+                          style={{ cursor: 'pointer', border: `1px solid ${theme.border}`, padding: '5px', backgroundColor: theme.bg, marginBottom: '20px' }}
+                        >
+                          <img 
+                            src={item.img} 
+                            alt={item.title} 
+                            style={{ width: '100%', height: '220px', objectFit: 'cover', filter: isDarkMode ? 'sepia(0.2) brightness(0.9)' : 'none' }} 
+                          />
+                          <p style={{ textAlign: 'center', margin: '5px 0 0 0', fontFamily: '"Courier New", monospace', fontSize: '0.7rem', color: theme.muted }}>[ CLICK TO ENLARGE FIGURE ]</p>
+                        </div>
+                     ) : (
+                        <div style={{ height: '220px', border: `1px dashed ${theme.border}`, marginBottom: '20px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                            <p style={{ fontFamily: '"Courier New", monospace', color: theme.muted }}>NO VISUAL DATA ATTACHED</p>
+                        </div>
+                     )}
+
+                     <p style={{ margin: '0', color: theme.text, lineHeight: '1.6', fontSize: '1.05rem', flexGrow: 1 }}>{item.desc}</p>
+                     
+                     {/* Dynamic Code Link Button */}
+                     {item.codeLink && (
+                       <div style={{ marginTop: '20px', paddingTop: '15px', borderTop: `1px dashed ${theme.border}` }}>
+                         <a 
+                           href={item.codeLink} 
+                           target="_blank" 
+                           rel="noopener noreferrer" 
+                           style={{ 
+                             display: 'inline-block', 
+                             padding: '8px 15px', 
+                             border: `1px solid ${theme.accent}`, 
+                             color: theme.text, 
+                             textDecoration: 'none', 
+                             fontFamily: '"Courier New", monospace', 
+                             fontSize: '0.85rem', 
+                             fontWeight: 'bold', 
+                             textTransform: 'uppercase', 
+                             transition: 'all 0.3s', 
+                             backgroundColor: theme.bg 
+                           }}
+                           onMouseOver={(e) => {e.currentTarget.style.backgroundColor = theme.text; e.currentTarget.style.color = theme.bg}} 
+                           onMouseOut={(e) => {e.currentTarget.style.backgroundColor = theme.bg; e.currentTarget.style.color = theme.text}}
+                         >
+                           View Source Code ↗
+                         </a>
+                       </div>
+                     )}
                    </motion.div>
                  ))}
                </div>
@@ -334,7 +422,7 @@ function MemberOne() {
 
                 </div>
 
-                {/* NEW: Social Network Links */}
+                {/* Social Network Links */}
                 <div style={{ marginTop: '40px', paddingTop: '30px', borderTop: `1px dashed ${theme.border}`, textAlign: 'center' }}>
                   <p style={{ color: theme.muted, fontFamily: '"Courier New", monospace', fontSize: '0.9rem', marginBottom: '20px' }}>&gt; EXTERNAL_NETWORK_LINKS</p>
                   

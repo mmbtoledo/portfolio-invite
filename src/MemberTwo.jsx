@@ -18,6 +18,15 @@ import kkb from './Membertwo/KKB.jpg';
 import mvp from './Membertwo/MVP.jpg';
 import squadGoals from './Membertwo/Squad Goals.jpg';
 
+// Importing Project Images
+import projCarting from './Membertwo/Projects/Carting System.png';
+import projCrypto from './Membertwo/Projects/Crypto Pulse.png';
+import projGit from './Membertwo/Projects/Git Frontend.png';
+import projLogin from './Membertwo/Projects/Interactive Login Dashboard.png';
+import projMeatshop from "./Membertwo/Projects/Lovier's Meatshop Database.jpg";
+import projEnrollment from './Membertwo/Projects/University Enrollment Portal.png';
+import projWedding from './Membertwo/Projects/Wedding Invitation.png';
+
 function MemberTwo() {
   const [activeTab, setActiveTab] = useState('home');
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -62,7 +71,7 @@ function MemberTwo() {
     { id: 3, img: excAward, title: 'Excellence Award', desc: 'Recognized for outstanding academic and extracurricular excellence.' },
     { id: 4, img: excAward2, title: 'Excellence Award II', desc: 'Continued recognition for dedication and performance.' },
     { id: 5, img: mvp, title: 'MVP Award', desc: 'Most Valuable Player award for exceptional sportsmanship and skill.' },
-    { id: 6, img: champPubmat, title: 'Championship Pubmat', desc: 'Official publication material for the championship event.' },
+    { id: 6, img: champPubmat, title: 'CEA MLBB Champions', desc: 'Official publication material for the CEA MLBB Champions' },
     { id: 7, img: intercampus, title: 'Intercampus Participant', desc: 'Represented the campus in high-stakes intercampus events.' },
     { id: 8, img: intertown1, title: 'Intertown 1st Runner Up', desc: 'Secured 1st Runner Up position in the competitive Intertown event.' },
     { id: 9, img: intertown2, title: 'Intertown Commendation', desc: 'Additional recognition for the Intertown competition.' },
@@ -79,6 +88,8 @@ function MemberTwo() {
       title: 'Portfolio & Wedding Invitation',
       desc: 'A sophisticated digital portfolio and wedding invitation platform featuring interactive components and an elegant vintage aesthetic.',
       codeLink: 'https://github.com/mmbtoledo/portfolio-invite',
+      siteLink: 'https://wedding-invitation-project-olive.vercel.app/',
+      img: projWedding
     },
     {
       id: 2,
@@ -86,13 +97,15 @@ function MemberTwo() {
       desc: 'A comprehensive database management system built to streamline operations and inventory for Lovier\'s Meatshop.',
       codeLink: 'https://github.com/mmbtoledo/meatshop-system',
       siteLink: null,
+      img: projMeatshop
     },
     {
       id: 3,
       title: 'Crypto Pulse',
       desc: 'A modern cryptocurrency tracking platform delivering real-time market data, trends, and analytical insights.',
       codeLink: 'https://github.com/mmbtoledo/crypto-pulse',
-      siteLink: 'https://crypto-pulse-neon.vercel.app/',
+      siteLink: 'https://crypto-pulse-26jurd0q0-mmbtoledo-4878s-projects.vercel.app/',
+      img: projCrypto
     },
     {
       id: 4,
@@ -100,6 +113,7 @@ function MemberTwo() {
       desc: 'An intuitive user interface design engineered specifically to simplify and enhance university enrollment processes.',
       codeLink: 'https://github.com/mmbtoledo/enrollment-ui-design',
       siteLink: 'https://enrollment-ui-design.netlify.app/',
+      img: projEnrollment
     },
     {
       id: 5,
@@ -107,6 +121,7 @@ function MemberTwo() {
       desc: 'Project Gatekeeper: A highly secure, interactive, and responsive dashboard designed for smooth user authentication.',
       codeLink: 'https://github.com/mmbtoledo/project-gatekeeper',
       siteLink: 'https://mmbtoledo.github.io/project-gatekeeper/',
+      img: projLogin
     },
     {
       id: 6,
@@ -114,6 +129,7 @@ function MemberTwo() {
       desc: 'A frontend interface project that heavily utilizes Git for version control, showcasing clean deployment strategies.',
       codeLink: 'https://github.com/mmbtoledo/git-frontend-project',
       siteLink: 'https://mmbtoledo.github.io/git-frontend-project/',
+      img: projGit
     },
     {
       id: 7,
@@ -121,6 +137,7 @@ function MemberTwo() {
       desc: 'A robust command-line interface application developed to efficiently manage a text-based shopping cart system.',
       codeLink: 'https://github.com/mmbtoledo/Carting-System',
       siteLink: null,
+      img: projCarting
     }
   ];
 
@@ -230,7 +247,7 @@ function MemberTwo() {
               </h1>
               
               <p style={{ fontSize: '1.2rem', lineHeight: '2', color: theme.muted, maxWidth: '700px', margin: '0 auto', borderTop: `1px solid ${theme.border}`, paddingTop: '30px' }}>
-                A 2nd-year Computer Engineering student at TIP-Manila. I build systems, write code, and design circuits—constantly exploring the dynamic intersection where software meets hardware.
+                A 2nd-year Computer Engineering student at TIP-Manila, I am passionate about building innovative systems, writing efficient code, and designing functional electronic circuits. My academic journey has allowed me to explore both the theoretical and practical aspects of computing, strengthening my problem-solving skills and technical foundation. I am particularly interested in the dynamic intersection where software meets hardware, where I can develop solutions that bridge digital logic with real-world applications. Through continuous learning, hands-on projects, and active exploration of emerging technologies, I strive to improve my skills and prepare myself for a future career in the tech industry, especially in fields like system development and cybersecurity.
               </p>
             </motion.div>
           )}
@@ -248,8 +265,13 @@ function MemberTwo() {
                  <div style={{ position: 'absolute', bottom: 10, left: 10, width: 8, height: 8, borderRadius: '50%', backgroundColor: theme.accent }} />
                  <div style={{ position: 'absolute', bottom: 10, right: 10, width: 8, height: 8, borderRadius: '50%', backgroundColor: theme.accent }} />
 
-                 <p><span style={{ fontSize: '3.5rem', float: 'left', lineHeight: '0.8', color: theme.accent, paddingRight: '15px', fontFamily: '"Playfair Display", serif', marginTop: '5px' }}>M</span>ichael Benedict F. Toledo is a Computer Engineering student who is passionate about technology, cybersecurity, and understanding how systems work. He enjoys exploring both hardware and software, particularly in the area of protecting systems from threats and vulnerabilities. Whether working on a project or learning something new, he consistently challenges himself to improve his skills.</p>
-                 <p>He describes himself as determined, curious, and adaptable. He takes his responsibilities seriously while recognizing that there is still much for him to learn. He believes that mistakes are part of growth and uses them as motivation to improve both academically and personally.</p>
+                 <p><span style={{ fontSize: '3.5rem', float: 'left', lineHeight: '0.8', color: theme.accent, paddingRight: '15px', fontFamily: '"Playfair Display", serif', marginTop: '5px' }}>M</span>ichael Benedict F. Toledo is a 2nd-year Computer Engineering student at TIP-Manila who is passionate about technology and how systems work. He is currently developing his skills in both hardware and software, learning concepts in programming, system development, and basic circuit design. Through his studies, he continues to explore how different components of computer systems interact and function together.
+
+He is particularly interested in cybersecurity, as he wants to understand how to protect systems from threats and vulnerabilities. He enjoys trying out new things, whether it’s experimenting with code, working on small projects, or learning beyond what is taught in class. For him, learning is a continuous process that goes beyond lectures and requires constant practice and self-improvement.
+
+As a student, he describes himself as determined, curious, and adaptable. He understands that there is still a lot for him to learn, and he is open to challenges that help him grow. He believes that mistakes are part of the learning process and uses them as motivation to improve both academically and personally.
+
+In the future, he aims to become a successful computer engineer who can build useful systems and contribute to solving real-world problems. He is continuously working on improving his knowledge and skills to prepare himself for opportunities in the tech industry, especially in areas such as cybersecurity and system development.</p>
                </div>
              </motion.div>
           )}
@@ -299,6 +321,7 @@ function MemberTwo() {
              </motion.div>
           )}
 
+          {/* PROJECTS SECTION */}
           {activeTab === 'projects' && (
              <motion.div key="projects" variants={contentVariants} initial="hidden" animate="visible" exit="exit" style={{ maxWidth: '1000px', width: '100%' }}>
                <div style={{ textAlign: 'center', marginBottom: '50px' }}>
@@ -323,6 +346,7 @@ function MemberTwo() {
                        transition: 'border-color 0.3s ease'
                      }}
                    >
+                     {/* Image Container */}
                      <div style={{ 
                        height: '180px', 
                        backgroundColor: theme.bg, 
@@ -330,13 +354,26 @@ function MemberTwo() {
                        display: 'flex', justifyContent: 'center', alignItems: 'center',
                        position: 'relative', overflow: 'hidden'
                      }}>
-                       <div style={{ position: 'absolute', top: 10, left: 10, right: 10, bottom: 10, border: `1px dashed ${theme.border}`, borderRadius: '6px' }} />
-                       <div style={{ fontSize: '4.5rem', color: theme.accent, opacity: 0.15, fontFamily: '"Playfair Display", serif', fontWeight: 'bold', textAlign: 'center', lineHeight: '1' }}>
-                         {project.title.substring(0, 2).toUpperCase()}
-                       </div>
-                       <div style={{ position: 'absolute', bottom: '15px', right: '20px', color: theme.muted, fontSize: '0.7rem', fontFamily: 'sans-serif', letterSpacing: '2px', textTransform: 'uppercase' }}>
-                         System Arch.
-                       </div>
+                       {project.img ? (
+                         <img 
+                           src={project.img} 
+                           alt={project.title} 
+                           style={{ 
+                             width: '100%', height: '100%', objectFit: 'cover', 
+                             filter: isDarkMode ? 'brightness(0.85)' : 'none' 
+                           }} 
+                         />
+                       ) : (
+                         <>
+                           <div style={{ position: 'absolute', top: 10, left: 10, right: 10, bottom: 10, border: `1px dashed ${theme.border}`, borderRadius: '6px' }} />
+                           <div style={{ fontSize: '4.5rem', color: theme.accent, opacity: 0.15, fontFamily: '"Playfair Display", serif', fontWeight: 'bold', textAlign: 'center', lineHeight: '1' }}>
+                             {project.title.substring(0, 2).toUpperCase()}
+                           </div>
+                           <div style={{ position: 'absolute', bottom: '15px', right: '20px', color: theme.muted, fontSize: '0.7rem', fontFamily: 'sans-serif', letterSpacing: '2px', textTransform: 'uppercase' }}>
+                             System Arch.
+                           </div>
+                         </>
+                       )}
                      </div>
 
                      <div style={{ padding: '30px', flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
@@ -368,7 +405,7 @@ function MemberTwo() {
             <motion.div key="connect" variants={contentVariants} initial="hidden" animate="visible" exit="exit" style={{ maxWidth: '900px', width: '100%' }}>
               <div style={{ textAlign: 'center', marginBottom: '40px' }}>
                 <div style={{ fontSize: '2rem', color: theme.accent, marginBottom: '10px' }}>✉</div>
-                <h1 style={{ fontFamily: '"Playfair Display", serif', color: theme.text, fontSize: '3rem', margin: 0, letterSpacing: '2px' }}>Formal Correspondence</h1>
+                <h1 style={{ fontFamily: '"Playfair Display", serif', color: theme.text, fontSize: '3rem', margin: 0, letterSpacing: '2px' }}>Direct Inquiries</h1>
               </div>
 
               <div style={{ backgroundColor: theme.panel, border: `2px solid ${theme.border}`, padding: '4px', boxShadow: theme.shadow }}>
@@ -377,24 +414,24 @@ function MemberTwo() {
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '50px' }}>
                     <div style={{ flex: '1 1 300px' }}>
                       <h3 style={{ color: theme.accent, fontFamily: '"Playfair Display", serif', fontSize: '1.5rem', borderBottom: `1px solid ${theme.border}`, paddingBottom: '10px', margin: '0 0 20px 0' }}>
-                        The Architect's Quarters
+                        Contact Details
                       </h3>
                       
                       <div style={{ marginBottom: '25px' }}>
-                        <p style={{ color: theme.muted, textTransform: 'uppercase', letterSpacing: '3px', fontSize: '0.7rem', margin: '0 0 5px 0' }}>Electronic Mail</p>
+                        <p style={{ color: theme.muted, textTransform: 'uppercase', letterSpacing: '3px', fontSize: '0.7rem', margin: '0 0 5px 0' }}>Email Address</p>
                         <a href="mailto:mmbtoledo@tip.edu.ph" style={{ display: 'block', color: theme.text, fontSize: '1rem', textDecoration: 'none', marginBottom: '5px', fontStyle: 'italic' }}>mmbtoledo@tip.edu.ph</a>
                         <a href="mailto:benedicttoledo001@gmail.com" style={{ display: 'block', color: theme.text, fontSize: '1rem', textDecoration: 'none', fontStyle: 'italic' }}>benedicttoledo001@gmail.com</a>
                       </div>
 
                       <div>
-                        <p style={{ color: theme.muted, textTransform: 'uppercase', letterSpacing: '3px', fontSize: '0.7rem', margin: '0 0 5px 0' }}>Geographic Coordinates</p>
-                        <p style={{ color: theme.text, fontSize: '1rem', margin: 0, lineHeight: '1.6', fontStyle: 'italic' }}>Noveleta, Cavite<br/>Republic of the Philippines</p>
+                        <p style={{ color: theme.muted, textTransform: 'uppercase', letterSpacing: '3px', fontSize: '0.7rem', margin: '0 0 5px 0' }}>Current Location</p>
+                        <p style={{ color: theme.text, fontSize: '1rem', margin: 0, lineHeight: '1.6', fontStyle: 'italic' }}>Noveleta, Cavite<br/>Philippines</p>
                       </div>
                     </div>
 
                     <div style={{ flex: '1 1 300px' }}>
                       <h3 style={{ color: theme.accent, fontFamily: '"Playfair Display", serif', fontSize: '1.5rem', borderBottom: `1px solid ${theme.border}`, paddingBottom: '10px', margin: '0 0 20px 0' }}>
-                        Academic Guild
+                        Academic Institution
                       </h3>
                       
                       <div style={{ marginBottom: '25px' }}>
@@ -403,7 +440,7 @@ function MemberTwo() {
                       </div>
 
                       <div style={{ backgroundColor: theme.bg, border: `1px solid ${theme.border}`, padding: '20px' }}>
-                        <p style={{ color: theme.muted, textTransform: 'uppercase', letterSpacing: '3px', fontSize: '0.7rem', margin: '0 0 10px 0' }}>Direct Superior / Program Chair</p>
+                        <p style={{ color: theme.muted, textTransform: 'uppercase', letterSpacing: '3px', fontSize: '0.7rem', margin: '0 0 10px 0' }}>Program Chair</p>
                         <h4 style={{ margin: '0 0 5px 0', color: theme.text, fontFamily: '"Playfair Display", serif', fontSize: '1.2rem' }}>Dr. Jennifer B. Enriquez</h4>
                         <p style={{ margin: '0 0 10px 0', color: theme.accent, fontSize: '0.8rem' }}>Computer Engineering Department</p>
                         <a href="mailto:jennifer.enriquez@tip.edu.ph" style={{ color: theme.muted, fontSize: '0.8rem', textDecoration: 'none', fontStyle: 'italic' }}>jennifer.enriquez@tip.edu.ph</a>
@@ -412,7 +449,7 @@ function MemberTwo() {
                   </div>
 
                   <div style={{ marginTop: '50px', borderTop: `1px solid ${theme.border}`, paddingTop: '40px', textAlign: 'center' }}>
-                    <p style={{ color: theme.muted, fontStyle: 'italic', margin: '0 0 20px 0' }}>For swift dispatch, utilize the following telegraphic channels:</p>
+                    <p style={{ color: theme.muted, fontStyle: 'italic', margin: '0 0 20px 0' }}>Connect with me on my professional networks:</p>
                     
                     <div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
                       <a href="https://github.com/mmbtoledo" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '50px', height: '50px', borderRadius: '50%', border: `1px solid ${theme.accent}`, color: theme.accent, textDecoration: 'none', transition: 'all 0.3s' }} onMouseOver={(e) => {e.currentTarget.style.backgroundColor = theme.accent; e.currentTarget.style.color = theme.bg}} onMouseOut={(e) => {e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = theme.accent}}>

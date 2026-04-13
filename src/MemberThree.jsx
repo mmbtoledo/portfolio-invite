@@ -3,6 +3,13 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import mcleanImg from './assets/2.2.jpg';
 
+// --- IMPORT CERTIFICATES FROM MemberThree FOLDER ---
+import cert1 from './MemberThree/Conduct Award.jpg'; 
+import cert2 from './MemberThree/Honesty Award.jpg';
+import cert3 from './MemberThree/Marian Award.jpg';
+import cert4 from './MemberThree/Most Active Participation Award.jpg';
+import cert5 from './MemberThree/Squal Goals Certificate.jpg';
+
 function MemberThree() {
   const [activeTab, setActiveTab] = useState('home');
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -30,45 +37,48 @@ function MemberThree() {
 
   const theme = isDarkMode ? darkTheme : lightTheme;
 
+  // Updated Tab Order and Labels
   const tabs = [
-    { id: 'home', label: 'Front Page' },
-    { id: 'about', label: 'Editorial' },
-    { id: 'journey', label: 'Timeline' },
-    { id: 'projects', label: 'Publications' },
-    { id: 'connect', label: 'Classifieds' }
+    { id: 'home', label: 'Overview' },
+    { id: 'about', label: 'About Me' },
+    { id: 'journey', label: 'Achievements' },
+    { id: 'projects', label: 'Projects' },
+    { id: 'connect', label: 'Contact' }
   ];
 
-  // Data populated from Portfolio
+  // Data populated from Portfolio using exact certificate images
   const timelineData = [
-    { id: 1, img: mcleanImg, title: 'Project Management', date: 'Academic Milestone', desc: 'Consistently completed school projects on time, demonstrating strong time management and responsibility.' },
-    { id: 2, img: mcleanImg, title: 'Technical Proficiency', date: 'Skill Development', desc: 'Significantly improved skills in using computers, moving beyond basics into structured learning.' },
-    { id: 3, img: mcleanImg, title: 'Hardware Diagnostics', date: 'Skill Development', desc: 'Learned basic troubleshooting in computers, gaining the ability to identify and resolve common technical issues.' },
-    { id: 4, img: mcleanImg, title: 'Continuous Growth', date: 'Academic Milestone', desc: 'Finished tasks and assignments with maximum effort, continually studying and improving technical skills.' },
+    { id: 1, img: cert1, title: 'Conduct Award', date: 'Academic Milestone', desc: 'Recognized for excellent behavior, strong moral principles, and serving as a role model to peers.' },
+    { id: 2, img: cert2, title: 'Honesty Award', date: 'Academic Milestone', desc: 'Awarded for demonstrating integrity, truthfulness, and trustworthy character within the academic community.' },
+    { id: 3, img: cert3, title: 'Marian Award', date: 'Academic Milestone', desc: 'Honored with the Marian Award for embodying the core values and spirit of the institution.' },
+    { id: 4, img: cert4, title: 'Most Active Participation Award', date: 'Academic Milestone', desc: 'Acknowledged for consistent enthusiasm, engagement, and active involvement in school activities.' },
+    { id: 5, img: cert5, title: 'Squad Goals Certificate', date: 'Team Achievement', desc: 'A special recognition highlighting teamwork, collaboration, and collective success with peers.' },
   ];
 
+  // Updated Publications Data with Actual GitHub Repositories
   const publicationsData = [
     {
       id: 1,
-      title: 'Software Fundamentals',
-      category: 'PROGRAMMING',
-      desc: 'Engaged in basic programming and coding activities, developing simple programs using C++, HTML, and CSS.',
-      codeLink: 'https://github.com/',
+      title: 'Interactive Dashboard',
+      category: 'WEB DEVELOPMENT',
+      desc: 'A dynamic interface designed to streamline data visualization and user management through an interactive dashboard layout.',
+      codeLink: 'https://github.com/mjmadornado-byte/Dashboard',
       siteLink: null,
     },
     {
       id: 2,
-      title: 'Hardware Assembly',
-      category: 'SYSTEM ARCHITECTURE',
-      desc: 'Gained hands-on experience in learning how to build and set up basic computer systems.',
-      codeLink: null,
+      title: 'University Enrollment Portal',
+      category: 'SYSTEMS ENGINEERING',
+      desc: 'A comprehensive academic portal engineered to facilitate and manage the student enrollment process efficiently.',
+      codeLink: 'https://github.com/mjmadornado-byte/university',
       siteLink: null,
     },
     {
       id: 3,
-      title: 'Tech-Driven Research',
-      category: 'ACADEMIC PROJECTS',
-      desc: 'Completed various school projects related to technology, researching and applying new technological concepts.',
-      codeLink: null,
+      title: 'Crypto Pulse',
+      category: 'FINTECH',
+      desc: 'A cryptocurrency tracking platform built to provide real-time data, market trends, and analytical insights.',
+      codeLink: 'https://github.com/mjmadornado-byte/crypto-pulseee',
       siteLink: null,
     }
   ];
@@ -118,8 +128,9 @@ function MemberThree() {
             style={{ width: '280px', backgroundColor: theme.panel, borderRight: `3px solid ${theme.border}`, padding: '90px 30px 30px 30px', display: 'flex', flexDirection: 'column', zIndex: 40, position: 'fixed', height: '100vh', overflowY: 'auto' }}
           >
             <div style={{ marginBottom: '40px', textAlign: 'center', borderBottom: `2px solid ${theme.border}`, paddingBottom: '20px' }}>
-              <h2 style={{ margin: '0', fontFamily: '"Playfair Display", serif', fontSize: '2rem', textTransform: 'uppercase', lineHeight: '1' }}>THE <br/>CHRONICLE</h2>
-              <p style={{ fontFamily: '"Courier New", monospace', fontSize: '0.8rem', marginTop: '10px', color: theme.accent, fontWeight: 'bold' }}>ISSUE: MCLEAN</p>
+              <h2 style={{ margin: '0', fontFamily: '"Playfair Display", serif', fontSize: '2rem', textTransform: 'uppercase', lineHeight: '1.1' }}>
+                John Mclean A. Adornado
+              </h2>
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
@@ -140,13 +151,13 @@ function MemberThree() {
       <div style={{ flex: 1, marginLeft: isSidebarOpen ? '280px' : '0', transition: 'margin-left 0.4s ease', padding: '100px 60px 60px 60px', position: 'relative', display: 'flex', justifyContent: 'center' }}>
         <AnimatePresence mode="wait">
           
-          {/* HOME TAB */}
+          {/* HOME / OVERVIEW TAB */}
           {activeTab === 'home' && (
             <motion.div key="home" variants={contentVariants} initial="hidden" animate="visible" exit="exit" style={{ maxWidth: '1000px', width: '100%', margin: '0 auto' }}>
               
               <div style={{ borderBottom: `4px double ${theme.border}`, paddingBottom: '20px', marginBottom: '40px', textAlign: 'center' }}>
                 <h1 style={{ fontSize: '5rem', margin: '0', fontFamily: '"Playfair Display", serif', textTransform: 'uppercase', lineHeight: '1' }}>John McLean A. Adornado</h1>
-                <p style={{ fontSize: '1.5rem', margin: '10px 0 0 0', fontStyle: 'italic' }}>Tech Enthusiast & Dedicated Learner</p>
+                <p style={{ fontSize: '1.5rem', margin: '10px 0 0 0', fontStyle: 'italic' }}>Computer Engineering Student</p>
               </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '40px' }}>
@@ -165,12 +176,12 @@ function MemberThree() {
             </motion.div>
           )}
 
-          {/* EDITORIAL (ABOUT) TAB */}
+          {/* EDITORIAL / ABOUT ME TAB */}
           {activeTab === 'about' && (
             <motion.div key="about" variants={contentVariants} initial="hidden" animate="visible" exit="exit" style={{ maxWidth: '900px', width: '100%' }}>
               <div style={{ borderBottom: `2px solid ${theme.border}`, paddingBottom: '20px', marginBottom: '30px' }}>
                  <p style={{ fontFamily: '"Courier New", monospace', color: theme.muted, textTransform: 'uppercase', fontSize: '0.8rem', margin: '0 0 10px 0' }}>COLUMN I.</p>
-                 <h1 style={{ fontFamily: '"Playfair Display", serif', color: theme.text, fontSize: '3.5rem', margin: 0, textTransform: 'uppercase' }}>The Editorial</h1>
+                 <h1 style={{ fontFamily: '"Playfair Display", serif', color: theme.text, fontSize: '3.5rem', margin: 0, textTransform: 'uppercase' }}>About Me</h1>
               </div>
 
               <div style={{ backgroundColor: theme.panel, border: `2px solid ${theme.border}`, padding: '40px', columnCount: 2, columnGap: '40px', fontSize: '1.1rem', lineHeight: '1.9', textAlign: 'justify' }}>
@@ -181,11 +192,11 @@ function MemberThree() {
             </motion.div>
           )}
 
-          {/* TIMELINE (ACHIEVEMENTS) TAB */}
+          {/* TIMELINE / ACHIEVEMENTS TAB */}
           {activeTab === 'journey' && (
             <motion.div key="journey" variants={contentVariants} initial="hidden" animate="visible" exit="exit" style={{ maxWidth: '1000px', width: '100%' }}>
                <div style={{ borderBottom: `4px double ${theme.border}`, paddingBottom: '10px', marginBottom: '40px', textAlign: 'center' }}>
-                 <h1 style={{ fontFamily: '"Playfair Display", serif', color: theme.text, fontSize: '3rem', margin: 0, textTransform: 'uppercase' }}>Historical Timeline</h1>
+                 <h1 style={{ fontFamily: '"Playfair Display", serif', color: theme.text, fontSize: '3rem', margin: 0, textTransform: 'uppercase' }}>Achievements</h1>
                  <p style={{ fontFamily: '"Courier New", monospace', color: theme.accent, fontSize: '1rem', marginTop: '10px', fontWeight: 'bold' }}>// DOCUMENTED MILESTONES</p>
                </div>
 
@@ -225,11 +236,11 @@ function MemberThree() {
             </motion.div>
           )}
 
-          {/* PUBLICATIONS (PROJECTS) TAB */}
+          {/* PUBLICATIONS / PROJECTS TAB */}
           {activeTab === 'projects' && (
              <motion.div key="projects" variants={contentVariants} initial="hidden" animate="visible" exit="exit" style={{ maxWidth: '1000px', width: '100%' }}>
                <div style={{ borderBottom: `4px double ${theme.border}`, paddingBottom: '10px', marginBottom: '40px', textAlign: 'center' }}>
-                 <h1 style={{ fontFamily: '"Playfair Display", serif', color: theme.text, fontSize: '3rem', margin: 0, textTransform: 'uppercase' }}>Publications & Works</h1>
+                 <h1 style={{ fontFamily: '"Playfair Display", serif', color: theme.text, fontSize: '3rem', margin: 0, textTransform: 'uppercase' }}>Projects</h1>
                  <p style={{ fontFamily: '"Courier New", monospace', color: theme.accent, fontSize: '1rem', marginTop: '10px', fontWeight: 'bold' }}>// CATALOG OF PROJECTS</p>
                </div>
 
@@ -275,34 +286,36 @@ function MemberThree() {
              </motion.div>
           )}
 
-          {/* CLASSIFIEDS (CONNECT) TAB */}
+          {/* CLASSIFIEDS / CONTACT TAB */}
           {activeTab === 'connect' && (
             <motion.div key="connect" variants={contentVariants} initial="hidden" animate="visible" exit="exit" style={{ maxWidth: '800px', width: '100%' }}>
               <div style={{ textAlign: 'center', marginBottom: '40px', borderBottom: `4px double ${theme.border}`, paddingBottom: '20px' }}>
-                <h1 style={{ fontFamily: '"Playfair Display", serif', color: theme.text, fontSize: '3rem', margin: '0', textTransform: 'uppercase' }}>Classifieds</h1>
+                <h1 style={{ fontFamily: '"Playfair Display", serif', color: theme.text, fontSize: '3rem', margin: '0', textTransform: 'uppercase' }}>Contact</h1>
                 <p style={{ fontFamily: '"Courier New", monospace', color: theme.muted, fontSize: '1rem', marginTop: '10px' }}>// CONTACT & INQUIRIES</p>
               </div>
 
               <div style={{ border: `2px solid ${theme.border}`, padding: '10px', backgroundColor: theme.panel }}>
                 <div style={{ border: `1px solid ${theme.text}`, padding: '40px', display: 'flex', flexDirection: 'column', gap: '30px' }}>
                   
-                  {/* Ad Block 1 */}
-                  <div style={{ borderBottom: `2px dashed ${theme.border}`, paddingBottom: '20px' }}>
-                    <h2 style={{ fontFamily: '"Playfair Display", serif', fontSize: '2rem', margin: '0 0 10px 0', textTransform: 'uppercase' }}>WANTED: Opportunities</h2>
+                  {/* Ad Block 1 - Updated to Contact Information */}
+                  <div style={{ borderBottom: `2px dashed ${theme.border}`, paddingBottom: '20px', marginBottom: '10px' }}>
+                    <h2 style={{ fontFamily: '"Playfair Display", serif', fontSize: '2rem', margin: '0 0 10px 0', textTransform: 'uppercase' }}>Contact Information</h2>
                     <p style={{ fontSize: '1.1rem', lineHeight: '1.6' }}>
-                      Highly motivated student seeking challenges in programming and systems development. Will trade hard work, responsibility, and a willingness to learn for experience and knowledge. 
+                      Feel free to reach out for collaborations, project inquiries, or just to say hello. I am always open to discussing new opportunities in software engineering and connecting with fellow tech enthusiasts.
                     </p>
                   </div>
 
-                  {/* Ad Block 2 */}
+                  {/* Ad Block 2 - Updated with User Data */}
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
                     <div>
                       <h3 style={{ fontFamily: '"Courier New", monospace', fontSize: '1.1rem', margin: '0 0 10px 0', color: theme.accent, fontWeight: 'bold' }}>DIRECT LINE:</h3>
+                      <p style={{ margin: '0 0 5px 0', fontSize: '1rem' }}>Email: <a href="mailto:mjmadornado@tip.edu.ph" style={{ color: theme.text, textDecoration: 'underline' }}>mjmadornado@tip.edu.ph</a></p>
                       <p style={{ margin: '0 0 5px 0', fontSize: '1rem' }}>Location: Infanta, Quezon</p>
                     </div>
                     <div>
                       <h3 style={{ fontFamily: '"Courier New", monospace', fontSize: '1.1rem', margin: '0 0 10px 0', color: theme.accent, fontWeight: 'bold' }}>SOCIAL TELEGRAPH:</h3>
-                      <p style={{ margin: '0 0 5px 0', fontSize: '1rem' }}>Github: <a href="#" style={{ color: theme.text, textDecoration: 'underline' }}>@johndoe</a></p>
+                      <p style={{ margin: '0 0 5px 0', fontSize: '1rem' }}>Github: <a href="https://github.com/mjmadornado-byte" target="_blank" rel="noopener noreferrer" style={{ color: theme.text, textDecoration: 'underline' }}>@mjmadornado-byte</a></p>
+                      <p style={{ margin: '0 0 5px 0', fontSize: '1rem' }}>Facebook: <a href="https://www.facebook.com/johnmclean.adornado2221" target="_blank" rel="noopener noreferrer" style={{ color: theme.text, textDecoration: 'underline' }}>John Mclean Adornado</a></p>
                     </div>
                   </div>
 

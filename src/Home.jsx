@@ -38,7 +38,7 @@ function Home() {
     { 
       id: 'No. 01', 
       name: 'Jei Ervin R. Icalabis', 
-      role: 'Hardware Specialist',
+      role: 'Computer Engineering Student',
       desc: 'A dedicated artisan with a profound interest in the mechanical and the electrical. Eager to unearth the workings of modern machinery and apply classic ingenuity.',
       skills: ['C++', 'HTML', 'CSS', 'PYTHON', 'HARDWARE'],
       path: '/member-one',
@@ -47,7 +47,7 @@ function Home() {
     { 
       id: 'No. 02', 
       name: 'Michael Benedict F. Toledo', 
-      role: 'Computer Engineering',
+      role: 'Computer Engineering Student',
       desc: 'A scholar of technology and system architecture. Enjoys exploring the delicate interface between hardware and software, safeguarding systems like an archivist.',
       skills: ['C++', 'PYTHON', 'JAVA', 'MYSQL', 'NETWORKING'],
       path: '/member-two',
@@ -56,7 +56,7 @@ function Home() {
     { 
       id: 'No. 03', 
       name: 'John Mclean A. Adornado', 
-      role: 'Tech Enthusiast & Learner',
+      role: 'Computer Engineering Student',
       desc: 'A steadfast apprentice of the digital age who endeavors to master his craft. Focused on building a solid foundation of knowledge to endure the test of time.',
       skills: ['HTML', 'CSS', 'C++', 'TROUBLESHOOTING', 'LOGIC'],
       path: '/member-three',
@@ -94,10 +94,10 @@ function Home() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '80px', paddingLeft: '40px' }}>
           <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 1 }}>
             <p style={{ fontFamily: '"Courier New", monospace', letterSpacing: '2px', fontSize: '0.85rem', color: theme.textMuted, margin: '0 0 15px 0', textTransform: 'uppercase' }}>
-              Archive / Batch 2026 / Group IV
+              Archive / Group IV
             </p>
             <h1 style={{ fontSize: '4.5rem', margin: '0', fontWeight: 'normal', color: theme.textMain, lineHeight: '1.1' }}>
-              The Team <br/> <span style={{ fontStyle: 'italic', color: theme.accent }}>Dossier</span>
+              The Team's <br/> <span style={{ fontStyle: 'italic', color: theme.accent }}>Portfolio</span>
             </h1>
           </motion.div>
 

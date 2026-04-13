@@ -1,11 +1,23 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+
+// Import the wedding song
+import weddingSong from './Wedding Song/Hambog Ng Sagpro Krew-Alaala Nalang ft. LUN (Lyrics).mp3';
+
+// --- Import Images with Exact Repository Names ---
+import quiapoBg from './Wedding Song/Quiapo Church.jpg';
+import suitExample from './Wedding Song/BlackTuxedo.jpg';
+import gownExample from './Wedding Song/Floor-Length Gown Evening gown.jpg';
 
 function WeddingInvite() {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [rsvpCount, setRsvpCount] = useState(142);
   const [hasSubmitted, setHasSubmitted] = useState(false);
+  
+  // Audio state and ref
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef(null);
 
   // --- Elegant Vintage Theme Palette ---
   const darkTheme = {
@@ -34,6 +46,15 @@ function WeddingInvite() {
     setHasSubmitted(true);
   };
 
+  const toggleAudio = () => {
+    if (isPlaying) {
+      audioRef.current.pause();
+    } else {
+      audioRef.current.play();
+    }
+    setIsPlaying(!isPlaying);
+  };
+
   // Common Styles
   const sectionStyle = {
     padding: '100px 20px',
@@ -59,6 +80,16 @@ function WeddingInvite() {
     color: theme.textMain
   };
 
+  // Style for the new attire example images
+  const attireImageStyle = {
+    width: '100%',
+    height: 'auto',
+    marginBottom: '20px',
+    border: `1px solid ${theme.border}`,
+    filter: 'grayscale(100%)', // Optional: adds to the vintage feel
+    opacity: isDarkMode ? 0.8 : 1, // Optional: softens them on dark mode
+  };
+
   return (
     <motion.div 
       animate={{ backgroundColor: theme.bg, color: theme.textMain }}
@@ -66,17 +97,33 @@ function WeddingInvite() {
       style={{ fontFamily: '"Playfair Display", "Georgia", serif', minHeight: '100vh' }}
     >
       
+      {/* Hidden Audio Player */}
+      <audio ref={audioRef} src={weddingSong} loop />
+
       {/* Top Navigation Bar */}
       <div style={{ position: 'fixed', top: 0, left: 0, right: 0, display: 'flex', justifyContent: 'space-between', padding: '20px 40px', zIndex: 100, background: `linear-gradient(${theme.bg} 40%, transparent)` }}>
         <Link to="/" style={{ color: theme.accent, textDecoration: 'none', fontFamily: 'sans-serif', fontSize: '0.8rem', letterSpacing: '2px', textTransform: 'uppercase' }}>
           ← Return to Front Page
         </Link>
-        <button 
-          onClick={() => setIsDarkMode(!isDarkMode)}
-          style={{ background: 'transparent', border: `1px solid ${theme.accent}`, color: theme.accent, borderRadius: '50%', width: '35px', height: '35px', cursor: 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-        >
-          {isDarkMode ? '☼' : '☾'}
-        </button>
+        <div style={{ display: 'flex', gap: '15px' }}>
+          {/* Audio Toggle Button */}
+          <button 
+            onClick={toggleAudio}
+            style={{ background: 'transparent', border: `1px solid ${theme.accent}`, color: theme.accent, borderRadius: '50%', width: '35px', height: '35px', cursor: 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '1rem' }}
+            title={isPlaying ? "Pause Music" : "Play Music"}
+          >
+            {isPlaying ? '⏸' : '♪'}
+          </button>
+
+          {/* Theme Toggle Button */}
+          <button 
+            onClick={() => setIsDarkMode(!isDarkMode)}
+            style={{ background: 'transparent', border: `1px solid ${theme.accent}`, color: theme.accent, borderRadius: '50%', width: '35px', height: '35px', cursor: 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+            title="Toggle Theme"
+          >
+            {isDarkMode ? '☼' : '☾'}
+          </button>
+        </div>
       </div>
 
       {/* 1. HERO SECTION */}
@@ -177,24 +224,30 @@ function WeddingInvite() {
         </div>
       </div>
 
-      {/* 4. THE SETTING */}
-      <div style={{ ...sectionStyle, padding: '120px 20px' }}>
-        <p style={sectionSubtitle}>The Setting</p>
-        <h2 style={sectionTitle}>Quiapo Church</h2>
-        <div style={{ maxWidth: '700px', margin: '0 auto' }}>
-          <p style={{ color: theme.textMuted, fontSize: '1rem', lineHeight: '2', marginBottom: '40px' }}>
-            Standing as one of the most prominent basilicas in the country, Quiapo Church has graced the heart of Manila for centuries. Its soaring architecture and rich history radiate an enduring testament to devotion, artistry, and the timeless pursuit of beauty.
-            <br/><br/>
-            It is here, beneath centuries of history and stone, that Dwyane and Ramiel will begin their eternal journey together.
-          </p>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '40px', borderTop: `1px solid ${theme.border}`, paddingTop: '30px' }}>
-            <div>
-              <p style={{ color: theme.accent, fontSize: '1.2rem', margin: '0 0 5px 0' }}>1588</p>
-              <p style={{ color: theme.textMuted, fontSize: '0.6rem', textTransform: 'uppercase', letterSpacing: '2px', margin: 0 }}>Parish Founded</p>
-            </div>
-            <div>
-              <p style={{ color: theme.accent, fontSize: '1.2rem', margin: '0 0 5px 0' }}>1987</p>
-              <p style={{ color: theme.textMuted, fontSize: '0.6rem', textTransform: 'uppercase', letterSpacing: '2px', margin: 0 }}>Made Minor Basilica</p>
+      {/* 4. THE SETTING (Quiapo Church Background Integrated) */}
+      <div style={{ ...sectionStyle, padding: '120px 20px', position: 'relative' }}>
+        
+        {/* Subtle background overlay with user's Quiapo Church image */}
+        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, backgroundImage: `url("${quiapoBg}")`, backgroundSize: 'cover', backgroundPosition: 'center', opacity: isDarkMode ? 0.2 : 0.1, zIndex: 0 }} />
+
+        <div style={{ zIndex: 1, position: 'relative' }}>
+          <p style={sectionSubtitle}>The Setting</p>
+          <h2 style={sectionTitle}>Quiapo Church</h2>
+          <div style={{ maxWidth: '700px', margin: '0 auto' }}>
+            <p style={{ color: theme.textMain, fontSize: '1rem', lineHeight: '2', marginBottom: '40px' }}>
+              Standing as one of the most prominent basilicas in the country, Quiapo Church has graced the heart of Manila for centuries. Its soaring architecture and rich history radiate an enduring testament to devotion, artistry, and the timeless pursuit of beauty.
+              <br/><br/>
+              It is here, beneath centuries of history and stone, that Dwyane and Ramiel will begin their eternal journey together.
+            </p>
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '40px', borderTop: `1px solid ${theme.border}`, paddingTop: '30px' }}>
+              <div>
+                <p style={{ color: theme.accent, fontSize: '1.2rem', margin: '0 0 5px 0' }}>1588</p>
+                <p style={{ color: theme.textMuted, fontSize: '0.6rem', textTransform: 'uppercase', letterSpacing: '2px', margin: 0 }}>Parish Founded</p>
+              </div>
+              <div>
+                <p style={{ color: theme.accent, fontSize: '1.2rem', margin: '0 0 5px 0' }}>1987</p>
+                <p style={{ color: theme.textMuted, fontSize: '0.6rem', textTransform: 'uppercase', letterSpacing: '2px', margin: 0 }}>Made Minor Basilica</p>
+              </div>
             </div>
           </div>
         </div>
@@ -255,7 +308,7 @@ function WeddingInvite() {
         </div>
       </div>
 
-      {/* 7. DRESS CODE */}
+      {/* 7. DRESS CODE (Attire Examples Integrated) */}
       <div style={{ ...sectionStyle, backgroundColor: isDarkMode ? '#0A0908' : '#F2EFE9' }}>
         <p style={sectionSubtitle}>Attire</p>
         <h2 style={sectionTitle}>Dress Code</h2>
@@ -264,8 +317,11 @@ function WeddingInvite() {
         <div style={{ maxWidth: '900px', margin: '0 auto' }}>
           <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', marginBottom: '40px' }}>
             
-            {/* For Gentlemen */}
+            {/* For Gentlemen with Suit Example Image */}
             <div style={{ flex: '1 1 400px', border: `1px solid ${theme.border}`, padding: '40px', textAlign: 'left' }}>
+              
+              <img src={suitExample} alt="Gentleman's Suit Example" style={attireImageStyle} />
+              
               <p style={{ color: theme.accent, fontSize: '0.7rem', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '25px' }}>✦ For Gentlemen</p>
               
               <div style={{ marginBottom: '20px' }}>
@@ -278,8 +334,11 @@ function WeddingInvite() {
               </div>
             </div>
 
-            {/* For Ladies */}
+            {/* For Ladies with Gown Example Image */}
             <div style={{ flex: '1 1 400px', border: `1px solid ${theme.border}`, padding: '40px', textAlign: 'left' }}>
+              
+              <img src={gownExample} alt="Lady's Gown Example" style={attireImageStyle} />
+
               <p style={{ color: theme.accent, fontSize: '0.7rem', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '25px' }}>✦ For Ladies</p>
               
               <div style={{ marginBottom: '20px' }}>

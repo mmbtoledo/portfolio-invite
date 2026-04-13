@@ -6,25 +6,26 @@ import mcleanImg from './assets/2.2.jpg';
 function MemberThree() {
   const [activeTab, setActiveTab] = useState('home');
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const [isDarkMode, setIsDarkMode] = useState(false); // Default to Light for Newspaper feel
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
 
   // Chronicle Theme
   const lightTheme = {
-    bg: '#F5F2EB',          // Newsprint off-white
-    panel: '#EBE6DC',       // Darker paper edge
-    accent: '#8B0000',      // Crimson Ink Stamp
-    text: '#1C1C1C',        // Charcoal Ink
-    muted: '#5A5A5A',       // Faded gray ink
-    border: '#1C1C1C'       // Solid black lines
+    bg: '#F5F2EB',          
+    panel: '#EBE6DC',       
+    accent: '#8B0000',      
+    text: '#1C1C1C',        
+    muted: '#5A5A5A',       
+    border: '#1C1C1C'       
   };
 
   const darkTheme = {
-    bg: '#1C1C1C',          // Dark Charcoal Paper
-    panel: '#262626',       // Slightly lighter charcoal
-    accent: '#D32F2F',      // Bright Crimson Stamp
-    text: '#E5E0D8',        // Off-white ink
-    muted: '#A0A0A0',       // Faded silver ink
-    border: '#4A4A4A'       // Gray lines
+    bg: '#1C1C1C',          
+    panel: '#262626',       
+    accent: '#D32F2F',      
+    text: '#E5E0D8',        
+    muted: '#A0A0A0',       
+    border: '#4A4A4A'       
   };
 
   const theme = isDarkMode ? darkTheme : lightTheme;
@@ -37,10 +38,45 @@ function MemberThree() {
     { id: 'connect', label: 'Classifieds' }
   ];
 
+  // Data populated from Portfolio
+  const timelineData = [
+    { id: 1, img: mcleanImg, title: 'Project Management', date: 'Academic Milestone', desc: 'Consistently completed school projects on time, demonstrating strong time management and responsibility.' },
+    { id: 2, img: mcleanImg, title: 'Technical Proficiency', date: 'Skill Development', desc: 'Significantly improved skills in using computers, moving beyond basics into structured learning.' },
+    { id: 3, img: mcleanImg, title: 'Hardware Diagnostics', date: 'Skill Development', desc: 'Learned basic troubleshooting in computers, gaining the ability to identify and resolve common technical issues.' },
+    { id: 4, img: mcleanImg, title: 'Continuous Growth', date: 'Academic Milestone', desc: 'Finished tasks and assignments with maximum effort, continually studying and improving technical skills.' },
+  ];
+
+  const publicationsData = [
+    {
+      id: 1,
+      title: 'Software Fundamentals',
+      category: 'PROGRAMMING',
+      desc: 'Engaged in basic programming and coding activities, developing simple programs using C++, HTML, and CSS.',
+      codeLink: 'https://github.com/',
+      siteLink: null,
+    },
+    {
+      id: 2,
+      title: 'Hardware Assembly',
+      category: 'SYSTEM ARCHITECTURE',
+      desc: 'Gained hands-on experience in learning how to build and set up basic computer systems.',
+      codeLink: null,
+      siteLink: null,
+    },
+    {
+      id: 3,
+      title: 'Tech-Driven Research',
+      category: 'ACADEMIC PROJECTS',
+      desc: 'Completed various school projects related to technology, researching and applying new technological concepts.',
+      codeLink: null,
+      siteLink: null,
+    }
+  ];
+
   const contentVariants = {
-    hidden: { opacity: 0, scale: 0.98 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
-    exit: { opacity: 0, scale: 0.98, transition: { duration: 0.3 } }
+    hidden: { opacity: 0, y: 10 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+    exit: { opacity: 0, y: -10, transition: { duration: 0.3 } }
   };
 
   return (
@@ -101,55 +137,256 @@ function MemberThree() {
       </AnimatePresence>
 
       {/* Main Content Area */}
-      <div style={{ flex: 1, marginLeft: isSidebarOpen ? '280px' : '0', transition: 'margin-left 0.4s ease', padding: '100px 60px 60px 60px', position: 'relative' }}>
+      <div style={{ flex: 1, marginLeft: isSidebarOpen ? '280px' : '0', transition: 'margin-left 0.4s ease', padding: '100px 60px 60px 60px', position: 'relative', display: 'flex', justifyContent: 'center' }}>
         <AnimatePresence mode="wait">
+          
+          {/* HOME TAB */}
           {activeTab === 'home' && (
-            <motion.div key="home" variants={contentVariants} initial="hidden" animate="visible" exit="exit" style={{ maxWidth: '1000px', margin: '0 auto' }}>
+            <motion.div key="home" variants={contentVariants} initial="hidden" animate="visible" exit="exit" style={{ maxWidth: '1000px', width: '100%', margin: '0 auto' }}>
               
               <div style={{ borderBottom: `4px double ${theme.border}`, paddingBottom: '20px', marginBottom: '40px', textAlign: 'center' }}>
-                <h1 style={{ fontSize: '5rem', margin: '0', fontFamily: '"Playfair Display", serif', textTransform: 'uppercase', lineHeight: '1' }}>John McLean</h1>
+                <h1 style={{ fontSize: '5rem', margin: '0', fontFamily: '"Playfair Display", serif', textTransform: 'uppercase', lineHeight: '1' }}>John McLean A. Adornado</h1>
                 <p style={{ fontSize: '1.5rem', margin: '10px 0 0 0', fontStyle: 'italic' }}>Tech Enthusiast & Dedicated Learner</p>
               </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '40px' }}>
                 <div>
-                  <img src={mcleanImg} alt="McLean" style={{ width: '100%', height: 'auto', filter: 'grayscale(100%) contrast(1.2)', border: `2px solid ${theme.border}`, padding: '5px', backgroundColor: theme.bg }} />
-                  <p style={{ textAlign: 'center', fontSize: '0.9rem', fontStyle: 'italic', marginTop: '10px', color: theme.muted }}>Captured on film, 2026.</p>
+                  <img src={mcleanImg} alt="McLean" style={{ width: '100%', height: 'auto', border: `2px solid ${theme.border}`, padding: '5px', backgroundColor: theme.bg }} />
+                  <p style={{ textAlign: 'center', fontSize: '0.9rem', fontStyle: 'italic', marginTop: '10px', color: theme.muted }}>Captured on film.</p>
                 </div>
                 
                 <div style={{ columnCount: 2, columnGap: '30px', fontSize: '1.1rem', lineHeight: '1.8', textAlign: 'justify' }}>
-                  <p><strong>[PLACEHOLDER STORY]</strong> I am a simple person who always tries my best in everything I do. I am hardworking and willing to learn new things. I am not perfect, but I keep trying to improve myself little by little.</p>
+                  <p>I am a simple person who always tries my best in everything I do. I can say that I am hardworking and willing to learn new things. I am not perfect, but I keep trying to improve myself little by little.</p>
                   <p>I like learning about technology, especially computers, because it is interesting and helpful for my future. Sometimes I experience challenges in school and in life, but I do not give up easily. I stay positive and continue working hard because I know it will help me grow.</p>
                   <h3 style={{ color: theme.accent, fontFamily: '"Courier New", monospace', marginTop: '20px' }}>// DIRECTIVE:</h3>
-                  <p>My goal is to finish my studies, secure a stable job, help my family, and make them proud. I believe that with hard work and determination, I can achieve my dreams.</p>
+                  <p>My goal is to finish my studies and have a stable job someday. I want to help my family and make them proud. I believe that with hard work and determination, I can achieve my dreams.</p>
                 </div>
               </div>
             </motion.div>
           )}
 
+          {/* EDITORIAL (ABOUT) TAB */}
+          {activeTab === 'about' && (
+            <motion.div key="about" variants={contentVariants} initial="hidden" animate="visible" exit="exit" style={{ maxWidth: '900px', width: '100%' }}>
+              <div style={{ borderBottom: `2px solid ${theme.border}`, paddingBottom: '20px', marginBottom: '30px' }}>
+                 <p style={{ fontFamily: '"Courier New", monospace', color: theme.muted, textTransform: 'uppercase', fontSize: '0.8rem', margin: '0 0 10px 0' }}>COLUMN I.</p>
+                 <h1 style={{ fontFamily: '"Playfair Display", serif', color: theme.text, fontSize: '3.5rem', margin: 0, textTransform: 'uppercase' }}>The Editorial</h1>
+              </div>
+
+              <div style={{ backgroundColor: theme.panel, border: `2px solid ${theme.border}`, padding: '40px', columnCount: 2, columnGap: '40px', fontSize: '1.1rem', lineHeight: '1.9', textAlign: 'justify' }}>
+                 <p><span style={{ fontSize: '4rem', float: 'left', lineHeight: '0.8', color: theme.text, paddingRight: '15px', fontFamily: '"Playfair Display", serif', marginTop: '5px' }}>J</span>ohn Mclean A. Adornado, born on March 22, 2005, and hailing from Infanta, Quezon, is a student who views technology not just as a set of tools, but as an ever-expanding language that needs to be deciphered and mastered.</p>
+                 <p>Throughout his academic journey, he has focused on building a strong foundation in basic computer skills, coding in C++, HTML, and CSS, and troubleshooting hardware. He is hardworking, responsible, and possesses excellent time management skills, allowing him to handle challenges effectively.</p>
+                 <p>Beyond the screen, John Mclean has a vibrant set of interests. He enjoys exploring new ideas, spending time with friends and family, and staying active through sports like basketball and cycling. He believes that the best path forward is through rigorous learning and an unwavering positive attitude.</p>
+              </div>
+            </motion.div>
+          )}
+
+          {/* TIMELINE (ACHIEVEMENTS) TAB */}
+          {activeTab === 'journey' && (
+            <motion.div key="journey" variants={contentVariants} initial="hidden" animate="visible" exit="exit" style={{ maxWidth: '1000px', width: '100%' }}>
+               <div style={{ borderBottom: `4px double ${theme.border}`, paddingBottom: '10px', marginBottom: '40px', textAlign: 'center' }}>
+                 <h1 style={{ fontFamily: '"Playfair Display", serif', color: theme.text, fontSize: '3rem', margin: 0, textTransform: 'uppercase' }}>Historical Timeline</h1>
+                 <p style={{ fontFamily: '"Courier New", monospace', color: theme.accent, fontSize: '1rem', marginTop: '10px', fontWeight: 'bold' }}>// DOCUMENTED MILESTONES</p>
+               </div>
+
+               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '30px' }}>
+                 {timelineData.map((item) => (
+                   <motion.div 
+                     key={item.id}
+                     whileHover={{ y: -5, backgroundColor: isDarkMode ? '#333' : '#E0D8C8' }}
+                     onClick={() => setSelectedItem(item)}
+                     style={{ 
+                       backgroundColor: theme.bg, 
+                       padding: '15px', 
+                       border: `2px solid ${theme.border}`, 
+                       cursor: 'pointer',
+                       transition: 'background-color 0.3s ease'
+                     }}
+                   >
+                     <div style={{ borderBottom: `2px solid ${theme.text}`, paddingBottom: '10px', marginBottom: '15px' }}>
+                       <span style={{ fontFamily: '"Courier New", monospace', fontSize: '0.8rem', fontWeight: 'bold' }}>DATE: {item.date}</span>
+                     </div>
+                     <img 
+                       src={item.img} 
+                       alt={item.title} 
+                       style={{ 
+                         width: '100%', 
+                         height: '180px', 
+                         objectFit: 'cover', 
+                         border: `1px solid ${theme.border}`,
+                         marginBottom: '15px'
+                       }} 
+                     />
+                     <h3 style={{ color: theme.text, fontSize: '1.3rem', margin: '0 0 10px 0', fontFamily: '"Playfair Display", serif' }}>{item.title}</h3>
+                     <p style={{ color: theme.text, fontFamily: '"Courier New", monospace', fontSize: '0.8rem', margin: 0, textDecoration: 'underline' }}>[ VIEW ATTACHMENT ]</p>
+                   </motion.div>
+                 ))}
+               </div>
+            </motion.div>
+          )}
+
+          {/* PUBLICATIONS (PROJECTS) TAB */}
           {activeTab === 'projects' && (
-             <motion.div key="projects" variants={contentVariants} initial="hidden" animate="visible" exit="exit" style={{ maxWidth: '900px', margin: '0 auto' }}>
-               <h1 style={{ fontFamily: '"Playfair Display", serif', fontSize: '3rem', borderBottom: `2px solid ${theme.border}`, paddingBottom: '10px' }}>RECENT PUBLICATIONS</h1>
-               <div style={{ marginTop: '30px' }}>
-                 {[1, 2, 3].map(item => (
-                   <div key={item} style={{ borderBottom: `1px dashed ${theme.border}`, paddingBottom: '20px', marginBottom: '20px' }}>
-                     <h2 style={{ margin: '0 0 10px 0', fontFamily: '"Playfair Display", serif' }}>[Project Headline Placeholder]</h2>
-                     <p style={{ color: theme.accent, fontFamily: '"Courier New", monospace', fontSize: '0.9rem', margin: '0 0 10px 0' }}>FILED UNDER: TECH / DEV</p>
-                     <p style={{ margin: 0, fontSize: '1.1rem', lineHeight: '1.6', color: theme.text }}>[Detailed project description. You can edit this section later to describe your contributions to the portfolio or other academic tasks.]</p>
-                   </div>
+             <motion.div key="projects" variants={contentVariants} initial="hidden" animate="visible" exit="exit" style={{ maxWidth: '1000px', width: '100%' }}>
+               <div style={{ borderBottom: `4px double ${theme.border}`, paddingBottom: '10px', marginBottom: '40px', textAlign: 'center' }}>
+                 <h1 style={{ fontFamily: '"Playfair Display", serif', color: theme.text, fontSize: '3rem', margin: 0, textTransform: 'uppercase' }}>Publications & Works</h1>
+                 <p style={{ fontFamily: '"Courier New", monospace', color: theme.accent, fontSize: '1rem', marginTop: '10px', fontWeight: 'bold' }}>// CATALOG OF PROJECTS</p>
+               </div>
+
+               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(400px, 1fr))', gap: '30px' }}>
+                 {publicationsData.map((pub) => (
+                   <motion.div 
+                     key={pub.id}
+                     whileHover={{ x: 5 }}
+                     style={{ 
+                       border: `2px solid ${theme.border}`, 
+                       borderLeft: `8px solid ${theme.text}`,
+                       padding: '25px',
+                       backgroundColor: theme.panel,
+                       display: 'flex',
+                       flexDirection: 'column'
+                     }}
+                   >
+                     <p style={{ color: theme.accent, fontFamily: '"Courier New", monospace', fontSize: '0.8rem', margin: '0 0 10px 0', fontWeight: 'bold' }}>
+                       FILED UNDER: {pub.category}
+                     </p>
+                     <h3 style={{ color: theme.text, fontSize: '1.8rem', margin: '0 0 15px 0', fontFamily: '"Playfair Display", serif', lineHeight: '1.2' }}>
+                       {pub.title}
+                     </h3>
+                     <p style={{ color: theme.text, fontSize: '1rem', lineHeight: '1.6', margin: '0 0 25px 0', flexGrow: 1 }}>
+                       {pub.desc}
+                     </p>
+
+                     <div style={{ display: 'flex', gap: '15px', borderTop: `1px dashed ${theme.border}`, paddingTop: '15px' }}>
+                       {pub.siteLink && (
+                         <a href={pub.siteLink} target="_blank" rel="noopener noreferrer" style={{ color: theme.text, fontFamily: '"Courier New", monospace', fontSize: '0.9rem', textDecoration: 'none', fontWeight: 'bold', borderBottom: `1px solid ${theme.text}` }}>
+                           [ VIEW LIVE SITE ]
+                         </a>
+                       )}
+                       {pub.codeLink && (
+                         <a href={pub.codeLink} target="_blank" rel="noopener noreferrer" style={{ color: theme.text, fontFamily: '"Courier New", monospace', fontSize: '0.9rem', textDecoration: 'none', fontWeight: 'bold', borderBottom: `1px solid ${theme.text}` }}>
+                           [ SOURCE CODE ]
+                         </a>
+                       )}
+                     </div>
+                   </motion.div>
                  ))}
                </div>
              </motion.div>
           )}
 
-          {(activeTab !== 'home' && activeTab !== 'projects') && (
-            <motion.div key="placeholder" variants={contentVariants} initial="hidden" animate="visible" exit="exit" style={{ textAlign: 'center', marginTop: '100px' }}>
-              <h1 style={{ fontFamily: '"Playfair Display", serif', fontSize: '3rem', textTransform: 'uppercase' }}>{tabs.find(t => t.id === activeTab)?.label}</h1>
-              <p style={{ fontSize: '1.2rem', fontStyle: 'italic', color: theme.muted, marginTop: '20px' }}>[Placeholder Content. Edit this section later.]</p>
+          {/* CLASSIFIEDS (CONNECT) TAB */}
+          {activeTab === 'connect' && (
+            <motion.div key="connect" variants={contentVariants} initial="hidden" animate="visible" exit="exit" style={{ maxWidth: '800px', width: '100%' }}>
+              <div style={{ textAlign: 'center', marginBottom: '40px', borderBottom: `4px double ${theme.border}`, paddingBottom: '20px' }}>
+                <h1 style={{ fontFamily: '"Playfair Display", serif', color: theme.text, fontSize: '3rem', margin: '0', textTransform: 'uppercase' }}>Classifieds</h1>
+                <p style={{ fontFamily: '"Courier New", monospace', color: theme.muted, fontSize: '1rem', marginTop: '10px' }}>// CONTACT & INQUIRIES</p>
+              </div>
+
+              <div style={{ border: `2px solid ${theme.border}`, padding: '10px', backgroundColor: theme.panel }}>
+                <div style={{ border: `1px solid ${theme.text}`, padding: '40px', display: 'flex', flexDirection: 'column', gap: '30px' }}>
+                  
+                  {/* Ad Block 1 */}
+                  <div style={{ borderBottom: `2px dashed ${theme.border}`, paddingBottom: '20px' }}>
+                    <h2 style={{ fontFamily: '"Playfair Display", serif', fontSize: '2rem', margin: '0 0 10px 0', textTransform: 'uppercase' }}>WANTED: Opportunities</h2>
+                    <p style={{ fontSize: '1.1rem', lineHeight: '1.6' }}>
+                      Highly motivated student seeking challenges in programming and systems development. Will trade hard work, responsibility, and a willingness to learn for experience and knowledge. 
+                    </p>
+                  </div>
+
+                  {/* Ad Block 2 */}
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+                    <div>
+                      <h3 style={{ fontFamily: '"Courier New", monospace', fontSize: '1.1rem', margin: '0 0 10px 0', color: theme.accent, fontWeight: 'bold' }}>DIRECT LINE:</h3>
+                      <p style={{ margin: '0 0 5px 0', fontSize: '1rem' }}>Location: Infanta, Quezon</p>
+                    </div>
+                    <div>
+                      <h3 style={{ fontFamily: '"Courier New", monospace', fontSize: '1.1rem', margin: '0 0 10px 0', color: theme.accent, fontWeight: 'bold' }}>SOCIAL TELEGRAPH:</h3>
+                      <p style={{ margin: '0 0 5px 0', fontSize: '1rem' }}>Github: <a href="#" style={{ color: theme.text, textDecoration: 'underline' }}>@johndoe</a></p>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
             </motion.div>
           )}
+
         </AnimatePresence>
       </div>
+
+      {/* MODAL / LIGHTBOX FOR TIMELINE ACHIEVEMENTS */}
+      <AnimatePresence>
+        {selectedItem && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedItem(null)}
+            style={{
+              position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+              backgroundColor: isDarkMode ? 'rgba(0,0,0,0.9)' : 'rgba(0,0,0,0.8)', zIndex: 999,
+              display: 'flex', justifyContent: 'center', alignItems: 'center',
+              padding: '40px'
+            }}
+          >
+            <motion.div
+              initial={{ scale: 0.95, y: 10 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.95, y: 10 }}
+              onClick={(e) => e.stopPropagation()} 
+              style={{
+                backgroundColor: theme.bg,
+                padding: '20px',
+                border: `4px solid ${theme.border}`,
+                outline: `2px solid ${theme.bg}`,
+                outlineOffset: '-8px',
+                maxWidth: '700px',
+                width: '100%',
+                maxHeight: '90vh',
+                overflowY: 'auto',
+                position: 'relative',
+                display: 'flex',
+                flexDirection: 'column',
+                boxShadow: '10px 10px 0px rgba(0,0,0,0.5)'
+              }}
+            >
+              <button
+                onClick={() => setSelectedItem(null)}
+                style={{ 
+                  position: 'absolute', top: '15px', right: '15px', 
+                  background: theme.text, color: theme.bg, border: 'none', 
+                  fontFamily: '"Courier New", monospace', fontWeight: 'bold',
+                  padding: '5px 10px', cursor: 'pointer'
+                }}
+              >
+                [X] CLOSE
+              </button>
+
+              <div style={{ textAlign: 'center', marginTop: '30px' }}>
+                <img 
+                  src={selectedItem.img} 
+                  alt={selectedItem.title} 
+                  style={{ 
+                    maxWidth: '100%', 
+                    maxHeight: '50vh', 
+                    objectFit: 'contain', 
+                    border: `2px solid ${theme.border}`
+                  }} 
+                />
+                <div style={{ borderTop: `2px dashed ${theme.border}`, marginTop: '20px', paddingTop: '20px' }}>
+                  <h2 style={{ color: theme.text, fontFamily: '"Playfair Display", serif', margin: '0 0 10px 0', fontSize: '2.5rem', textTransform: 'uppercase' }}>
+                    {selectedItem.title}
+                  </h2>
+                  <p style={{ fontFamily: '"Courier New", monospace', color: theme.accent, fontWeight: 'bold', marginBottom: '15px' }}>RECORDED: {selectedItem.date}</p>
+                  <p style={{ color: theme.text, margin: 0, fontSize: '1.2rem', lineHeight: '1.6', textAlign: 'justify' }}>
+                    {selectedItem.desc}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 }

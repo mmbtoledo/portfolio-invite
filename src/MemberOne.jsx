@@ -1,48 +1,88 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+
+// Profile Images (From assets folder)
 import jeiImg from './assets/1x1.jpg';
+import jeiImg2 from './assets/2x2.jpg';
+import jeiImg3 from './assets/2.2.jpg';
+
+// Project & Achievement Images (From MemberOne folder, no spaces)
+import flowchartImg from './MemberOne/flowchart.png';
+import troubleshootImg from './MemberOne/troubleshoot.png';
+import mlCertChamp from './MemberOne/coess.jpg';
+import mlCert2nd from './MemberOne/2nd.jpg';
 
 function MemberOne() {
   const [activeTab, setActiveTab] = useState('home');
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isDarkMode, setIsDarkMode] = useState(true);
+  const [selectedImage, setSelectedImage] = useState(null);
 
-  // Modern Cyber/Tech Theme (Glassmorphism & Neon)
+  // --- Unique "Vintage Engineer Blueprint" Theme ---
   const darkTheme = {
-    bg: '#050505',               
-    panel: 'rgba(20, 25, 35, 0.6)', 
-    accent: '#00f0ff',           
-    text: '#e2e8f0',             
-    muted: '#64748b',            
-    border: 'rgba(0, 240, 255, 0.2)', 
-    glow: '0 0 15px rgba(0, 240, 255, 0.4)'
+    bg: '#0B132B',          // Deep Blueprint Navy
+    panel: '#152243',       // Slightly lighter blueprint paper
+    accent: '#E6C229',      // Antique Brass / Gold
+    text: '#EAEAEA',        // Chalk White ink
+    muted: '#8A9EBD',       // Faded blueprint ink
+    border: '#283E71',      // Grid lines
+    shadow: '4px 4px 0px rgba(0, 0, 0, 0.5)' // Hard retro shadow
   };
 
   const lightTheme = {
-    bg: '#f8fafc',               
-    panel: 'rgba(255, 255, 255, 0.6)', 
-    accent: '#0ea5e9',           
-    text: '#0f172a',             
-    muted: '#64748b',            
-    border: 'rgba(14, 165, 233, 0.2)', 
-    glow: '0 0 15px rgba(14, 165, 233, 0.3)'
+    bg: '#F5F2EB',          // Vintage Draft Paper
+    panel: '#EBE5D9',       // Lighter paper layer
+    accent: '#1D3557',      // Dark Navy ink
+    text: '#2B2D42',        // Typewriter black
+    muted: '#7A8494',       // Faded text
+    border: '#D0C8B6',      // Pencil lines
+    shadow: '4px 4px 0px rgba(29, 53, 87, 0.15)' // Hard retro shadow
   };
 
   const theme = isDarkMode ? darkTheme : lightTheme;
 
   const tabs = [
-    { id: 'home', label: 'OVERVIEW' },
-    { id: 'about', label: 'ABOUT ME' },
-    { id: 'journey', label: 'MY JOURNEY' },
-    { id: 'projects', label: 'PROJECTS & ACHIEVEMENTS' },
-    { id: 'connect', label: 'CONTACT' }
+    { id: 'home', label: 'Technical Profile' },
+    { id: 'about', label: 'Biographical Data' },
+    { id: 'journey', label: 'Experience Logs' },
+    { id: 'projects', label: 'Schematics & Records' }, 
+    { id: 'connect', label: 'Communications' }
+  ];
+
+  // Specific Data derived from your Portfolio Document
+  const achievementsData = [
+    { id: 1, img: mlCertChamp, title: 'MLBB Champion', desc: 'Participated and achieved Championship recognition in competitive gaming tournaments.' },
+    { id: 2, img: mlCert2nd, title: 'MLBB 2nd Place', desc: 'Secured 2nd Place title in Mobile Legends Championships.' },
+    { id: 3, img: jeiImg2, title: 'Hardware Config', desc: 'Visual documentation of hands-on technical activities.' },
+    { id: 4, img: jeiImg3, title: 'Logic Assembly', desc: 'Practical application of basic logic circuit knowledge.' }
+  ];
+
+  const projectsData = [
+    {
+      id: 1,
+      title: 'Algorithms & Flowcharts',
+      desc: 'Created algorithms, flowcharts, and basic programs in Python and C++.',
+      img: flowchartImg
+    },
+    {
+      id: 2,
+      title: 'Networking & Troubleshooting',
+      desc: 'Developed fundamental understanding in computer networking and hardware troubleshooting.',
+      img: troubleshootImg
+    },
+    {
+      id: 3,
+      title: 'Safety Awareness Presentations',
+      desc: 'Shared online safety awareness with peers through organized presentations.',
+      img: null
+    }
   ];
 
   const contentVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
-    exit: { opacity: 0, y: -20, transition: { duration: 0.3 } }
+    hidden: { opacity: 0, x: 20 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: "easeOut" } },
+    exit: { opacity: 0, x: -20, transition: { duration: 0.3 } }
   };
 
   return (
@@ -50,146 +90,112 @@ function MemberOne() {
       animate={{ backgroundColor: theme.bg, color: theme.text }}
       transition={{ duration: 0.5 }}
       style={{ 
-        display: 'flex', 
-        minHeight: '100vh', 
-        fontFamily: '"Inter", "Segoe UI", sans-serif', 
+        display: 'flex', minHeight: '100vh', 
+        fontFamily: '"Georgia", serif', 
         overflow: 'hidden', 
-        backgroundImage: `radial-gradient(${theme.border} 1px, transparent 1px)`, 
-        backgroundSize: '24px 24px',
-        backgroundPosition: '0 0'
+        // Engineering Blueprint Grid Pattern
+        backgroundImage: isDarkMode 
+          ? `linear-gradient(${theme.border} 1px, transparent 1px), linear-gradient(90deg, ${theme.border} 1px, transparent 1px)` 
+          : `linear-gradient(${theme.border} 1px, transparent 1px), linear-gradient(90deg, ${theme.border} 1px, transparent 1px)`,
+        backgroundSize: '40px 40px'
       }}
     >
       
-      {/* Top Left: Sidebar Toggle */}
-      <motion.button 
-        whileHover={{ scale: 1.05, boxShadow: theme.glow }}
-        whileTap={{ scale: 0.95 }}
-        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-        style={{ position: 'fixed', top: '20px', left: '20px', zIndex: 50, background: theme.panel, backdropFilter: 'blur(10px)', border: `1px solid ${theme.border}`, color: theme.accent, padding: '10px 15px', borderRadius: '8px', cursor: 'pointer', fontFamily: '"Courier New", monospace', fontWeight: 'bold', letterSpacing: '1px' }}
-      >
-        {isSidebarOpen ? '[X] CLOSE MENU' : '[_] OPEN MENU'}
-      </motion.button>
-
-      {/* Top Right: Controls */}
+      {/* Top Controls */}
       <div style={{ position: 'fixed', top: '20px', right: '30px', zIndex: 50, display: 'flex', gap: '15px' }}>
-        <motion.button 
-          whileHover={{ scale: 1.1, boxShadow: theme.glow }}
+        <button 
           onClick={() => setIsDarkMode(!isDarkMode)}
-          style={{ background: theme.panel, backdropFilter: 'blur(10px)', border: `1px solid ${theme.border}`, color: theme.accent, padding: '10px', borderRadius: '50%', width: '45px', height: '45px', cursor: 'pointer', fontSize: '1.2rem', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+          style={{ background: theme.panel, border: `2px solid ${theme.text}`, color: theme.text, padding: '10px', width: '45px', height: '45px', cursor: 'pointer', fontSize: '1.2rem', display: 'flex', justifyContent: 'center', alignItems: 'center', boxShadow: theme.shadow }}
         >
-          {isDarkMode ? '⚡' : '🔋'}
-        </motion.button>
+          {isDarkMode ? '☼' : '☾'}
+        </button>
         <Link to="/">
-          <motion.button 
-            whileHover={{ scale: 1.05, boxShadow: theme.glow }}
-            style={{ background: theme.accent, border: 'none', color: isDarkMode ? '#050505' : '#fff', padding: '10px 20px', borderRadius: '8px', cursor: 'pointer', fontFamily: '"Courier New", monospace', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px' }}
-          >
-            &lt; RETURN HOME
-          </motion.button>
+          <button style={{ background: theme.accent, border: `2px solid ${theme.accent}`, color: isDarkMode ? '#050505' : '#fff', padding: '10px 20px', cursor: 'pointer', fontFamily: '"Courier New", monospace', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 'bold', boxShadow: theme.shadow }}>
+            ↤ Return to Archive
+          </button>
         </Link>
       </div>
 
-      {/* Sidebar */}
+      {/* Sidebar: Styled like a technical manual index */}
       <AnimatePresence>
         {isSidebarOpen && (
           <motion.div 
-            initial={{ x: -320, opacity: 0 }} 
-            animate={{ x: 0, opacity: 1 }} 
-            exit={{ x: -320, opacity: 0 }} 
-            transition={{ type: 'spring', stiffness: 200, damping: 25 }}
-            style={{ width: '280px', backgroundColor: theme.panel, backdropFilter: 'blur(15px)', borderRight: `1px solid ${theme.border}`, padding: '90px 20px 20px 20px', display: 'flex', flexDirection: 'column', zIndex: 40, position: 'fixed', height: '100vh', overflowY: 'auto', boxShadow: '10px 0 30px rgba(0,0,0,0.2)' }}
+            initial={{ x: -350 }} animate={{ x: 0 }} exit={{ x: -350 }} transition={{ type: 'tween', duration: 0.4 }}
+            style={{ 
+              width: '320px', backgroundColor: theme.panel, borderRight: `4px solid ${theme.accent}`, 
+              padding: '80px 30px 30px 30px', display: 'flex', flexDirection: 'column', zIndex: 40, 
+              position: 'fixed', height: '100vh', overflowY: 'auto'
+            }}
           >
-            <div style={{ marginBottom: '40px', paddingBottom: '20px', borderBottom: `1px solid ${theme.border}` }}>
-              <div style={{ display: 'inline-block', padding: '4px 8px', backgroundColor: theme.border, color: theme.accent, fontSize: '0.7rem', fontFamily: '"Courier New", monospace', borderRadius: '4px', marginBottom: '10px' }}>
-                STATUS: ONLINE
-              </div>
-              <h2 style={{ margin: '0', fontSize: '1.8rem', fontWeight: '800', letterSpacing: '-1px' }}>J. ICALABIS</h2>
-              <p style={{ color: theme.muted, fontSize: '0.85rem', marginTop: '5px', fontFamily: '"Courier New", monospace' }}>Location: Manila, PH</p>
+            <div style={{ marginBottom: '40px', paddingBottom: '20px', borderBottom: `2px solid ${theme.border}` }}>
+              <p style={{ margin: '0 0 5px 0', fontSize: '0.8rem', letterSpacing: '2px', color: theme.accent, fontFamily: '"Courier New", monospace', textTransform: 'uppercase' }}>
+                Document Ref: CE-2026
+              </p>
+              <h2 style={{ margin: '0', fontFamily: '"Playfair Display", serif', fontSize: '2.2rem', color: theme.text, lineHeight: '1.2' }}>
+                JEI ERVIN<br/>ICALABIS
+              </h2>
+              <p style={{ margin: '10px 0 0 0', color: theme.muted, fontStyle: 'italic', fontSize: '0.9rem' }}>Computer Engineering</p>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
               {tabs.map(tab => (
-                <motion.button
-                  whileHover={{ x: 5, backgroundColor: theme.border }}
+                <button
                   key={tab.id} onClick={() => setActiveTab(tab.id)}
                   style={{ 
-                    background: activeTab === tab.id ? theme.border : 'transparent', 
-                    color: activeTab === tab.id ? theme.accent : theme.text, 
-                    border: `1px solid ${activeTab === tab.id ? theme.accent : 'transparent'}`, 
-                    borderLeft: activeTab === tab.id ? `4px solid ${theme.accent}` : `4px solid transparent`,
-                    padding: '12px 15px', 
-                    textAlign: 'left', 
-                    borderRadius: '6px',
-                    cursor: 'pointer', 
-                    fontFamily: '"Courier New", monospace', 
-                    fontSize: '0.9rem',
-                    letterSpacing: '1px', 
-                    transition: 'all 0.2s' 
+                    background: activeTab === tab.id ? theme.text : 'transparent', 
+                    color: activeTab === tab.id ? theme.bg : theme.text, 
+                    border: `2px solid ${theme.text}`, 
+                    padding: '12px 15px', textAlign: 'left', cursor: 'pointer', 
+                    fontFamily: '"Courier New", monospace', fontSize: '1rem', fontWeight: 'bold',
+                    boxShadow: activeTab === tab.id ? theme.shadow : 'none',
+                    textTransform: 'uppercase', transition: 'all 0.2s'
                   }}
                 >
                   {tab.label}
-                </motion.button>
+                </button>
               ))}
+            </div>
+            
+            {/* Sidebar bottom stamp */}
+            <div style={{ marginTop: 'auto', paddingTop: '20px', borderTop: `1px dashed ${theme.border}`, textAlign: 'center' }}>
+                <p style={{ color: theme.muted, fontFamily: '"Courier New", monospace', fontSize: '0.75rem', margin: 0 }}>CONFIDENTIAL DOSSIER</p>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
       {/* Main Content Area */}
-      <div style={{ flex: 1, marginLeft: isSidebarOpen ? '280px' : '0', transition: 'margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1)', padding: '100px 5% 40px 5%', position: 'relative', overflowY: 'auto' }}>
+      <div style={{ flex: 1, marginLeft: isSidebarOpen ? '320px' : '0', transition: 'margin-left 0.4s ease', padding: '100px 5% 60px 5%', overflowY: 'auto' }}>
         <AnimatePresence mode="wait">
           
           {/* TAB: OVERVIEW */}
           {activeTab === 'home' && (
-            <motion.div key="home" variants={contentVariants} initial="hidden" animate="visible" exit="exit" style={{ maxWidth: '1000px', margin: '0 auto' }}>
-              <motion.div 
-                initial={{ opacity: 0, width: 0 }} animate={{ opacity: 1, width: '100%' }} transition={{ delay: 0.2, duration: 0.8 }}
-                style={{ height: '2px', background: `linear-gradient(90deg, ${theme.accent}, transparent)`, marginBottom: '20px' }}
-              />
-              <p style={{ color: theme.accent, fontFamily: '"Courier New", monospace', letterSpacing: '2px', marginBottom: '10px' }}>&gt; Discipline: Computer Engineering</p>
-              <h1 style={{ fontSize: 'clamp(3rem, 6vw, 5.5rem)', margin: '0 0 30px 0', fontWeight: '900', letterSpacing: '-2px', lineHeight: '1' }}>
-                JEI ERVIN <br/><span style={{ color: 'transparent', WebkitTextStroke: `2px ${theme.text}` }}>ICALABIS</span>
-              </h1>
+            <motion.div key="home" variants={contentVariants} initial="hidden" animate="visible" exit="exit" style={{ maxWidth: '950px', margin: '0 auto' }}>
               
-              <div style={{ display: 'flex', gap: '40px', flexWrap: 'wrap', alignItems: 'center' }}>
-                <div style={{ flex: '1 1 450px' }}>
-                  <div style={{ background: theme.panel, backdropFilter: 'blur(12px)', border: `1px solid ${theme.border}`, padding: '30px', borderRadius: '16px', boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }}>
-                    <p style={{ fontSize: '1.1rem', lineHeight: '1.8', color: theme.muted, margin: 0 }}>
-                      <strong style={{ color: theme.accent }}>{`{ Building systems. Writing code. Designing circuits. }`}</strong><br/><br/>
-                      I want to be a technology specialist, helping to develop computer systems and preserve digital information. I want to keep learning, obtain hands-on experience, and establish a profession where I can have a positive influence.
-                    </p>
-                  </div>
-                  
-                  <div style={{ display: 'flex', gap: '20px', marginTop: '20px' }}>
-                    <motion.div whileHover={{ y: -5 }} style={{ border: `1px solid ${theme.border}`, padding: '20px', borderRadius: '12px', flex: 1, backgroundColor: theme.panel, backdropFilter: 'blur(10px)', position: 'relative', overflow: 'hidden' }}>
-                      <div style={{ position: 'absolute', top: 0, left: 0, width: '4px', height: '100%', backgroundColor: theme.accent }}></div>
-                      <h3 style={{ color: theme.accent, margin: '0 0 5px 0', fontSize: '2.5rem', fontWeight: '800' }}>20</h3>
-                      <p style={{ margin: 0, fontSize: '0.75rem', color: theme.muted, fontFamily: '"Courier New", monospace' }}>&gt; Age (Years)</p>
-                    </motion.div>
-                    <motion.div whileHover={{ y: -5 }} style={{ border: `1px solid ${theme.border}`, padding: '20px', borderRadius: '12px', flex: 1, backgroundColor: theme.panel, backdropFilter: 'blur(10px)', position: 'relative', overflow: 'hidden' }}>
-                      <div style={{ position: 'absolute', top: 0, left: 0, width: '4px', height: '100%', backgroundColor: theme.accent }}></div>
-                      <h3 style={{ color: theme.accent, margin: '0 0 5px 0', fontSize: '2.5rem', fontWeight: '800' }}>2nd</h3>
-                      <p style={{ margin: 0, fontSize: '0.75rem', color: theme.muted, fontFamily: '"Courier New", monospace' }}>&gt; Year Level</p>
-                    </motion.div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '50px', alignItems: 'center' }}>
+                
+                {/* Vintage Polaroid / Spec Sheet Image Container */}
+                <div style={{ flex: '0 0 auto', border: `12px solid #FFF`, backgroundColor: '#FFF', padding: '0px', boxShadow: theme.shadow, transform: 'rotate(-2deg)' }}>
+                  <img src={jeiImg} alt="Jei Ervin Icalabis" style={{ width: '280px', height: '280px', objectFit: 'cover', filter: isDarkMode ? 'sepia(0.3) contrast(1.2)' : 'sepia(0.1) contrast(1.1)' }} />
+                  <div style={{ padding: '15px 10px', backgroundColor: '#FFF', textAlign: 'center', borderTop: '2px solid #EEE' }}>
+                    <p style={{ margin: 0, color: '#333', fontFamily: '"Courier New", monospace', fontSize: '0.9rem', fontWeight: 'bold', letterSpacing: '1px' }}>FIG 1. PORTRAIT</p>
                   </div>
                 </div>
-                
-                <motion.div 
-                  initial={{ scale: 0.9, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ delay: 0.3 }}
-                  style={{ flex: '1 1 300px', position: 'relative' }}
-                >
-                  <div style={{ position: 'absolute', inset: '-10px', background: `linear-gradient(45deg, ${theme.accent}, transparent)`, borderRadius: '24px', filter: 'blur(20px)', opacity: 0.4 }}></div>
-                  <div style={{ position: 'relative', border: `1px solid ${theme.border}`, borderRadius: '16px', overflow: 'hidden', backgroundColor: theme.panel, backdropFilter: 'blur(10px)', padding: '10px' }}>
-                    <div style={{ position: 'absolute', top: '15px', right: '15px', width: '10px', height: '10px', borderRadius: '50%', backgroundColor: theme.accent, boxShadow: theme.glow }}></div>
-                    <img src={jeiImg} alt="Jei" style={{ width: '100%', height: 'auto', borderRadius: '8px', filter: isDarkMode ? 'grayscale(0.3) contrast(1.2)' : 'none' }} />
-                    <div style={{ padding: '15px 10px 5px 10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <p style={{ margin: 0, color: theme.accent, fontSize: '0.75rem', fontFamily: '"Courier New", monospace' }}>Fig. 1 / Profile Image</p>
-                      <p style={{ margin: 0, color: theme.muted, fontSize: '0.75rem', fontFamily: '"Courier New", monospace' }}>Loaded</p>
-                    </div>
+
+                <div style={{ flex: '1 1 400px' }}>
+                  <h1 style={{ fontSize: '4.5rem', margin: '0 0 20px 0', fontFamily: '"Playfair Display", serif', color: theme.text, lineHeight: '1' }}>
+                    Jei Ervin <br/><span style={{ fontStyle: 'italic', color: theme.accent, fontSize: '3.5rem' }}>Icalabis</span>
+                  </h1>
+                  
+                  <div style={{ backgroundColor: theme.panel, border: `2px solid ${theme.border}`, padding: '30px', boxShadow: theme.shadow, position: 'relative' }}>
+                     {/* Draftsman tape details */}
+                     <div style={{ position: 'absolute', top: '-10px', left: '40%', width: '80px', height: '20px', backgroundColor: isDarkMode ? '#FFF' : '#EAEAEA', opacity: 0.2, transform: 'rotate(-2deg)' }} />
+
+                    <p style={{ fontSize: '1.15rem', lineHeight: '1.8', color: theme.text, margin: 0 }}>
+                      I want to be a technology specialist, helping to develop computer systems and preserve digital information. I want to keep learning, obtain hands-on experience, and establish a profession where I can have a positive influence while exploring new technologies and tackling real-world challenges.
+                    </p>
                   </div>
-                </motion.div>
+                </div>
               </div>
             </motion.div>
           )}
@@ -197,129 +203,239 @@ function MemberOne() {
           {/* TAB: ABOUT ME */}
           {activeTab === 'about' && (
              <motion.div key="about" variants={contentVariants} initial="hidden" animate="visible" exit="exit" style={{ maxWidth: '900px', margin: '0 auto' }}>
-               <div style={{ display: 'flex', alignItems: 'center', gap: '15px', borderBottom: `1px solid ${theme.border}`, paddingBottom: '20px' }}>
-                 <div style={{ width: '40px', height: '40px', borderRadius: '8px', backgroundColor: theme.border, display: 'flex', alignItems: 'center', justifyContent: 'center', color: theme.accent }}>
-                    {'</>'}
-                 </div>
-                 <h1 style={{ margin: 0, fontWeight: '800', letterSpacing: '-1px' }}>ABOUT ME</h1>
-               </div>
+               <h1 style={{ fontFamily: '"Playfair Display", serif', color: theme.text, fontSize: '3rem', margin: '0 0 30px 0', borderBottom: `4px double ${theme.border}`, paddingBottom: '15px' }}>Biographical Data</h1>
 
-               <div style={{ backgroundColor: theme.panel, backdropFilter: 'blur(15px)', border: `1px solid ${theme.border}`, borderRadius: '16px', padding: '40px', marginTop: '30px', lineHeight: '2', boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }}>
-                 <p style={{ fontSize: '1.05rem' }}>
-                    <span style={{ color: theme.accent, fontFamily: '"Courier New", monospace' }}>&gt; Introduction: </span>
-                    I was born on June 8, 2005, in Santa Maria, Bulacan. I grew up with my grandparents until I reached high school, and they played an important role in shaping who I am today. I also have an older sister whom I look up to. I describe myself as a hardworking, somewhat friendly, and a jolly person.
+               <div style={{ backgroundColor: theme.panel, padding: '40px', border: `2px solid ${theme.border}`, boxShadow: theme.shadow, lineHeight: '1.9', fontSize: '1.15rem', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                 
+                 <p style={{ margin: 0 }}>
+                   <strong style={{ fontFamily: '"Courier New", monospace', color: theme.accent, textTransform: 'uppercase', fontSize: '1rem' }}>[ Personal Background ]</strong><br/>
+                   I was born on June 8, 2005, in Santa Maria, Bulacan. I grew up with my grandparents until I reached high school, and they played an important role in shaping who I am today. I also have a sister who is five years older than me, and she has been one of the people I look up to. I describe myself as a hardworking, somewhat friendly, and a jolly person.
                  </p>
-                 <p style={{ fontSize: '1.05rem', marginTop: '20px' }}>
-                    <span style={{ color: theme.accent, fontFamily: '"Courier New", monospace' }}>&gt; Core Skills: </span>
-                    Communication skills • Basic coding (C++, HTML, CSS, PYTHON) • Computer literate • Patient and understanding • Always up for challenges • Basic logic circuit knowledge
+                 
+                 <p style={{ margin: 0, paddingTop: '20px', borderTop: `1px dashed ${theme.border}` }}>
+                   <strong style={{ fontFamily: '"Courier New", monospace', color: theme.accent, textTransform: 'uppercase', fontSize: '1rem' }}>[ Technical Interests ]</strong><br/>
+                   During my school years, I developed an interest in technology and hands-on activities, especially those related to electronics. I enjoy learning how things work and applying that knowledge to projects. My interests include hardware configurations (like PCs and TVs), new technological learnings, and basic logic circuits.
                  </p>
-                 <p style={{ fontSize: '1.05rem', marginTop: '20px' }}>
-                    <span style={{ color: theme.accent, fontFamily: '"Courier New", monospace' }}>&gt; Interests: </span>
-                    Hardware configurations (PCs, TVs) • Games requiring strategy • Baking • Drawing • Learning about new technologies
+
+                 <p style={{ margin: 0, paddingTop: '20px', borderTop: `1px dashed ${theme.border}` }}>
+                   <strong style={{ fontFamily: '"Courier New", monospace', color: theme.accent, textTransform: 'uppercase', fontSize: '1rem' }}>[ Core Competencies ]</strong><br/>
+                   • Communication Skills<br/>
+                   • Basic Coding (C++, HTML, CSS, PYTHON)<br/>
+                   • Logic Circuit Knowledge<br/>
+                   • Computer Hardware Building
                  </p>
+                 
                </div>
              </motion.div>
           )}
 
-          {/* TAB: MY JOURNEY */}
+          {/* TAB: JOURNEY */}
           {activeTab === 'journey' && (
              <motion.div key="journey" variants={contentVariants} initial="hidden" animate="visible" exit="exit" style={{ maxWidth: '900px', margin: '0 auto' }}>
-                <h1 style={{ margin: '0 0 30px 0', fontWeight: '800', letterSpacing: '-1px' }}>MY JOURNEY & EXPERIENCES</h1>
+                <h1 style={{ fontFamily: '"Playfair Display", serif', color: theme.text, fontSize: '3rem', margin: '0 0 30px 0', borderBottom: `4px double ${theme.border}`, paddingBottom: '15px' }}>Experience Logs</h1>
                 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
-                  
-                  {/* Experience Cards */}
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '20px' }}>
                   {[
                     "Game development & Programming",
-                    "Math and spelling competitions",
-                    "Basic logic circuits assembly",
+                    "Basic logic circuits",
+                    "Building a PC",
                     "Treasurer role in high school",
-                    "Selling foods in school during senior high",
-                    "Building a custom PC from scratch",
-                    "Joining competitive gaming tournaments"
+                    "Selling foods in senior high school",
+                    "Math and spelling competitions",
+                    "Joining competitive games"
                   ].map((exp, idx) => (
-                    <motion.div whileHover={{ y: -5 }} key={idx} style={{ backgroundColor: theme.panel, backdropFilter: 'blur(10px)', border: `1px solid ${theme.border}`, padding: '20px', borderRadius: '12px' }}>
-                      <div style={{ color: theme.accent, marginBottom: '10px' }}>★</div>
+                    <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '15px', backgroundColor: theme.panel, border: `2px solid ${theme.border}`, padding: '15px 20px', boxShadow: theme.shadow }}>
+                      <span style={{ color: theme.accent, fontFamily: '"Courier New", monospace', fontSize: '1.2rem', fontWeight: 'bold' }}>{String(idx + 1).padStart(2, '0')}.</span>
                       <p style={{ margin: 0, fontSize: '1.05rem' }}>{exp}</p>
-                    </motion.div>
+                    </div>
                   ))}
-                  
-                </div>
-
-                {/* Optional Image Section for Journey */}
-                <div style={{ marginTop: '40px', borderTop: `1px dashed ${theme.border}`, paddingTop: '30px' }}>
-                  <h3 style={{ color: theme.accent, fontFamily: '"Courier New", monospace' }}>&gt; VISUAL_LOGS:</h3>
-                  <div style={{ display: 'flex', gap: '20px', overflowX: 'auto', paddingBottom: '10px' }}>
-                    
-                    {/* REPLACE 'src' WITH YOUR OWN IMPORTED IMAGES */}
-                    <img src="https://via.placeholder.com/300x200/141923/00f0ff?text=Journey+Photo+1" alt="Journey 1" style={{ borderRadius: '8px', border: `1px solid ${theme.border}` }} />
-                    <img src="https://via.placeholder.com/300x200/141923/00f0ff?text=Journey+Photo+2" alt="Journey 2" style={{ borderRadius: '8px', border: `1px solid ${theme.border}` }} />
-                  
-                  </div>
                 </div>
              </motion.div>
           )}
 
-          {/* TAB: PROJECTS */}
+          {/* TAB: PROJECTS & ACHIEVEMENTS */}
           {activeTab === 'projects' && (
-             <motion.div key="projects" variants={contentVariants} initial="hidden" animate="visible" exit="exit" style={{ maxWidth: '900px', margin: '0 auto' }}>
-                <h1 style={{ margin: '0 0 30px 0', fontWeight: '800', letterSpacing: '-1px' }}>PROJECTS & ACHIEVEMENTS</h1>
-                
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '25px' }}>
-                  
-                  {[
-                    { title: "Algorithms & Flowcharts", desc: "Created algorithms, flowcharts, and basic programs in Python and C++." },
-                    { title: "Networking & Troubleshooting", desc: "Developed fundamental understanding in computer networking and troubleshooting techniques." },
-                    { title: "Safety Awareness Presentations", desc: "Shared online safety awareness with peers through organized presentations." },
-                    { title: "ML Championships", desc: "Participated and achieved recognition in Mobile Legends Championships." }
-                  ].map((proj, idx) => (
-                    <div key={idx} style={{ backgroundColor: theme.panel, backdropFilter: 'blur(10px)', border: `1px solid ${theme.border}`, padding: '25px', borderRadius: '12px', display: 'flex', gap: '20px', flexDirection: 'row', flexWrap: 'wrap' }}>
-                      <div style={{ flex: '1 1 300px' }}>
-                        <h3 style={{ margin: '0 0 10px 0', color: theme.accent }}>{proj.title}</h3>
-                        <p style={{ margin: 0, color: theme.muted, lineHeight: '1.6' }}>{proj.desc}</p>
-                      </div>
-                      
-                      {/* REPLACE 'src' WITH YOUR ACTUAL PROJECT IMAGE */}
-                      <div style={{ flex: '1 1 200px', maxWidth: '250px' }}>
-                        <img src={`https://via.placeholder.com/400x250/141923/00f0ff?text=Project+${idx+1}`} alt={proj.title} style={{ width: '100%', borderRadius: '6px', border: `1px solid ${theme.border}` }} />
-                      </div>
-                    </div>
-                  ))}
+             <motion.div key="projects" variants={contentVariants} initial="hidden" animate="visible" exit="exit" style={{ maxWidth: '1000px', margin: '0 auto' }}>
+               <h1 style={{ fontFamily: '"Playfair Display", serif', color: theme.text, fontSize: '3rem', margin: '0 0 10px 0' }}>Schematics & Records</h1>
+               <p style={{ color: theme.muted, fontFamily: '"Courier New", monospace', marginBottom: '40px', fontSize: '0.9rem' }}>&gt; DISPLAYING ARCHIVED TECHNICAL FILES...</p>
 
-                </div>
+               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(400px, 1fr))', gap: '40px' }}>
+                 
+                 {/* Combine Projects and Achievements into one technical view */}
+                 {[...projectsData, ...achievementsData].map((item, idx) => (
+                   <motion.div 
+                     key={idx}
+                     whileHover={{ y: -5 }}
+                     style={{ 
+                       backgroundColor: theme.panel, 
+                       border: `2px solid ${theme.text}`, 
+                       padding: '20px',
+                       boxShadow: theme.shadow,
+                       display: 'flex', flexDirection: 'column'
+                     }}
+                   >
+                     <div style={{ borderBottom: `2px solid ${theme.border}`, paddingBottom: '10px', marginBottom: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+                        <h3 style={{ margin: 0, fontFamily: '"Playfair Display", serif', fontSize: '1.6rem', color: theme.accent }}>{item.title}</h3>
+                        <span style={{ fontFamily: '"Courier New", monospace', fontSize: '0.8rem', color: theme.muted }}>REF-{String(idx + 1).padStart(3, '0')}</span>
+                     </div>
+                     
+                     {item.img ? (
+                        <div 
+                          onClick={() => setSelectedImage(item.img)}
+                          style={{ cursor: 'pointer', border: `1px solid ${theme.border}`, padding: '5px', backgroundColor: theme.bg, marginBottom: '20px' }}
+                        >
+                          <img 
+                            src={item.img} 
+                            alt={item.title} 
+                            style={{ width: '100%', height: '220px', objectFit: 'cover', filter: isDarkMode ? 'sepia(0.2) brightness(0.9)' : 'none' }} 
+                          />
+                          <p style={{ textAlign: 'center', margin: '5px 0 0 0', fontFamily: '"Courier New", monospace', fontSize: '0.7rem', color: theme.muted }}>[ CLICK TO ENLARGE FIGURE ]</p>
+                        </div>
+                     ) : (
+                        <div style={{ height: '220px', border: `1px dashed ${theme.border}`, marginBottom: '20px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                            <p style={{ fontFamily: '"Courier New", monospace', color: theme.muted }}>NO VISUAL DATA ATTACHED</p>
+                        </div>
+                     )}
+
+                     <p style={{ margin: '0', color: theme.text, lineHeight: '1.6', fontSize: '1.05rem', flexGrow: 1 }}>{item.desc}</p>
+                   </motion.div>
+                 ))}
+               </div>
              </motion.div>
           )}
 
           {/* TAB: CONTACT */}
           {activeTab === 'connect' && (
-             <motion.div key="connect" variants={contentVariants} initial="hidden" animate="visible" exit="exit" style={{ maxWidth: '900px', margin: '0 auto' }}>
-                <h1 style={{ margin: '0 0 30px 0', fontWeight: '800', letterSpacing: '-1px' }}>ESTABLISH UPLINK</h1>
-                
-                <div style={{ backgroundColor: theme.panel, backdropFilter: 'blur(15px)', padding: '40px', borderRadius: '16px', border: `1px solid ${theme.border}` }}>
-                  <p style={{ fontSize: '1.1rem', marginBottom: '30px' }}>If you are looking to collaborate on a hardware project, write some code, or just discuss technology, feel free to reach out.</p>
+            <motion.div key="connect" variants={contentVariants} initial="hidden" animate="visible" exit="exit" style={{ maxWidth: '800px', margin: '0 auto' }}>
+              <h1 style={{ fontFamily: '"Playfair Display", serif', color: theme.text, fontSize: '3rem', margin: '0 0 30px 0', borderBottom: `4px double ${theme.border}`, paddingBottom: '15px' }}>Communications Uplink</h1>
+
+              <div style={{ backgroundColor: theme.panel, border: `2px solid ${theme.text}`, padding: '40px', boxShadow: theme.shadow }}>
+                <p style={{ fontSize: '1.2rem', marginBottom: '40px', fontStyle: 'italic', textAlign: 'center' }}>
+                  To collaborate on hardware projects, software development, or discuss technological systems, utilize the channels below.
+                </p>
                   
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                      <span style={{ color: theme.accent, fontFamily: '"Courier New", monospace' }}>&gt; EMAIL:</span>
-                      <a href="mailto:jei.icalabis@example.com" style={{ color: theme.text, textDecoration: 'none', borderBottom: `1px dashed ${theme.muted}` }}>[ Insert Your Email Here ]</a>
-                    </div>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px' }}>
+                  
+                  <div style={{ border: `1px solid ${theme.border}`, padding: '20px', backgroundColor: theme.bg }}>
+                    <p style={{ color: theme.muted, fontFamily: '"Courier New", monospace', textTransform: 'uppercase', fontSize: '0.8rem', margin: '0 0 10px 0' }}>Electronic Mail</p>
+                    <a href="mailto:mjeicalabis@tip.edu.ph" style={{ display: 'block', color: theme.text, fontSize: '1.1rem', textDecoration: 'none', fontWeight: 'bold' }}>mjeicalabis@tip.edu.ph</a>
+                  </div>
+
+                  <div style={{ border: `1px solid ${theme.border}`, padding: '20px', backgroundColor: theme.bg }}>
+                    <p style={{ color: theme.muted, fontFamily: '"Courier New", monospace', textTransform: 'uppercase', fontSize: '0.8rem', margin: '0 0 10px 0' }}>Current Base</p>
+                    <p style={{ color: theme.text, fontSize: '1.1rem', margin: 0, fontWeight: 'bold' }}>Manila, Philippines</p>
+                  </div>
+
+                  <div style={{ gridColumn: '1 / -1', border: `1px solid ${theme.border}`, padding: '20px', backgroundColor: theme.bg }}>
+                    <p style={{ color: theme.muted, fontFamily: '"Courier New", monospace', textTransform: 'uppercase', fontSize: '0.8rem', margin: '0 0 10px 0' }}>Academic Institution Details</p>
+                    <p style={{ color: theme.text, fontSize: '1.2rem', margin: '0 0 5px 0', fontFamily: '"Playfair Display", serif' }}>Technological Institute of the Philippines</p>
+                    <p style={{ color: theme.accent, fontSize: '1rem', margin: 0, fontFamily: '"Courier New", monospace' }}>Program: Computer Engineering (2nd Year)</p>
+                  </div>
+
+                </div>
+
+                {/* NEW: Social Network Links */}
+                <div style={{ marginTop: '40px', paddingTop: '30px', borderTop: `1px dashed ${theme.border}`, textAlign: 'center' }}>
+                  <p style={{ color: theme.muted, fontFamily: '"Courier New", monospace', fontSize: '0.9rem', marginBottom: '20px' }}>&gt; EXTERNAL_NETWORK_LINKS</p>
+                  
+                  <div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
                     
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                      <span style={{ color: theme.accent, fontFamily: '"Courier New", monospace' }}>&gt; LINKEDIN:</span>
-                      <a href="#" style={{ color: theme.text, textDecoration: 'none', borderBottom: `1px dashed ${theme.muted}` }}>[ Insert LinkedIn Profile ]</a>
-                    </div>
-                    
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                      <span style={{ color: theme.accent, fontFamily: '"Courier New", monospace' }}>&gt; GITHUB:</span>
-                      <a href="#" style={{ color: theme.text, textDecoration: 'none', borderBottom: `1px dashed ${theme.muted}` }}>[ Insert Github Profile ]</a>
-                    </div>
+                    {/* GitHub Link */}
+                    <a 
+                      href="https://github.com/mjeicalabis-alt" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '50px', height: '50px', border: `2px solid ${theme.text}`, color: theme.text, textDecoration: 'none', transition: 'all 0.3s', backgroundColor: theme.bg }} 
+                      onMouseOver={(e) => {e.currentTarget.style.backgroundColor = theme.text; e.currentTarget.style.color = theme.bg}} 
+                      onMouseOut={(e) => {e.currentTarget.style.backgroundColor = theme.bg; e.currentTarget.style.color = theme.text}}
+                    >
+                      <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                      </svg>
+                    </a>
+
+                    {/* Facebook Link */}
+                    <a 
+                      href="https://www.facebook.com/jeiervin.icalabis" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '50px', height: '50px', border: `2px solid ${theme.text}`, color: theme.text, textDecoration: 'none', transition: 'all 0.3s', backgroundColor: theme.bg }} 
+                      onMouseOver={(e) => {e.currentTarget.style.backgroundColor = theme.text; e.currentTarget.style.color = theme.bg}} 
+                      onMouseOut={(e) => {e.currentTarget.style.backgroundColor = theme.bg; e.currentTarget.style.color = theme.text}}
+                    >
+                      <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                      </svg>
+                    </a>
+
                   </div>
                 </div>
-             </motion.div>
+
+              </div>
+            </motion.div>
           )}
 
         </AnimatePresence>
       </div>
+
+      {/* Full Screen Image Lightbox */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedImage(null)}
+            style={{
+              position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+              backgroundColor: 'rgba(0,0,0,0.9)', zIndex: 999,
+              display: 'flex', justifyContent: 'center', alignItems: 'center',
+              padding: '40px'
+            }}
+          >
+            <motion.div
+              initial={{ scale: 0.95 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.95 }}
+              onClick={(e) => e.stopPropagation()} 
+              style={{
+                backgroundColor: theme.panel,
+                padding: '20px',
+                border: `2px solid ${theme.accent}`,
+                maxWidth: '900px',
+                position: 'relative',
+                boxShadow: '0 20px 50px rgba(0,0,0,0.8)'
+              }}
+            >
+              <button
+                onClick={() => setSelectedImage(null)}
+                style={{ 
+                  position: 'absolute', top: '15px', right: '15px', 
+                  background: 'transparent', border: 'none', color: theme.accent, 
+                  fontSize: '2rem', cursor: 'pointer', fontFamily: 'sans-serif'
+                }}
+              >
+                ✕
+              </button>
+              <img 
+                src={selectedImage} 
+                alt="Expanded Technical View" 
+                style={{ maxWidth: '100%', maxHeight: '80vh', objectFit: 'contain', border: `1px solid ${theme.border}` }} 
+              />
+              <p style={{ color: theme.accent, fontFamily: '"Courier New", monospace', margin: '15px 0 0 0', textAlign: 'center' }}>ARCHIVE SPECIFICATION CLOSEUP</p>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <style>
+        {`
+          @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+          }
+        `}
+      </style>
     </motion.div>
   );
 }

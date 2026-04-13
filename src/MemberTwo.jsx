@@ -12,7 +12,7 @@ import excAward2 from './Membertwo/Excellence Award 2.jpg';
 import intercampus from './Membertwo/Intercampus.jpg';
 import intertown1 from './Membertwo/Intertown Cavite 1st runner up.jpg';
 import intertown2 from './Membertwo/Intertown Cavite 1st runner.jpg';
-import intertownCert from './Membertwo/Intertown Cavite Cert.jpg'; // Added new cert
+import intertownCert from './Membertwo/Intertown Cavite Cert.jpg';
 import introCyber from './Membertwo/Introduction to Cyber.jpg';
 import kkb from './Membertwo/KKB.jpg';
 import mvp from './Membertwo/MVP.jpg';
@@ -51,7 +51,7 @@ function MemberTwo() {
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'About Me' },
     { id: 'achievements', label: 'Achievements' },
-    { id: 'projects', label: 'Schematics' },
+    { id: 'projects', label: 'Projects' }, 
     { id: 'connect', label: 'Contact' }
   ];
 
@@ -62,14 +62,66 @@ function MemberTwo() {
     { id: 3, img: excAward, title: 'Excellence Award', desc: 'Recognized for outstanding academic and extracurricular excellence.' },
     { id: 4, img: excAward2, title: 'Excellence Award II', desc: 'Continued recognition for dedication and performance.' },
     { id: 5, img: mvp, title: 'MVP Award', desc: 'Most Valuable Player award for exceptional sportsmanship and skill.' },
-    { id: 6, img: champPubmat, title: 'CEA MLBB Champion', desc: 'Official publication material for the CEA MLBB Championship.' },
+    { id: 6, img: champPubmat, title: 'Championship Pubmat', desc: 'Official publication material for the championship event.' },
     { id: 7, img: intercampus, title: 'Intercampus Participant', desc: 'Represented the campus in high-stakes intercampus events.' },
     { id: 8, img: intertown1, title: 'Intertown 1st Runner Up', desc: 'Secured 1st Runner Up position in the competitive Intertown event.' },
     { id: 9, img: intertown2, title: 'Intertown Commendation', desc: 'Additional recognition for the Intertown competition.' },
-    { id: 10, img: intertownCert, title: 'Intertown Cavite Certificate', desc: 'Official Certificate of Recognition for Intertown Cavite participation.' }, // Added new entry
+    { id: 10, img: intertownCert, title: 'Intertown Cavite Certificate', desc: 'Official Certificate of Recognition for Intertown Cavite participation.' },
     { id: 11, img: introCyber, title: 'Cybersecurity Certification', desc: 'Successfully completed the Introduction to Cybersecurity course.' },
     { id: 12, img: kkb, title: 'KKB Participation', desc: 'Active participation and contribution to KKB initiatives.' },
     { id: 13, img: squadGoals, title: 'Squad Goals', desc: 'Commendation for outstanding teamwork and team achievement.' }
+  ];
+
+  // Projects Data List
+  const projectsList = [
+    {
+      id: 1,
+      title: 'Portfolio & Wedding Invitation',
+      desc: 'A sophisticated digital portfolio and wedding invitation platform featuring interactive components and an elegant vintage aesthetic.',
+      codeLink: 'https://github.com/mmbtoledo/portfolio-invite',
+    },
+    {
+      id: 2,
+      title: 'Lovier\'s Meatshop Database',
+      desc: 'A comprehensive database management system built to streamline operations and inventory for Lovier\'s Meatshop.',
+      codeLink: 'https://github.com/mmbtoledo/meatshop-system',
+      siteLink: null,
+    },
+    {
+      id: 3,
+      title: 'Crypto Pulse',
+      desc: 'A modern cryptocurrency tracking platform delivering real-time market data, trends, and analytical insights.',
+      codeLink: 'https://github.com/mmbtoledo/crypto-pulse',
+      siteLink: 'https://crypto-pulse-neon.vercel.app/',
+    },
+    {
+      id: 4,
+      title: 'University Enrollment Portal',
+      desc: 'An intuitive user interface design engineered specifically to simplify and enhance university enrollment processes.',
+      codeLink: 'https://github.com/mmbtoledo/enrollment-ui-design',
+      siteLink: 'https://enrollment-ui-design.netlify.app/',
+    },
+    {
+      id: 5,
+      title: 'Interactive Login Dashboard',
+      desc: 'Project Gatekeeper: A highly secure, interactive, and responsive dashboard designed for smooth user authentication.',
+      codeLink: 'https://github.com/mmbtoledo/project-gatekeeper',
+      siteLink: 'https://mmbtoledo.github.io/project-gatekeeper/',
+    },
+    {
+      id: 6,
+      title: 'Git Front End',
+      desc: 'A frontend interface project that heavily utilizes Git for version control, showcasing clean deployment strategies.',
+      codeLink: 'https://github.com/mmbtoledo/git-frontend-project',
+      siteLink: 'https://mmbtoledo.github.io/git-frontend-project/',
+    },
+    {
+      id: 7,
+      title: 'Text Based Carting System',
+      desc: 'A robust command-line interface application developed to efficiently manage a text-based shopping cart system.',
+      codeLink: 'https://github.com/mmbtoledo/Carting-System',
+      siteLink: null,
+    }
   ];
 
   const contentVariants = {
@@ -202,7 +254,6 @@ function MemberTwo() {
              </motion.div>
           )}
 
-          {/* ACHIEVEMENTS SECTION */}
           {activeTab === 'achievements' && (
              <motion.div key="achievements" variants={contentVariants} initial="hidden" animate="visible" exit="exit" style={{ maxWidth: '1000px', width: '100%' }}>
                <div style={{ textAlign: 'center', marginBottom: '40px' }}>
@@ -212,7 +263,6 @@ function MemberTwo() {
                  </p>
                </div>
 
-               {/* Grid Layout for Achievement Cards */}
                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '30px', paddingBottom: '40px' }}>
                  {achievementsList.map((item) => (
                    <motion.div 
@@ -237,11 +287,77 @@ function MemberTwo() {
                          objectFit: 'cover', 
                          border: `1px solid ${theme.border}`, 
                          marginBottom: '15px',
-                         filter: isDarkMode ? 'brightness(0.9)' : 'none'
+                         filter: isDarkMode ? 'brightness(0.9)' : 'none',
+                         borderRadius: '4px'
                        }} 
                      />
                      <h3 style={{ color: theme.text, fontSize: '1.1rem', margin: '0 0 5px 0', fontFamily: '"Playfair Display", serif' }}>{item.title}</h3>
                      <p style={{ color: theme.muted, fontSize: '0.8rem', margin: 0, textTransform: 'uppercase', letterSpacing: '1px' }}>Click to view ↗</p>
+                   </motion.div>
+                 ))}
+               </div>
+             </motion.div>
+          )}
+
+          {activeTab === 'projects' && (
+             <motion.div key="projects" variants={contentVariants} initial="hidden" animate="visible" exit="exit" style={{ maxWidth: '1000px', width: '100%' }}>
+               <div style={{ textAlign: 'center', marginBottom: '50px' }}>
+                 <h1 style={{ fontFamily: '"Playfair Display", serif', color: theme.text, fontSize: '3.5rem', margin: 0, letterSpacing: '2px' }}>Projects</h1>
+                 <p style={{ color: theme.muted, fontStyle: 'italic', fontSize: '1.1rem', marginTop: '10px' }}>
+                   A collection of systems, interfaces, and architecture I have built.
+                 </p>
+               </div>
+
+               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '30px', paddingBottom: '40px' }}>
+                 {projectsList.map((project) => (
+                   <motion.div 
+                     key={project.id}
+                     whileHover={{ y: -8, boxShadow: theme.shadow, borderColor: theme.accent }}
+                     style={{ 
+                       backgroundColor: theme.panel, 
+                       border: `1px solid ${theme.border}`, 
+                       borderRadius: '10px', 
+                       overflow: 'hidden',
+                       display: 'flex',
+                       flexDirection: 'column',
+                       transition: 'border-color 0.3s ease'
+                     }}
+                   >
+                     <div style={{ 
+                       height: '180px', 
+                       backgroundColor: theme.bg, 
+                       borderBottom: `1px solid ${theme.border}`,
+                       display: 'flex', justifyContent: 'center', alignItems: 'center',
+                       position: 'relative', overflow: 'hidden'
+                     }}>
+                       <div style={{ position: 'absolute', top: 10, left: 10, right: 10, bottom: 10, border: `1px dashed ${theme.border}`, borderRadius: '6px' }} />
+                       <div style={{ fontSize: '4.5rem', color: theme.accent, opacity: 0.15, fontFamily: '"Playfair Display", serif', fontWeight: 'bold', textAlign: 'center', lineHeight: '1' }}>
+                         {project.title.substring(0, 2).toUpperCase()}
+                       </div>
+                       <div style={{ position: 'absolute', bottom: '15px', right: '20px', color: theme.muted, fontSize: '0.7rem', fontFamily: 'sans-serif', letterSpacing: '2px', textTransform: 'uppercase' }}>
+                         System Arch.
+                       </div>
+                     </div>
+
+                     <div style={{ padding: '30px', flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+                       <h3 style={{ color: theme.text, fontSize: '1.3rem', margin: '0 0 10px 0', fontFamily: '"Playfair Display", serif', lineHeight: '1.3' }}>{project.title}</h3>
+                       <p style={{ color: theme.muted, fontSize: '0.95rem', lineHeight: '1.6', margin: '0 0 25px 0', flexGrow: 1 }}>
+                         {project.desc}
+                       </p>
+
+                       <div style={{ display: 'flex', gap: '20px', borderTop: `1px solid ${theme.border}`, paddingTop: '20px', marginTop: 'auto' }}>
+                         {project.siteLink && (
+                           <a href={project.siteLink} target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '5px', color: theme.text, textDecoration: 'none', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 'bold', transition: 'color 0.2s' }} onMouseOver={(e) => e.currentTarget.style.color = theme.accent} onMouseOut={(e) => e.currentTarget.style.color = theme.text}>
+                             Site <span style={{ color: theme.accent, fontSize: '1.2rem', lineHeight: '1' }}>↗</span>
+                           </a>
+                         )}
+                         {project.codeLink && (
+                           <a href={project.codeLink} target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '5px', color: theme.text, textDecoration: 'none', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 'bold', transition: 'color 0.2s' }} onMouseOver={(e) => e.currentTarget.style.color = theme.accent} onMouseOut={(e) => e.currentTarget.style.color = theme.text}>
+                             Source Code <span style={{ color: theme.accent, fontSize: '1.2rem', lineHeight: '1' }}>↗</span>
+                           </a>
+                         )}
+                       </div>
+                     </div>
                    </motion.div>
                  ))}
                </div>
@@ -318,21 +434,6 @@ function MemberTwo() {
             </motion.div>
           )}
 
-          {/* Placeholders for the remaining tabs */}
-          {(activeTab !== 'home' && activeTab !== 'about' && activeTab !== 'connect' && activeTab !== 'achievements') && (
-            <motion.div key="placeholder" variants={contentVariants} initial="hidden" animate="visible" exit="exit" style={{ maxWidth: '900px', width: '100%', textAlign: 'center', marginTop: '100px' }}>
-              <div style={{ fontSize: '3rem', color: theme.accent, marginBottom: '20px' }}>✧</div>
-              <h1 style={{ fontFamily: '"Playfair Display", serif', color: theme.text, fontSize: '3rem', margin: '0 0 20px 0' }}>
-                {tabs.find(t => t.id === activeTab)?.label}
-              </h1>
-              <div style={{ borderTop: `1px solid ${theme.border}`, borderBottom: `1px solid ${theme.border}`, padding: '40px 0' }}>
-                <p style={{ color: theme.muted, fontSize: '1.2rem', fontStyle: 'italic', margin: 0 }}>
-                  [The blueprints for this chapter are currently being drafted. Detailed records will appear here soon.]
-                </p>
-              </div>
-            </motion.div>
-          )}
-
         </AnimatePresence>
       </div>
 
@@ -372,7 +473,6 @@ function MemberTwo() {
                 boxShadow: '0 25px 50px rgba(0,0,0,0.5)'
               }}
             >
-              {/* Close Button */}
               <button
                 onClick={() => setSelectedAchievement(null)}
                 style={{ 
@@ -386,7 +486,6 @@ function MemberTwo() {
                 ✕
               </button>
 
-              {/* Modal Content */}
               <img 
                 src={selectedAchievement.img} 
                 alt={selectedAchievement.title} 

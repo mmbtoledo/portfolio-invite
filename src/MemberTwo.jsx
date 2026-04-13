@@ -12,6 +12,7 @@ import excAward2 from './Membertwo/Excellence Award 2.jpg';
 import intercampus from './Membertwo/Intercampus.jpg';
 import intertown1 from './Membertwo/Intertown Cavite 1st runner up.jpg';
 import intertown2 from './Membertwo/Intertown Cavite 1st runner.jpg';
+import intertownCert from './Membertwo/Intertown Cavite Cert.jpg'; // Added new cert
 import introCyber from './Membertwo/Introduction to Cyber.jpg';
 import kkb from './Membertwo/KKB.jpg';
 import mvp from './Membertwo/MVP.jpg';
@@ -21,7 +22,7 @@ function MemberTwo() {
   const [activeTab, setActiveTab] = useState('home');
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isDarkMode, setIsDarkMode] = useState(true);
-  const [selectedAchievement, setSelectedAchievement] = useState(null); // State for popup modal
+  const [selectedAchievement, setSelectedAchievement] = useState(null);
 
   // --- The System Architect / Emerald & Gold Theme ---
   const darkTheme = {
@@ -49,7 +50,7 @@ function MemberTwo() {
   const tabs = [
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'About Me' },
-    { id: 'achievements', label: 'Achievements' }, // Updated from Expeditions
+    { id: 'achievements', label: 'Achievements' },
     { id: 'projects', label: 'Schematics' },
     { id: 'connect', label: 'Contact' }
   ];
@@ -61,13 +62,14 @@ function MemberTwo() {
     { id: 3, img: excAward, title: 'Excellence Award', desc: 'Recognized for outstanding academic and extracurricular excellence.' },
     { id: 4, img: excAward2, title: 'Excellence Award II', desc: 'Continued recognition for dedication and performance.' },
     { id: 5, img: mvp, title: 'MVP Award', desc: 'Most Valuable Player award for exceptional sportsmanship and skill.' },
-    { id: 6, img: champPubmat, title: 'Champion CEA MLBB', desc: 'Official publication material for the champions of CEA MLBB.' },
+    { id: 6, img: champPubmat, title: 'CEA MLBB Champion', desc: 'Official publication material for the CEA MLBB Championship.' },
     { id: 7, img: intercampus, title: 'Intercampus Participant', desc: 'Represented the campus in high-stakes intercampus events.' },
     { id: 8, img: intertown1, title: 'Intertown 1st Runner Up', desc: 'Secured 1st Runner Up position in the competitive Intertown event.' },
     { id: 9, img: intertown2, title: 'Intertown Commendation', desc: 'Additional recognition for the Intertown competition.' },
-    { id: 10, img: introCyber, title: 'Cybersecurity Certification', desc: 'Successfully completed the Introduction to Cybersecurity course.' },
-    { id: 11, img: kkb, title: 'KKB Participation', desc: 'Active participation and contribution to KKB initiatives.' },
-    { id: 12, img: squadGoals, title: 'Squad Goals', desc: 'Commendation for outstanding teamwork and team achievement.' }
+    { id: 10, img: intertownCert, title: 'Intertown Cavite Certificate', desc: 'Official Certificate of Recognition for Intertown Cavite participation.' }, // Added new entry
+    { id: 11, img: introCyber, title: 'Cybersecurity Certification', desc: 'Successfully completed the Introduction to Cybersecurity course.' },
+    { id: 12, img: kkb, title: 'KKB Participation', desc: 'Active participation and contribution to KKB initiatives.' },
+    { id: 13, img: squadGoals, title: 'Squad Goals', desc: 'Commendation for outstanding teamwork and team achievement.' }
   ];
 
   const contentVariants = {
@@ -200,7 +202,7 @@ function MemberTwo() {
              </motion.div>
           )}
 
-          {/* NEW ACHIEVEMENTS SECTION (Replaced Expeditions) */}
+          {/* ACHIEVEMENTS SECTION */}
           {activeTab === 'achievements' && (
              <motion.div key="achievements" variants={contentVariants} initial="hidden" animate="visible" exit="exit" style={{ maxWidth: '1000px', width: '100%' }}>
                <div style={{ textAlign: 'center', marginBottom: '40px' }}>
@@ -353,7 +355,7 @@ function MemberTwo() {
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
-              onClick={(e) => e.stopPropagation()} // Prevents closing when clicking inside the box
+              onClick={(e) => e.stopPropagation()} 
               style={{
                 backgroundColor: theme.bg,
                 padding: '30px',

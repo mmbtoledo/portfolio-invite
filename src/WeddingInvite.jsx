@@ -1,51 +1,42 @@
 import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { useTheme } from './ThemeContext'; // <-- Import Context
+import { useTheme } from './ThemeContext'; 
 
-// Import the wedding song
-import weddingSong from './Wedding Song/Hambog Ng Sagpro Krew-Alaala Nalang ft. LUN (Lyrics).mp3';
-
-// --- Import Images with Exact Repository Names ---
+import weddingSong from './Wedding Song/SUGARCANE - Leonora (Official Lyric Video).mp3';
 import quiapoBg from './Wedding Song/Quiapo Church.jpg';
 import suitExample from './Wedding Song/BlackTuxedo.jpg';
 import gownExample from './Wedding Song/Floor-Length Gown Evening gown.jpg';
 
 function WeddingInvite() {
-  const [rsvpCount, setRsvpCount] = useState(142);
+  // STARTING COUNT SET TO 0
+  const [rsvpCount, setRsvpCount] = useState(0);
   const [hasSubmitted, setHasSubmitted] = useState(false);
   
-  // Audio state and ref
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
 
-  // Grab global toggle state
   const { isDarkMode, toggleTheme } = useTheme();
 
-  // --- Elegant Vintage Theme Palette ---
   const darkTheme = {
-    bg: '#0D0C0B',
-    panelBg: '#161413',
-    accent: '#C5A880', 
-    textMain: '#E8E4D9',
-    textMuted: '#948D85',
-    border: '#2C2724'
+    bg: '#0D0C0B', panelBg: '#161413', accent: '#C5A880', textMain: '#E8E4D9', textMuted: '#948D85', border: '#2C2724'
   };
-
   const lightTheme = {
-    bg: '#F7F5F0',
-    panelBg: '#FFFFFF',
-    accent: '#9A7B4F', 
-    textMain: '#2A2624',
-    textMuted: '#78736E',
-    border: '#E6DFD3'
+    bg: '#F7F5F0', panelBg: '#FFFFFF', accent: '#9A7B4F', textMain: '#2A2624', textMuted: '#78736E', border: '#E6DFD3'
   };
-
   const theme = isDarkMode ? darkTheme : lightTheme;
 
+  // UPDATED LOGIC FOR GUEST ADDITION
   const handleRsvpSubmit = (e) => {
     e.preventDefault();
-    setRsvpCount(prev => prev + 1);
+    const formData = new FormData(e.target);
+    const isAttending = formData.get('attend') === 'yes';
+    const additionalGuests = parseInt(formData.get('additionalGuests') || '0', 10);
+
+    if (isAttending) {
+      setRsvpCount(prev => prev + 1 + additionalGuests);
+    }
+    
     setHasSubmitted(true);
   };
 
@@ -58,51 +49,30 @@ function WeddingInvite() {
     setIsPlaying(!isPlaying);
   };
 
-  // Common Styles
   const sectionStyle = {
-    padding: '100px 20px',
-    borderBottom: `1px solid ${theme.border}`,
-    textAlign: 'center'
+    padding: '100px 20px', borderBottom: `1px solid ${theme.border}`, textAlign: 'center'
   };
-
   const sectionSubtitle = {
-    color: theme.accent,
-    textTransform: 'uppercase',
-    letterSpacing: '4px',
-    fontSize: '0.75rem',
-    marginBottom: '10px',
-    fontFamily: 'sans-serif'
+    color: theme.accent, textTransform: 'uppercase', letterSpacing: '4px', fontSize: '0.75rem', marginBottom: '10px', fontFamily: 'sans-serif'
   };
-
   const sectionTitle = {
-    fontSize: '2.5rem',
-    fontWeight: 'normal',
-    letterSpacing: '4px',
-    margin: '0 0 50px 0',
-    textTransform: 'uppercase',
-    color: theme.textMain
+    fontSize: '2.5rem', fontWeight: 'normal', letterSpacing: '4px', margin: '0 0 50px 0', textTransform: 'uppercase', color: theme.textMain
   };
-
   const attireImageStyle = {
-    width: '100%',
-    height: 'auto',
-    marginBottom: '20px',
-    border: `1px solid ${theme.border}`,
-    filter: 'grayscale(100%)', 
-    opacity: isDarkMode ? 0.8 : 1, 
+    width: '100%', height: 'auto', marginBottom: '20px', border: `1px solid ${theme.border}`, filter: 'grayscale(100%)', opacity: isDarkMode ? 0.8 : 1, 
   };
 
   return (
     <motion.div 
-      animate={{ backgroundColor: theme.bg, color: theme.textMain }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1, backgroundColor: theme.bg, color: theme.textMain }}
+      exit={{ opacity: 0, transition: { duration: 0.5 } }}
       transition={{ duration: 0.8 }}
       style={{ fontFamily: '"Playfair Display", "Georgia", serif', minHeight: '100vh' }}
     >
       
-      {/* Hidden Audio Player */}
       <audio ref={audioRef} src={weddingSong} loop />
 
-      {/* Top Navigation Bar */}
       <div style={{ position: 'fixed', top: 0, left: 0, right: 0, display: 'flex', justifyContent: 'space-between', padding: '20px 40px', zIndex: 100, background: `linear-gradient(${theme.bg} 40%, transparent)` }}>
         <Link to="/" style={{ color: theme.accent, textDecoration: 'none', fontFamily: 'sans-serif', fontSize: '0.8rem', letterSpacing: '2px', textTransform: 'uppercase' }}>
           ← Return to Front Page
@@ -110,15 +80,15 @@ function WeddingInvite() {
         <div style={{ display: 'flex', gap: '15px' }}>
           <button 
             onClick={toggleAudio}
-            style={{ background: 'transparent', border: `1px solid ${theme.accent}`, color: theme.accent, borderRadius: '50%', width: '35px', height: '35px', cursor: 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '1rem' }}
+            style={{ background: 'transparent', border: `1px solid ${theme.accent}`, color: theme.accent, borderRadius: '50%', width: '35px', height: '35px', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '1rem' }}
             title={isPlaying ? "Pause Music" : "Play Music"}
           >
             {isPlaying ? '⏸' : '♪'}
           </button>
 
           <button 
-            onClick={toggleTheme} // <-- Trigger global toggle
-            style={{ background: 'transparent', border: `1px solid ${theme.accent}`, color: theme.accent, borderRadius: '50%', width: '35px', height: '35px', cursor: 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+            onClick={toggleTheme} 
+            style={{ background: 'transparent', border: `1px solid ${theme.accent}`, color: theme.accent, borderRadius: '50%', width: '35px', height: '35px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
             title="Toggle Theme"
           >
             {isDarkMode ? '☼' : '☾'}
@@ -126,7 +96,6 @@ function WeddingInvite() {
         </div>
       </div>
 
-      {/* 1. HERO SECTION */}
       <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center', borderBottom: `1px solid ${theme.border}`, padding: '0 20px', position: 'relative' }}>
         <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, backgroundImage: 'url("https://images.unsplash.com/photo-1544928147-79a2dbc1f389?q=80&w=2000&auto=format&fit=crop")', backgroundSize: 'cover', backgroundPosition: 'center', opacity: isDarkMode ? 0.15 : 0.08, zIndex: 0, filter: 'grayscale(100%)' }} />
 
@@ -150,7 +119,6 @@ function WeddingInvite() {
         </div>
       </div>
 
-      {/* 2. WHERE & WHEN */}
       <div style={sectionStyle}>
         <p style={sectionSubtitle}>The Ceremony</p>
         <h2 style={sectionTitle}>Where & When</h2>
@@ -181,7 +149,6 @@ function WeddingInvite() {
         </div>
       </div>
 
-      {/* 3. GETTING THERE & MAP */}
       <div style={{ ...sectionStyle, backgroundColor: isDarkMode ? '#0A0908' : '#F2EFE9' }}>
         <p style={sectionSubtitle}>Directions</p>
         <h2 style={sectionTitle}>Getting There</h2>
@@ -217,9 +184,7 @@ function WeddingInvite() {
         </div>
       </div>
 
-      {/* 4. THE SETTING */}
       <div style={{ ...sectionStyle, padding: '120px 20px', position: 'relative' }}>
-        
         <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, backgroundImage: `url("${quiapoBg}")`, backgroundSize: 'cover', backgroundPosition: 'center', opacity: isDarkMode ? 0.2 : 0.1, zIndex: 0 }} />
 
         <div style={{ zIndex: 1, position: 'relative' }}>
@@ -245,7 +210,6 @@ function WeddingInvite() {
         </div>
       </div>
 
-      {/* 5. PROGRAMME */}
       <div style={{ ...sectionStyle, backgroundColor: isDarkMode ? '#0A0908' : '#F2EFE9' }}>
         <p style={sectionSubtitle}>The Day</p>
         <h2 style={sectionTitle}>Programme</h2>
@@ -272,7 +236,6 @@ function WeddingInvite() {
         </div>
       </div>
 
-      {/* 6. WEDDING PARTY */}
       <div style={sectionStyle}>
         <p style={sectionSubtitle}>Our Beloved</p>
         <h2 style={sectionTitle}>Wedding Party</h2>
@@ -300,7 +263,6 @@ function WeddingInvite() {
         </div>
       </div>
 
-      {/* 7. DRESS CODE */}
       <div style={{ ...sectionStyle, backgroundColor: isDarkMode ? '#0A0908' : '#F2EFE9' }}>
         <p style={sectionSubtitle}>Attire</p>
         <h2 style={sectionTitle}>Dress Code</h2>
@@ -310,9 +272,7 @@ function WeddingInvite() {
           <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', marginBottom: '40px' }}>
             
             <div style={{ flex: '1 1 400px', border: `1px solid ${theme.border}`, padding: '40px', textAlign: 'left' }}>
-              
               <img src={suitExample} alt="Gentleman's Suit Example" style={attireImageStyle} />
-              
               <p style={{ color: theme.accent, fontSize: '0.7rem', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '25px' }}>✦ For Gentlemen</p>
               
               <div style={{ marginBottom: '20px' }}>
@@ -326,9 +286,7 @@ function WeddingInvite() {
             </div>
 
             <div style={{ flex: '1 1 400px', border: `1px solid ${theme.border}`, padding: '40px', textAlign: 'left' }}>
-              
               <img src={gownExample} alt="Lady's Gown Example" style={attireImageStyle} />
-
               <p style={{ color: theme.accent, fontSize: '0.7rem', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '25px' }}>✦ For Ladies</p>
               
               <div style={{ marginBottom: '20px' }}>
@@ -363,7 +321,6 @@ function WeddingInvite() {
         </div>
       </div>
 
-      {/* 8. RSVP SECTION */}
       <div style={sectionStyle}>
         <p style={sectionSubtitle}>Your Response</p>
         <h2 style={sectionTitle}>RSVP</h2>
@@ -379,37 +336,37 @@ function WeddingInvite() {
               <div style={{ display: 'flex', gap: '20px' }}>
                 <div style={{ flex: 1 }}>
                   <label style={{ display: 'block', color: theme.accent, fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '10px' }}>First Name</label>
-                  <input required type="text" style={{ width: '100%', background: 'transparent', border: 'none', borderBottom: `1px solid ${theme.textMuted}`, color: theme.textMain, padding: '10px 0', fontSize: '1rem', outline: 'none', fontFamily: 'inherit' }} />
+                  <input name="firstName" required type="text" style={{ width: '100%', background: 'transparent', border: 'none', borderBottom: `1px solid ${theme.textMuted}`, color: theme.textMain, padding: '10px 0', fontSize: '1rem', outline: 'none', fontFamily: 'inherit' }} />
                 </div>
                 <div style={{ flex: 1 }}>
                   <label style={{ display: 'block', color: theme.accent, fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '10px' }}>Last Name</label>
-                  <input required type="text" style={{ width: '100%', background: 'transparent', border: 'none', borderBottom: `1px solid ${theme.textMuted}`, color: theme.textMain, padding: '10px 0', fontSize: '1rem', outline: 'none', fontFamily: 'inherit' }} />
+                  <input name="lastName" required type="text" style={{ width: '100%', background: 'transparent', border: 'none', borderBottom: `1px solid ${theme.textMuted}`, color: theme.textMain, padding: '10px 0', fontSize: '1rem', outline: 'none', fontFamily: 'inherit' }} />
                 </div>
               </div>
 
               <div>
                 <label style={{ display: 'block', color: theme.accent, fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '10px' }}>Will you attend?</label>
                 <div style={{ display: 'flex', gap: '20px' }}>
-                  <label style={{ flex: 1, border: `1px solid ${theme.border}`, padding: '15px', textAlign: 'center', cursor: 'pointer', color: theme.textMain, fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                  <label style={{ flex: 1, border: `1px solid ${theme.border}`, padding: '15px', textAlign: 'center', color: theme.textMain, fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px' }}>
                     <input type="radio" name="attend" value="yes" required style={{ marginRight: '10px' }} /> Joyfully Accepts
                   </label>
-                  <label style={{ flex: 1, border: `1px solid ${theme.border}`, padding: '15px', textAlign: 'center', cursor: 'pointer', color: theme.textMain, fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                  <label style={{ flex: 1, border: `1px solid ${theme.border}`, padding: '15px', textAlign: 'center', color: theme.textMain, fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px' }}>
                     <input type="radio" name="attend" value="no" style={{ marginRight: '10px' }} /> Regretfully Declines
                   </label>
                 </div>
               </div>
 
               <div>
-                <label style={{ display: 'block', color: theme.accent, fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '10px' }}>Additional Guests</label>
-                <input type="text" placeholder="Guest names..." style={{ width: '100%', background: 'transparent', border: 'none', borderBottom: `1px solid ${theme.textMuted}`, color: theme.textMain, padding: '10px 0', fontSize: '1rem', outline: 'none', fontFamily: 'inherit' }} />
+                <label style={{ display: 'block', color: theme.accent, fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '10px' }}>Number of Additional Guests</label>
+                <input name="additionalGuests" type="number" min="0" max="5" defaultValue="0" style={{ width: '100%', background: 'transparent', border: 'none', borderBottom: `1px solid ${theme.textMuted}`, color: theme.textMain, padding: '10px 0', fontSize: '1rem', outline: 'none', fontFamily: 'inherit' }} />
               </div>
 
               <div>
-                <label style={{ display: 'block', color: theme.accent, fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '10px' }}>Notes (Optional)</label>
-                <textarea placeholder="Dietary requirements, special requests..." rows="3" style={{ width: '100%', background: 'transparent', border: 'none', borderBottom: `1px solid ${theme.textMuted}`, color: theme.textMain, padding: '10px 0', fontSize: '1rem', outline: 'none', fontFamily: 'inherit', resize: 'none' }}></textarea>
+                <label style={{ display: 'block', color: theme.accent, fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '10px' }}>Notes (Guest Names or Dietary Requests)</label>
+                <textarea name="notes" placeholder="Please list names of additional guests or dietary requirements..." rows="3" style={{ width: '100%', background: 'transparent', border: 'none', borderBottom: `1px solid ${theme.textMuted}`, color: theme.textMain, padding: '10px 0', fontSize: '1rem', outline: 'none', fontFamily: 'inherit', resize: 'none' }}></textarea>
               </div>
 
-              <button type="submit" style={{ background: 'transparent', border: `1px solid ${theme.accent}`, color: theme.accent, padding: '20px', cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '3px', fontSize: '0.9rem', transition: 'all 0.3s', marginTop: '20px' }} onMouseOver={(e) => { e.target.style.backgroundColor = theme.accent; e.target.style.color = theme.bg; }} onMouseOut={(e) => { e.target.style.backgroundColor = 'transparent'; e.target.style.color = theme.accent; }}>
+              <button type="submit" style={{ background: 'transparent', border: `1px solid ${theme.accent}`, color: theme.accent, padding: '20px', textTransform: 'uppercase', letterSpacing: '3px', fontSize: '0.9rem', transition: 'all 0.3s', marginTop: '20px' }} onMouseOver={(e) => { e.target.style.backgroundColor = theme.accent; e.target.style.color = theme.bg; }} onMouseOut={(e) => { e.target.style.backgroundColor = 'transparent'; e.target.style.color = theme.accent; }}>
                 Send Response
               </button>
             </form>
@@ -421,7 +378,6 @@ function WeddingInvite() {
             </motion.div>
           )}
 
-          {/* Live RSVP Counter */}
           <div style={{ marginTop: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '15px' }}>
             <div style={{ width: '30px', height: '1px', backgroundColor: theme.accent }} />
             <p style={{ color: theme.textMuted, fontStyle: 'italic', fontSize: '1.1rem', margin: 0 }}>
@@ -433,7 +389,6 @@ function WeddingInvite() {
         </div>
       </div>
 
-      {/* Footer */}
       <div style={{ textAlign: 'center', padding: '60px 20px', backgroundColor: isDarkMode ? '#050505' : '#EAE6DD' }}>
         <p style={{ color: theme.accent, fontSize: '1.2rem', letterSpacing: '4px', margin: '0 0 10px 0' }}>D & R</p>
         <p style={{ color: theme.textMuted, fontSize: '0.8rem', letterSpacing: '2px', textTransform: 'uppercase' }}>11 · 01 · 2026</p>

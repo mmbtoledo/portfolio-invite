@@ -1,13 +1,12 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { useTheme } from './ThemeContext'; // Import the custom hook
+import { useTheme } from './ThemeContext'; 
 
 import jeiImg from './assets/1x1.jpg'; 
 import michaelImg from './assets/2x2.jpg';
 import mcleanImg from './assets/2.2.jpg';
 
 function Home() {
-  // Grab the global theme values from Context
   const { isDarkMode, toggleTheme, theme } = useTheme();
 
   const members = [
@@ -24,7 +23,7 @@ function Home() {
       id: 'No. 02', 
       name: 'Michael Benedict F. Toledo', 
       role: 'Computer Engineering Student',
-      desc: 'An aspiring system architect focused on the seamless integration of physical hardware and digital logic. He approaches technology with an archivists precision, dedicated to building, optimizing, and securing enduring systems.',
+      desc: 'A meticulous architect of technology, navigating the complex bridge between physical hardware and digital code. He preserves and protects digital ecosystems with the careful discipline of a modern archivist.',
       skills: ['C++', 'PYTHON', 'JAVA', 'MYSQL', 'NETWORKING'],
       path: '/member-two',
       img: michaelImg
@@ -52,7 +51,9 @@ function Home() {
 
   return (
     <motion.div 
-      animate={{ backgroundColor: theme.bg, color: theme.textMain }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1, backgroundColor: theme.bg, color: theme.textMain }}
+      exit={{ opacity: 0, transition: { duration: 0.5 } }} 
       transition={{ duration: 0.6, ease: "easeInOut" }}
       style={{ 
         minHeight: '100vh', 
@@ -81,14 +82,14 @@ function Home() {
           <motion.button
             whileHover={{ scale: 1.1, rotate: 180 }}
             whileTap={{ scale: 0.9 }}
-            onClick={toggleTheme} // Use the global toggle function
+            onClick={toggleTheme} 
             style={{
               background: theme.cardBg,
               border: `2px solid ${theme.metallic}`,
               borderRadius: '50%',
               width: '65px', height: '65px',
               display: 'flex', justifyContent: 'center', alignItems: 'center',
-              cursor: 'pointer', color: theme.metallic, fontSize: '1.8rem',
+              color: theme.metallic, fontSize: '1.8rem',
               outline: 'none', boxShadow: theme.shadow,
               transition: 'all 0.3s'
             }}
@@ -151,7 +152,7 @@ function Home() {
                   {member.desc}
                 </p>
 
-                {/* Skills (Typewriter style) */}
+                {/* Skills */}
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '30px' }}>
                   {member.skills.map(skill => (
                     <span key={skill} style={{ 
@@ -204,26 +205,17 @@ function Home() {
             <motion.div 
               whileHover={{ y: -10, filter: `drop-shadow(0 15px 25px ${isDarkMode ? 'rgba(0,0,0,0.9)' : 'rgba(41,97,87,0.2)'})` }}
               whileTap={{ scale: 0.95 }}
-              style={{ cursor: 'pointer', position: 'relative' }}
+              style={{ position: 'relative' }}
             >
               {/* Antique SVG Envelope */}
               <svg width="240" height="160" viewBox="0 0 240 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-                {/* Envelope Base */}
                 <rect x="5" y="5" width="230" height="150" fill={theme.cardBg} stroke={theme.border} strokeWidth="2"/>
-                
-                {/* Inner Pattern Line */}
                 <rect x="12" y="12" width="216" height="136" fill="none" stroke={theme.border} strokeWidth="1" strokeDasharray="4 4"/>
-                
-                {/* Envelope Flaps */}
                 <path d="M5 5 L120 90 L235 5" fill={isDarkMode ? '#1E292D' : '#F6F3EC'} stroke={theme.border} strokeWidth="2" strokeLinejoin="round" filter="drop-shadow(0px 3px 3px rgba(0,0,0,0.1))"/>
                 <path d="M5 155 L90 90" stroke={theme.border} strokeWidth="2"/>
                 <path d="M235 155 L150 90" stroke={theme.border} strokeWidth="2"/>
-                
-                {/* Antique Wax Seal */}
                 <circle cx="120" cy="90" r="24" fill={theme.accent} filter="drop-shadow(0px 4px 6px rgba(0,0,0,0.3))" />
                 <circle cx="120" cy="90" r="18" fill={isDarkMode ? '#B36332' : '#1F4F46'} />
-                
-                {/* Seal Motif */}
                 <path d="M120 78 L126 95 L114 95 Z" fill={theme.metallic} opacity="0.8"/>
                 <circle cx="120" cy="90" r="14" stroke={theme.metallic} strokeWidth="1.5" strokeDasharray="2 2" opacity="0.6"/>
               </svg>

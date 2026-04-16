@@ -15,3 +15,14 @@ a {
 a:hover {
   text-decoration: underline;
 }
+/* src/index.css */
+
+/* Hide default cursor globally */
+* {
+  cursor: none !important;
+}
+
+/* Ensure links and buttons don't show the pointing hand */
+a, button, input, textarea {
+  cursor: none !important;
+}

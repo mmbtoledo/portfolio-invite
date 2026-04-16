@@ -107,7 +107,7 @@ function MemberTwo() {
       title: 'Crypto Pulse',
       desc: 'A modern cryptocurrency tracking platform delivering real-time market data, trends, and analytical insights.',
       codeLink: 'https://github.com/mmbtoledo/crypto-pulse',
-      siteLink: 'https://crypto-pulse-26jurd0q0-mmbtoledo-4878s-projects.vercel.app/',
+      siteLink: 'https://crypto-pulse-neon.vercel.app/',
       img: projCrypto
     },
     {
@@ -152,11 +152,13 @@ function MemberTwo() {
 
   return (
     <motion.div 
-      animate={{ backgroundColor: theme.bg, color: theme.text }}
+      initial={{ opacity: 0 }} /* <-- Add this */
+      animate={{ opacity: 1, backgroundColor: theme.bg, color: theme.text }} /* <-- Update this */
+      exit={{ opacity: 0, transition: { duration: 0.3 } }} /* <-- Add this */
       transition={{ duration: 0.6 }}
       style={{ 
         display: 'flex', minHeight: '100vh', fontFamily: '"Georgia", serif', overflow: 'hidden', 
-        backgroundImage: `radial-gradient(circle at top right, ${theme.accent}15 0%, transparent 60%), radial-gradient(circle at bottom left, ${theme.border}20 0%, transparent 50%)` 
+        // ... rest of your styles remain exactly the same
       }}
     >
       

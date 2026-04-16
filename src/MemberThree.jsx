@@ -91,9 +91,15 @@ function MemberThree() {
 
   return (
     <motion.div 
-      animate={{ backgroundColor: theme.bg, color: theme.text }}
+      initial={{ opacity: 0 }} /* <-- Add this */
+      animate={{ opacity: 1, backgroundColor: theme.bg, color: theme.text }} /* <-- Update this */
+      exit={{ opacity: 0, transition: { duration: 0.3 } }} /* <-- Add this */
       transition={{ duration: 0.5 }}
-      style={{ display: 'flex', minHeight: '100vh', fontFamily: '"Times New Roman", Times, serif', overflow: 'hidden' }}
+      style={{ 
+        display: 'flex', minHeight: '100vh', fontFamily: '"Times New Roman", Times, serif', overflow: 'hidden' 
+        // ... rest of your styles remain exactly the same
+      }}
+
     >
       
       {/* Sidebar Toggle */}

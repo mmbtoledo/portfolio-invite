@@ -1,22 +1,25 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTheme } from './ThemeContext'; // <-- Import Context
 
 // Profile Image
 import jeiImg from './assets/1x1.jpg';
 
-// Project & Achievement Images (From MemberOne folder)
+// Project & Achievement Images
 import flowchartImg from './MemberOne/flowchart.png';
 import troubleshootImg from './MemberOne/troubleshoot.png';
 import mlCertChamp from './MemberOne/coess.jpg';
 import mlCert2nd from './MemberOne/2nd.jpg';
-import logicImg from './MemberOne/logic.jpg'; // <-- Added your new logic image!
+import logicImg from './MemberOne/logic.jpg'; 
 
 function MemberOne() {
   const [activeTab, setActiveTab] = useState('home');
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const [isDarkMode, setIsDarkMode] = useState(true);
   const [selectedImage, setSelectedImage] = useState(null);
+  
+  // Grab global toggle state
+  const { isDarkMode, toggleTheme } = useTheme();
 
   // --- Unique "Vintage Engineer Blueprint" Theme ---
   const darkTheme = {
@@ -50,14 +53,12 @@ function MemberOne() {
     { id: 'connect', label: 'Communications' }
   ];
 
-  // Achievements Data (Hardware removed, Logic added)
   const achievementsData = [
     { id: 1, img: mlCertChamp, title: 'MLBB Champion', desc: 'Participated and achieved Championship recognition in competitive gaming tournaments.' },
     { id: 2, img: mlCert2nd, title: 'MLBB 2nd Place', desc: 'Secured 2nd Place title in Mobile Legends Championships.' },
     { id: 3, img: logicImg, title: 'Logic Assembly', desc: 'Practical application and assembly of basic logic circuits.' }
   ];
 
-  // Projects Data
   const projectsData = [
     {
       id: 1,
@@ -120,7 +121,7 @@ function MemberOne() {
       {/* Top Controls */}
       <div style={{ position: 'fixed', top: '20px', right: '30px', zIndex: 50, display: 'flex', gap: '15px' }}>
         <button 
-          onClick={() => setIsDarkMode(!isDarkMode)}
+          onClick={toggleTheme} // <-- Trigger global toggle
           style={{ background: theme.panel, border: `2px solid ${theme.text}`, color: theme.text, padding: '10px', width: '45px', height: '45px', cursor: 'pointer', fontSize: '1.2rem', display: 'flex', justifyContent: 'center', alignItems: 'center', boxShadow: theme.shadow }}
         >
           {isDarkMode ? '☼' : '☾'}
@@ -428,7 +429,6 @@ function MemberOne() {
                   
                   <div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
                     
-                    {/* GitHub Link */}
                     <a 
                       href="https://github.com/mjeicalabis-alt" 
                       target="_blank" 
@@ -442,7 +442,6 @@ function MemberOne() {
                       </svg>
                     </a>
 
-                    {/* Facebook Link */}
                     <a 
                       href="https://www.facebook.com/jeiervin.icalabis" 
                       target="_blank" 
@@ -515,15 +514,6 @@ function MemberOne() {
           </motion.div>
         )}
       </AnimatePresence>
-
-      <style>
-        {`
-          @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-          }
-        `}
-      </style>
     </motion.div>
   );
 }

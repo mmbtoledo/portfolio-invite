@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTheme } from './ThemeContext'; // <-- Import Context
 import michaelImg from './assets/2x2.jpg';
 
 // Importing Achievement Images
@@ -30,8 +31,10 @@ import projWedding from './Membertwo/Projects/Wedding Invitation.png';
 function MemberTwo() {
   const [activeTab, setActiveTab] = useState('home');
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const [isDarkMode, setIsDarkMode] = useState(true);
   const [selectedAchievement, setSelectedAchievement] = useState(null);
+
+  // Grab global toggle state
+  const { isDarkMode, toggleTheme } = useTheme();
 
   // --- The System Architect / Emerald & Gold Theme ---
   const darkTheme = {
@@ -173,7 +176,7 @@ function MemberTwo() {
       {/* Top Right Controls */}
       <div style={{ position: 'fixed', top: '20px', right: '30px', zIndex: 50, display: 'flex', gap: '15px' }}>
         <button 
-          onClick={() => setIsDarkMode(!isDarkMode)}
+          onClick={toggleTheme} // <-- Trigger global toggle
           style={{ background: theme.panel, border: `1px solid ${theme.accent}`, color: theme.accent, padding: '10px', borderRadius: '50%', width: '45px', height: '45px', cursor: 'pointer', fontSize: '1.2rem', display: 'flex', justifyContent: 'center', alignItems: 'center', boxShadow: theme.shadow }}
           title="Toggle Lighting"
         >
@@ -546,15 +549,6 @@ In the future, he aims to become a successful computer engineer who can build us
           </motion.div>
         )}
       </AnimatePresence>
-
-      <style>
-        {`
-          @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-          }
-        `}
-      </style>
     </motion.div>
   );
 }

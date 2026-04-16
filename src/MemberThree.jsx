@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTheme } from './ThemeContext'; // <-- Import Context
 import mcleanImg from './assets/2.2.jpg';
 
 // --- IMPORT CERTIFICATES FROM MemberThree FOLDER ---
@@ -13,8 +14,10 @@ import cert5 from './MemberThree/Squal Goals Certificate.jpg';
 function MemberThree() {
   const [activeTab, setActiveTab] = useState('home');
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
+
+  // Grab global toggle state
+  const { isDarkMode, toggleTheme } = useTheme();
 
   // Chronicle Theme
   const lightTheme = {
@@ -37,7 +40,6 @@ function MemberThree() {
 
   const theme = isDarkMode ? darkTheme : lightTheme;
 
-  // Updated Tab Order and Labels
   const tabs = [
     { id: 'home', label: 'Overview' },
     { id: 'about', label: 'About Me' },
@@ -46,7 +48,6 @@ function MemberThree() {
     { id: 'connect', label: 'Contact' }
   ];
 
-  // Data populated from Portfolio using exact certificate images
   const timelineData = [
     { id: 1, img: cert1, title: 'Conduct Award', date: 'Academic Milestone', desc: 'Recognized for excellent behavior, strong moral principles, and serving as a role model to peers.' },
     { id: 2, img: cert2, title: 'Honesty Award', date: 'Academic Milestone', desc: 'Awarded for demonstrating integrity, truthfulness, and trustworthy character within the academic community.' },
@@ -55,7 +56,6 @@ function MemberThree() {
     { id: 5, img: cert5, title: 'Squad Goals Certificate', date: 'Team Achievement', desc: 'A special recognition highlighting teamwork, collaboration, and collective success with peers.' },
   ];
 
-  // Updated Publications Data with Actual GitHub Repositories
   const publicationsData = [
     {
       id: 1,
@@ -107,7 +107,7 @@ function MemberThree() {
       {/* Top Right Controls */}
       <div style={{ position: 'fixed', top: '20px', right: '30px', zIndex: 50, display: 'flex', gap: '15px' }}>
         <button 
-          onClick={() => setIsDarkMode(!isDarkMode)}
+          onClick={toggleTheme} // <-- Trigger global toggle
           style={{ background: 'transparent', border: `2px solid ${theme.text}`, color: theme.text, padding: '10px', borderRadius: '0', width: '45px', height: '45px', cursor: 'pointer', fontSize: '1.2rem', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
           title="Toggle Print"
         >

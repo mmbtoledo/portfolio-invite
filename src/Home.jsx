@@ -1,38 +1,14 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useTheme } from './ThemeContext'; // Import the custom hook
 
 import jeiImg from './assets/1x1.jpg'; 
 import michaelImg from './assets/2x2.jpg';
 import mcleanImg from './assets/2.2.jpg';
 
 function Home() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // --- Unique Vintage Palette: Cartographer & Antique Copper ---
-  const lightTheme = {
-    bg: '#F3EFE7',           // Dusty cream paper
-    cardBg: '#FCFAF5',       // Clean parchment
-    accent: '#296157',       // Deep Viridian Green / Teal
-    metallic: '#A37C40',     // Tarnished Brass
-    textMain: '#2C302E',     // Slate ink
-    textMuted: '#68706A',    // Faded slate
-    border: '#D0C9B8',       // Aged edge
-    shadow: '0 10px 25px rgba(41, 97, 87, 0.08)'
-  };
-
-  const darkTheme = {
-    bg: '#0F1517',           // Oceanic Navy / Midnight
-    cardBg: '#172023',       // Darkened ship wood
-    accent: '#D47A43',       // Antique Copper / Rust
-    metallic: '#B6925B',     // Polished Bronze
-    textMain: '#E3E6E3',     // Silvered paper
-    textMuted: '#849396',    // Faded silver ink
-    border: '#28363A',       // Dark steel
-    shadow: '0 12px 30px rgba(0, 0, 0, 0.6)'
-  };
-
-  const theme = isDarkMode ? darkTheme : lightTheme;
+  // Grab the global theme values from Context
+  const { isDarkMode, toggleTheme, theme } = useTheme();
 
   const members = [
     { 
@@ -48,7 +24,7 @@ function Home() {
       id: 'No. 02', 
       name: 'Michael Benedict F. Toledo', 
       role: 'Computer Engineering Student',
-      desc: 'A scholar of technology and system architecture. Enjoys exploring the delicate interface between hardware and software, safeguarding systems like an archivist.',
+      desc: 'An aspiring system architect focused on the seamless integration of physical hardware and digital logic. He approaches technology with an archivists precision, dedicated to building, optimizing, and securing enduring systems.',
       skills: ['C++', 'PYTHON', 'JAVA', 'MYSQL', 'NETWORKING'],
       path: '/member-two',
       img: michaelImg
@@ -94,7 +70,7 @@ function Home() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '80px', paddingLeft: '40px' }}>
           <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 1 }}>
             <p style={{ fontFamily: '"Courier New", monospace', letterSpacing: '2px', fontSize: '0.85rem', color: theme.textMuted, margin: '0 0 15px 0', textTransform: 'uppercase' }}>
-              Archive / Group IV
+              Archive / Group II
             </p>
             <h1 style={{ fontSize: '4.5rem', margin: '0', fontWeight: 'normal', color: theme.textMain, lineHeight: '1.1' }}>
               The Team's <br/> <span style={{ fontStyle: 'italic', color: theme.accent }}>Portfolio</span>
@@ -105,7 +81,7 @@ function Home() {
           <motion.button
             whileHover={{ scale: 1.1, rotate: 180 }}
             whileTap={{ scale: 0.9 }}
-            onClick={() => setIsDarkMode(!isDarkMode)}
+            onClick={toggleTheme} // Use the global toggle function
             style={{
               background: theme.cardBg,
               border: `2px solid ${theme.metallic}`,
@@ -136,7 +112,7 @@ function Home() {
               whileHover={{ y: -5, boxShadow: theme.shadow }}
               style={{ 
                 backgroundColor: theme.cardBg,
-                padding: '8px', // Outer frame padding
+                padding: '8px',
                 border: `1px solid ${theme.border}`,
                 boxShadow: '0 4px 10px rgba(0,0,0,0.05)',
                 transition: 'all 0.4s ease'

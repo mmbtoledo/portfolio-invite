@@ -91,7 +91,7 @@ function MemberTwo() {
       title: 'Portfolio & Wedding Invitation',
       desc: 'A sophisticated digital portfolio and wedding invitation platform featuring interactive components and an elegant vintage aesthetic.',
       codeLink: 'https://github.com/mmbtoledo/portfolio-invite',
-      siteLink: 'https://portfolio-invite.vercel.app/wedding',
+      siteLink: '/wedding', // <-- Internal route for smooth transition
       img: projWedding
     },
     {
@@ -152,13 +152,13 @@ function MemberTwo() {
 
   return (
     <motion.div 
-      initial={{ opacity: 0 }} /* <-- Add this */
-      animate={{ opacity: 1, backgroundColor: theme.bg, color: theme.text }} /* <-- Update this */
-      exit={{ opacity: 0, transition: { duration: 0.3 } }} /* <-- Add this */
+      initial={{ opacity: 0 }} 
+      animate={{ opacity: 1, backgroundColor: theme.bg, color: theme.text }} 
+      exit={{ opacity: 0, transition: { duration: 0.3 } }} 
       transition={{ duration: 0.6 }}
       style={{ 
         display: 'flex', minHeight: '100vh', fontFamily: '"Georgia", serif', overflow: 'hidden', 
-        // ... rest of your styles remain exactly the same
+        backgroundImage: `radial-gradient(circle at top right, ${theme.accent}15 0%, transparent 60%), radial-gradient(circle at bottom left, ${theme.border}20 0%, transparent 50%)` 
       }}
     >
       
@@ -178,7 +178,7 @@ function MemberTwo() {
       {/* Top Right Controls */}
       <div style={{ position: 'fixed', top: '20px', right: '30px', zIndex: 50, display: 'flex', gap: '15px' }}>
         <button 
-          onClick={toggleTheme} // <-- Trigger global toggle
+          onClick={toggleTheme} 
           style={{ background: theme.panel, border: `1px solid ${theme.accent}`, color: theme.accent, padding: '10px', borderRadius: '50%', width: '45px', height: '45px', cursor: 'pointer', fontSize: '1.2rem', display: 'flex', justifyContent: 'center', alignItems: 'center', boxShadow: theme.shadow }}
           title="Toggle Lighting"
         >
@@ -388,11 +388,22 @@ In the future, he aims to become a successful computer engineer who can build us
                        </p>
 
                        <div style={{ display: 'flex', gap: '20px', borderTop: `1px solid ${theme.border}`, paddingTop: '20px', marginTop: 'auto' }}>
+                         
+                         {/* DYNAMIC LINK RENDERER FIX */}
                          {project.siteLink && (
-                           <a href={project.siteLink} target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '5px', color: theme.text, textDecoration: 'none', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 'bold', transition: 'color 0.2s' }} onMouseOver={(e) => e.currentTarget.style.color = theme.accent} onMouseOut={(e) => e.currentTarget.style.color = theme.text}>
-                             Site <span style={{ color: theme.accent, fontSize: '1.2rem', lineHeight: '1' }}>↗</span>
-                           </a>
+                           project.siteLink.startsWith('/') ? (
+                             // Internal link uses React Router <Link>
+                             <Link to={project.siteLink} style={{ display: 'flex', alignItems: 'center', gap: '5px', color: theme.text, textDecoration: 'none', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 'bold', transition: 'color 0.2s' }} onMouseOver={(e) => e.currentTarget.style.color = theme.accent} onMouseOut={(e) => e.currentTarget.style.color = theme.text}>
+                               View Site <span style={{ color: theme.accent, fontSize: '1.2rem', lineHeight: '1' }}>↗</span>
+                             </Link>
+                           ) : (
+                             // External link uses standard <a>
+                             <a href={project.siteLink} target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '5px', color: theme.text, textDecoration: 'none', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 'bold', transition: 'color 0.2s' }} onMouseOver={(e) => e.currentTarget.style.color = theme.accent} onMouseOut={(e) => e.currentTarget.style.color = theme.text}>
+                               View Site <span style={{ color: theme.accent, fontSize: '1.2rem', lineHeight: '1' }}>↗</span>
+                             </a>
+                           )
                          )}
+                         
                          {project.codeLink && (
                            <a href={project.codeLink} target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '5px', color: theme.text, textDecoration: 'none', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 'bold', transition: 'color 0.2s' }} onMouseOver={(e) => e.currentTarget.style.color = theme.accent} onMouseOut={(e) => e.currentTarget.style.color = theme.text}>
                              Source Code <span style={{ color: theme.accent, fontSize: '1.2rem', lineHeight: '1' }}>↗</span>

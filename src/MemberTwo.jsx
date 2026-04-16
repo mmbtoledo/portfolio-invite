@@ -91,7 +91,7 @@ function MemberTwo() {
       title: 'Portfolio & Wedding Invitation',
       desc: 'A sophisticated digital portfolio and wedding invitation platform featuring interactive components and an elegant vintage aesthetic.',
       codeLink: 'https://github.com/mmbtoledo/portfolio-invite',
-      siteLink: 'https://portfolio-invite.vercel.app/',
+      siteLink: 'https://portfolio-invite.vercel.app/wedding',
       img: projWedding
     },
     {
